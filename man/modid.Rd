@@ -47,20 +47,20 @@ A S3 object of class \code{modid} with lists of items and absolute sum scores, s
 }
 \details{
 Before performing DMIRT analysis it is necessary to identify the compensatory model (Reckase, 2009).
-For a three-dimensional model, this entails that two items must be chosen and their loadings restricted as follows.
+For a three-dimensional model, this implies that two items must be chosen and their loadings restricted as follows.
 The first item is fixed not to load on the second and third axes (y and z), while the second item is fixed not to load on the third axis (z).
-If this can be empirically achieved, it will be possible to create the orthogonal structure necessary for a three-dimensional DMIRT model.
+If this can be achieved, it is possible to create a three-dimensional DMIRT model that reflects the data properly.
 
-The \code{modid()} function can help by suggesting what items to use for this purpose.
-This is done by the function by first performing an EFA on the data and then selecting the strongest loading items, following the order of strength of the factors, in accordance with the statistical assumptions described above.
+The \code{modid()} function can help by suggesting what items to use for the latter purpose.
+The function does this by first performing an EFA on the data and then selecting the strongest loading items, following the order of strength of the factors and in accordance with the statistical assumptions described above.
 This orders the entire model so that the strongest loading item, from the strongest factor, always aligns with the x-axis and the other items follow thereon.
 Note, the \code{modid()} function is not limited to three-dimensional analysis and can be used to identify a DMIRT model on any number of dimensions.
 
-Because \code{D3mirt} analysis is based on the M2PL and the MGRM, it is recommended to use multidimensional item response theory EFA methods, such as the EFA option in \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012) with \code{ìtemtype = 'graded'} or \code{'2PL'}, so that the EFA is performed with the proper item model.
+Because \code{D3mirt} analysis is based on the M2PL and the MGRM, it is recommended to use multidimensional item response theory EFA methods, such as the EFA option in \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012) with \code{itemtype = 'graded'} or \code{'2PL'}, so that the EFA is performed with the proper item model.
 For this reason, the \code{mirt()} function is integrated into \code{modid()} so that the user needs only to provide the data frame containing empirical item data in the first argument in the call to the function.
 Accordingly, in the default mode (\code{efa = TRUE}), using raw item data, the function performs an EFA with three factors as default (\code{factors = 3}), and then finishes with the model identification.
 
-However, it is also possible to use the \code{modid()} function without performing the EFA by setting \code{efa = FALSE}, if, for instance, a factor loading data frame is already available.
+However, it is also possible to use the \code{modid()} function without performing the EFA by setting \code{efa = FALSE}, if, for instance, a data frame with factor loadings is already available.
 This allows the function to move directly to the model identification step.
 
 Note, the EFA is only used to find model identification items that meet the necessary DMIRT model specification requirements.
@@ -83,19 +83,19 @@ x <- anes0809offwaves
 x <- x[,3:22] # Remove columns for age and gender
 
 # Identify the DMIRT model using a three-factor EFA
-g <- modid(x)
+id <- modid(x)
 
 # Optional: Load the EFA data for this example directly from the package file
 # load(system.file("extdata/efa.Rdata", package = "D3mirt"))
 
 # Call to summary
-summary(g)
+summary(id)
 
 # Call to modid with increased lower and upper bound
-modid(x, lower = 1, upper = 1 )
+id <- modid(x, lower = 1, upper = 1 )
 
 # Override factor order by reversing columns in the original data frame
-modid(x, fac.order = c(3,2,1))
+id <- modid(x, fac.order = c(3,2,1))
 }
 }
 \references{

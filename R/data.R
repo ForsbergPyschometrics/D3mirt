@@ -11,7 +11,7 @@
 #'   \item{W3Xage}{Age}
 #'   \item{W3XGENDER}{Gender (Male = 1, Female = 2)}
 #'   \item{W7Q1}{When one of my loved ones needs my attention, I really try to slow down and give them the time and help they need}
-#'   \item{W7Q2}{I am known by family and friends as someone who makes time to pay attention to others’ problems}
+#'   \item{W7Q2}{I am known by family and friends as someone who makes time to pay attention to others' problems}
 #'   \item{W7Q3}{I’m the kind of person who is willing to go the “extra mile” to help take care of my friends, relatives, and acquaintances}
 #'   \item{W7Q4}{When friends or family members experience something upsetting or discouraging I make a special point of being kind to them}
 #'   \item{W7Q5}{When it comes to my personal relationships with others, I am a very generous person}

@@ -2,7 +2,7 @@ Package: D3mirt
 Title: Descriptive 3D Multidimensional Item Response Theory Modeling
 Version: 1.1.0
 Authors@R: 
-    person("Erik", "Forsberg", , email= "forsbergpsychometrics@gmail.com", role = c("aut", "cre", "cph"),
+    person("Erik", "Forsberg", email= "forsbergpsychometrics@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-5228-9729"))
 Description: For identifying, estimating, and plotting descriptive multidimensional item response theory models, restricted to 3D and dichotomous or polytomous data that fit the two-parameter logistic model or the graded response model. The method is foremost explorative and centered around the plot function that exposes item characteristics and constructs, represented by vector arrows, located in a three-dimensional interactive space. The results can be useful for item-level analysis as well as test development.
 License: GPL (>= 3)
@@ -10,14 +10,16 @@ URL: https://github.com/ForsbergPyschometrics/D3mirt
 BugReports: https://github.com/ForsbergPyschometrics/D3mirt/issues
 Depends:
     mirt,
-    R (>= 3.5.0),
+    R (>= 3.6.0),
     rgl (>= 1.0.1)
 Suggests:
     knitr,
     rmarkdown,
-    stats
+    stats,
+    testthat (>= 3.0.0)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 LazyData: true
 VignetteBuilder: knitr
+Config/testthat/edition: 3

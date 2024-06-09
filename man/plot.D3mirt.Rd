@@ -48,6 +48,7 @@
   c.n = 20,
   c.theta = 0.2,
   c.barblen = 0.03,
+  ind.scores = FALSE,
   profiles = NULL,
   levels = NULL,
   sphere.col = c("black", "grey20", "grey40", "grey60", "grey80"),
@@ -73,9 +74,9 @@
 \item{item.names}{Logical, if item labels should be plotted. The default is \code{item.names = TRUE}.}
 
 \item{item.lab}{Optional. String vector of item names that will override row names extracted from the data frame. Note, row names are not overwritten.
-Instead, the string vector in \code{ìtem.lab} prints item labels on the item vector arrows currently displayed following the order of item vector arrows in the graphical output.
+Instead, the string vector in \code{item.lab} prints item labels on the item vector arrows currently displayed following the order of item vector arrows in the graphical output.
 For example, when plotting in the default mode (plotting all item vectors) the labels will follow the order of the items in the data frame.
-If a selection of items is plotted with \code{items}, e.g., \code{ìtems = c(24,34,25)}, then the item labels will be displayed following the order of the vector in \code{items} left to right.
+If a selection of items is plotted with \code{items}, e.g., \code{items = c(24,34,25)}, then the item labels will be displayed following the order of the vector in \code{items} left to right.
 In this case, item label 1 will be printed on item 24, item label 2 on item 34, and item label 3 on item 25, and so on.}
 
 \item{constructs}{Logical, if construct vector arrows should be plotted. The default is \code{constructs = FALSE}.}
@@ -158,7 +159,9 @@ The first numeric adjusts the length in the positive direction and the second nu
 
 \item{c.barblen}{The length of the barbs for construct vector arrows from \code{arrow3d()}. The default is \code{c.barblen = 0.03}.}
 
-\item{profiles}{Data frame with coordinates for spheres representing respondent scores. The default is \code{profiles = NULL}.}
+\item{ind.scores}{Logical, should output plot respondents trait scores. The default is \code{ind.scores = FALSE}.}
+
+\item{profiles}{Data frame with coordinates for spheres representing subset of respondent scores. The default is \code{profiles = NULL}.}
 
 \item{levels}{Optional. A column with values indicating levels for sphere colors from the \code{sphere.col} vector. The default is \code{levels = NULL}.}
 
@@ -194,9 +197,9 @@ Other options include plotting one level of difficulty at a time with the \code{
 Item row names are displayed by default, but the user has the option of adding new item labels for the items with \code{item.lab}, as well as labeling constructs with \code{construct.lab}.
 
 Regarding the interpretation of results, the angle of the vector arrows indicates what traits, located along the orthogonal axes, an item can be said to describe (Reckase, 2009, 1985, Reckase & McKinley, 1991).
-For instance, an item located at 0° seen from the x-axis, and 90° as seen from the y and z-axis, only describes trait x.
+For instance, an item located at 0 degrees seen from the x-axis, and 90 degrees as seen from the y and z-axis, only describes trait x.
 Such an item is unidimensional since its direction vector lies parallel and on the x-axis.
-In contrast, an item located at 45° between all three axes in a three-dimensional model describes all three traits in the model equally well.
+In contrast, an item located at 45 degrees between all three axes in a three-dimensional model describes all three traits in the model equally well.
 Such an item is within-multidimensional with respect to all three latent traits used in the analysis because its direction vector points in a neutral direction in the model.
 
 When plotting the \code{D3mirt} model with \code{plot()}, it is possible to visually observe statistical violations in the graphical output returned.
@@ -217,125 +220,97 @@ In the case of the latter, the model perspective in the still shoot can be manua
 }
 \examples{
 \donttest{
-# To plot, the data must be prepared with mirt::mirt and the D3mirt() function
 # Load data
 data("anes0809offwaves")
 x <- anes0809offwaves
-x <- x[,3:22] # Remove columns for age and gender
+x <- x[, 3:22] # Remove columns for age and gender
 
-# Fit a three-dimensional graded response model with orthogonal factors
-spec <- '  F1 = 1-20
-           F2 = 1-20
-           F3 = 1-20
-
-           START=(W7Q3,a2,0)
-           START=(W7Q3,a3,0)
-
-           START=(W7Q20,a3,0)
-
-           FIXED=(W7Q3,a2)
-           FIXED=(W7Q3,a3)
-
-           FIXED=(W7Q20,a3) '
-
-
-mod1 <- mirt::mirt(x,
-                   spec,
-                   itemtype = 'graded',
-                   SE = TRUE,
-                   method = 'QMCEM')
-
-# Optional: Load the mod1 data for this example directly from the package file
-# load(system.file("extdata/mod1.Rdata", package = "D3mirt"))
-
-# Call D3mirt() with mod1 and constructs assigned to c
-c <- list(list(1,2,3,4,5,6,7,8,9,10),
-          list(11,12,13,14),
-          list(15,17,18,19,20))
-g <- D3mirt(mod1, c)
-plot(g)
+# Call D3mirt() with constructs assigned to con
+con <- list(c(1,2,3,4,5,6,7,8,9,10),
+            c(11,12,13,14),
+            c(15,17,18,19,20))
+mod <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
+plot(mod)
 
 # Plot RGL device with constructs visible and named
-plot(g, constructs = TRUE,
+plot(mod, constructs = TRUE,
      construct.lab = c("Compassion", "Fairness", "Conformity"))
 
 # Item W7Q16 has location 6 in the data set (gender and age excluded)
-# The item is plotted together with construct to aid the visual interpretation
-plot(g, constructs = TRUE,
+# Below the item is plotted together with construct to aid the visual interpretation
+plot(mod, constructs = TRUE,
      items = 6,
      construct.lab = c("Compassion", "Fairness", "Conformity"))
 
 # Plot RGL device on item difficulty level 5
-plot(g, diff.level = 5)
+plot(mod, diff.level = 5)
 
 # A selection of Conformity items from the model plotted with constructs
-plot(g, constructs = TRUE,
+plot(mod, constructs = TRUE,
      items = c(5,7,8,9,10),
      construct.lab = c("Compassion", "Fairness", "Conformity"))
 
 # Plot RGL device with scaled items and constructs visible and named
-plot(g, scale = TRUE,
+plot(mod, scale = TRUE,
      constructs = TRUE,
      construct.lab = c("Compassion", "Fairness", "Conformity"))
 
 # Profile Analysis
-# Extract respondent factor scores from mod1 (see D3mirt()) with fscores()
-f <- mirt::fscores(mod1,
-                   method="EAP",
-                   full.scores = TRUE,
-                   full.scores.SE = FALSE, QMC = TRUE)
+# Plot respondents trait scores with item vectors hidden and no constructs
+plot(mod, hide = TRUE, ind.scores = TRUE)
 
-# Optional: Load the respondent factor scores for this example directly from the package file
-# load(system.file("extdata/fscores.Rdata", package = "D3mirt"))
+# Plot respondents separated on gender
+# Start by assigning the gender variable to a data frame
+# In this example this is done by sub-setting the gender column
+x <- as.matrix(anes0809offwaves)
 
-# Attach f to the gender variable (column 2 from anes0809offwaves data set; "W3XGENDER")
-# Use cbind with fscores() output attached first
-x <- anes0809offwaves
-z <- data.frame(cbind(f, x[,2]))
-
-# Plot profiles with item vector arrows hidden
+# Call plot() and use the gender variable column in the levels argument
+# Respondent data on gender is in column two, x[, 2]
+# In the function call below both items and constructs are hidden
 # Score levels: 1 = Blue ("male") and 2 = Red ("female")
-plot(g, hide = TRUE,
-     profiles = z,
-     levels = z[,4],
-     sphere.col = c("blue", "red"),
-     x.lab = "Compassion",
-     y.lab="Conformity",
-     z.lab="Fairness")
+plot(mod, hide = TRUE, ind.scores = TRUE,
+    levels = x[, 2],
+    sphere.col = c("blue", "red"),
+    x.lab = "Compassion",
+    y.lab="Conformity",
+    z.lab="Fairness",
+    view = c(16, 20, 0.6))
 
 # Add a 95\% CI to respondent factor scores on <= 30 y.o.
-# Column bind fscores() with age variable ("W3Xage")
-y <- data.frame(cbind(f, x[,1]))
+# Column bind trait scores with the age variable "W3Xage"
+z <- data.frame(cbind(mod$fscores, x[, 1]))
 
-# Subset data frame y conditioned on age <= 30
-z1 <- subset(y, y[,4] <= 30)
+# Subset data frame z conditioned on age <= 30
+z1 <- subset(z, z[, 4] <= 30)
 
 # Use rep() to create a color vector to color groups based on the nlevels() output
 # z1 has 14 factor levels
 colvec <- c(rep("red", 14))
 
 # Call plot() with profile data on age with item vector arrows hidden
-plot(g, hide = TRUE,
-     profiles = z1,
-     levels = z1[,4],
-     sphere.col = colvec,
-     x.lab = "Compassion",
-     y.lab="Conformity",
-     z.lab="Fairness",
-     ci = TRUE,
-     ci.level = 0.95,
-     ellipse.col = "orange")
+# Use the profiles argument for the data frame containing the subset to be plotted
+plot(mod, hide = TRUE,
+    profiles = z1,
+    levels = z1[, 4],
+    sphere.col = colvec,
+    x.lab = "Compassion",
+    y.lab="Conformity",
+    z.lab="Fairness",
+    ci = TRUE,
+    ci.level = 0.95,
+    ellipse.col = "orange",
+    view = c(15, 20, 0.6))
 }
 \dontrun{
 # Export an open RGL device to the console to be saved as html or image file
-plot(g, constructs = TRUE)
+plot(mod, constructs = TRUE)
 s <- scene3d()
 rgl::rglwidget(s,
                width = 1040,
                height = 1040)
 
 # Export a snap shoot of an open RGL device directly to file
-plot(g, constructs = TRUE)
+plot(mod, constructs = TRUE)
 rgl::rgl.snapshot('RGLdevice.png',
                     fmt = 'png')
 }

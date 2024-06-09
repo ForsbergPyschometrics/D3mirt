@@ -24,13 +24,13 @@ The summary method for the \code{\link[=modid]{modid()}} function.
 # Identify the DMIRT model using a three-factor EFA with modid()
 # x can be a data frame with item data or item factor loadings.
 # In the case of the latter, set argument 'efa' to 'FALSE'
-g <- modid(x)
+id <- modid(x)
 
 # Call to summary
-summary(x)
+summary(id)
 
 # Call to summary rounded off to 2 digits
-summary(x, digits = 2)
+summary(id, digits = 2)
 }
 }
 \author{

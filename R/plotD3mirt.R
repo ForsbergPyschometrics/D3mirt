@@ -8,9 +8,9 @@
 #' @param items Optional. The user can input a list of integers indicating what item vector arrows will be visible while the remaining item vector arrows are hidden.
 #' @param item.names Logical, if item labels should be plotted. The default is `item.names = TRUE`.
 #' @param item.lab Optional. String vector of item names that will override row names extracted from the data frame. Note, row names are not overwritten.
-#' Instead, the string vector in `ìtem.lab` prints item labels on the item vector arrows currently displayed following the order of item vector arrows in the graphical output.
+#' Instead, the string vector in `item.lab` prints item labels on the item vector arrows currently displayed following the order of item vector arrows in the graphical output.
 #' For example, when plotting in the default mode (plotting all item vectors) the labels will follow the order of the items in the data frame.
-#' If a selection of items is plotted with `items`, e.g., `ìtems = c(24,34,25)`, then the item labels will be displayed following the order of the vector in `items` left to right.
+#' If a selection of items is plotted with `items`, e.g., `items = c(24,34,25)`, then the item labels will be displayed following the order of the vector in `items` left to right.
 #' In this case, item label 1 will be printed on item 24, item label 2 on item 34, and item label 3 on item 25, and so on.
 #' @param constructs Logical, if construct vector arrows should be plotted. The default is `constructs = FALSE`.
 #' @param construct.lab Optional. String vector of names for constructs, similar to `item.lab`.
@@ -56,7 +56,8 @@
 #' @param c.n Number of barbs for the construct vector arrows from the `arrow3d()` function. The default is `c.n = 20`.
 #' @param c.theta Opening angle of barbs for construct vector arrows from `arrow3d()`. The default is `c.theta = 0.2`.
 #' @param c.barblen The length of the barbs for construct vector arrows from `arrow3d()`. The default is `c.barblen = 0.03`.
-#' @param profiles Data frame with coordinates for spheres representing respondent scores. The default is `profiles = NULL`.
+#' @param ind.scores Logical, should output plot respondents trait scores. The default is `ind.scores = FALSE`.
+#' @param profiles Data frame with coordinates for spheres representing subset of respondent scores. The default is `profiles = NULL`.
 #' @param levels Optional. A column with values indicating levels for sphere colors from the `sphere.col` vector. The default is `levels = NULL`.
 #' @param spheres.r Radius of the spheres for `spheres3d()`. The default is `spheres.r = 0.05`.
 #' @param sphere.col Color vector for `spheres3d()`. The default is `sphere.col = c("black", "grey20", "grey40", "grey60", "grey80")`.
@@ -81,9 +82,9 @@
 #' Item row names are displayed by default, but the user has the option of adding new item labels for the items with `item.lab`, as well as labeling constructs with `construct.lab`.
 #'
 #' Regarding the interpretation of results, the angle of the vector arrows indicates what traits, located along the orthogonal axes, an item can be said to describe (Reckase, 2009, 1985, Reckase & McKinley, 1991).
-#' For instance, an item located at 0° seen from the x-axis, and 90° as seen from the y and z-axis, only describes trait x.
+#' For instance, an item located at 0 degrees seen from the x-axis, and 90 degrees as seen from the y and z-axis, only describes trait x.
 #' Such an item is unidimensional since its direction vector lies parallel and on the x-axis.
-#' In contrast, an item located at 45° between all three axes in a three-dimensional model describes all three traits in the model equally well.
+#' In contrast, an item located at 45 degrees between all three axes in a three-dimensional model describes all three traits in the model equally well.
 #' Such an item is within-multidimensional with respect to all three latent traits used in the analysis because its direction vector points in a neutral direction in the model.
 #'
 #' When plotting the `D3mirt` model with `plot()`, it is possible to visually observe statistical violations in the graphical output returned.
@@ -113,142 +114,114 @@
 #'
 #' @examples
 #' \donttest{
-#' # To plot, the data must be prepared with mirt::mirt and the D3mirt() function
 #' # Load data
 #' data("anes0809offwaves")
 #' x <- anes0809offwaves
-#' x <- x[,3:22] # Remove columns for age and gender
+#' x <- x[, 3:22] # Remove columns for age and gender
 #'
-#' # Fit a three-dimensional graded response model with orthogonal factors
-#' spec <- '  F1 = 1-20
-#'            F2 = 1-20
-#'            F3 = 1-20
-#'
-#'            START=(W7Q3,a2,0)
-#'            START=(W7Q3,a3,0)
-#'
-#'            START=(W7Q20,a3,0)
-#'
-#'            FIXED=(W7Q3,a2)
-#'            FIXED=(W7Q3,a3)
-#'
-#'            FIXED=(W7Q20,a3) '
-#'
-#'
-#' mod1 <- mirt::mirt(x,
-#'                    spec,
-#'                    itemtype = 'graded',
-#'                    SE = TRUE,
-#'                    method = 'QMCEM')
-#'
-#' # Optional: Load the mod1 data for this example directly from the package file
-#' # load(system.file("extdata/mod1.Rdata", package = "D3mirt"))
-#'
-#' # Call D3mirt() with mod1 and constructs assigned to c
-#' c <- list(list(1,2,3,4,5,6,7,8,9,10),
-#'           list(11,12,13,14),
-#'           list(15,17,18,19,20))
-#' g <- D3mirt(mod1, c)
-#' plot(g)
+#' # Call D3mirt() with constructs assigned to con
+#' con <- list(c(1,2,3,4,5,6,7,8,9,10),
+#'             c(11,12,13,14),
+#'             c(15,17,18,19,20))
+#' mod <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
+#' plot(mod)
 #'
 #' # Plot RGL device with constructs visible and named
-#' plot(g, constructs = TRUE,
+#' plot(mod, constructs = TRUE,
 #'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
 #' # Item W7Q16 has location 6 in the data set (gender and age excluded)
-#' # The item is plotted together with construct to aid the visual interpretation
-#' plot(g, constructs = TRUE,
+#' # Below the item is plotted together with construct to aid the visual interpretation
+#' plot(mod, constructs = TRUE,
 #'      items = 6,
 #'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
 #' # Plot RGL device on item difficulty level 5
-#' plot(g, diff.level = 5)
+#' plot(mod, diff.level = 5)
 #'
 #' # A selection of Conformity items from the model plotted with constructs
-#' plot(g, constructs = TRUE,
+#' plot(mod, constructs = TRUE,
 #'      items = c(5,7,8,9,10),
 #'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
 #' # Plot RGL device with scaled items and constructs visible and named
-#' plot(g, scale = TRUE,
+#' plot(mod, scale = TRUE,
 #'      constructs = TRUE,
 #'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
 #' # Profile Analysis
-#' # Extract respondent factor scores from mod1 (see D3mirt()) with fscores()
-#' f <- mirt::fscores(mod1,
-#'                    method="EAP",
-#'                    full.scores = TRUE,
-#'                    full.scores.SE = FALSE, QMC = TRUE)
+#' # Plot respondents trait scores with item vectors hidden and no constructs
+#' plot(mod, hide = TRUE, ind.scores = TRUE)
 #'
-#' # Optional: Load the respondent factor scores for this example directly from the package file
-#' # load(system.file("extdata/fscores.Rdata", package = "D3mirt"))
+#' # Plot respondents separated on gender
+#' # Start by assigning the gender variable to a data frame
+#' # In this example this is done by sub-setting the gender column
+#' x <- as.matrix(anes0809offwaves)
 #'
-#' # Attach f to the gender variable (column 2 from anes0809offwaves data set; "W3XGENDER")
-#' # Use cbind with fscores() output attached first
-#' x <- anes0809offwaves
-#' z <- data.frame(cbind(f, x[,2]))
-#'
-#' # Plot profiles with item vector arrows hidden
+#' # Call plot() and use the gender variable column in the levels argument
+#' # Respondent data on gender is in column two, x[, 2]
+#' # In the function call below both items and constructs are hidden
 #' # Score levels: 1 = Blue ("male") and 2 = Red ("female")
-#' plot(g, hide = TRUE,
-#'      profiles = z,
-#'      levels = z[,4],
-#'      sphere.col = c("blue", "red"),
-#'      x.lab = "Compassion",
-#'      y.lab="Conformity",
-#'      z.lab="Fairness")
+#' plot(mod, hide = TRUE, ind.scores = TRUE,
+#'     levels = x[, 2],
+#'     sphere.col = c("blue", "red"),
+#'     x.lab = "Compassion",
+#'     y.lab="Conformity",
+#'     z.lab="Fairness",
+#'     view = c(16, 20, 0.6))
 #'
 #' # Add a 95% CI to respondent factor scores on <= 30 y.o.
-#' # Column bind fscores() with age variable ("W3Xage")
-#' y <- data.frame(cbind(f, x[,1]))
+#' # Column bind trait scores with the age variable "W3Xage"
+#' z <- data.frame(cbind(mod$fscores, x[, 1]))
 #'
-#' # Subset data frame y conditioned on age <= 30
-#' z1 <- subset(y, y[,4] <= 30)
+#' # Subset data frame z conditioned on age <= 30
+#' z1 <- subset(z, z[, 4] <= 30)
 #'
 #' # Use rep() to create a color vector to color groups based on the nlevels() output
 #' # z1 has 14 factor levels
 #' colvec <- c(rep("red", 14))
 #'
 #' # Call plot() with profile data on age with item vector arrows hidden
-#' plot(g, hide = TRUE,
-#'      profiles = z1,
-#'      levels = z1[,4],
-#'      sphere.col = colvec,
-#'      x.lab = "Compassion",
-#'      y.lab="Conformity",
-#'      z.lab="Fairness",
-#'      ci = TRUE,
-#'      ci.level = 0.95,
-#'      ellipse.col = "orange")
+#' # Use the profiles argument for the data frame containing the subset to be plotted
+#' plot(mod, hide = TRUE,
+#'     profiles = z1,
+#'     levels = z1[, 4],
+#'     sphere.col = colvec,
+#'     x.lab = "Compassion",
+#'     y.lab="Conformity",
+#'     z.lab="Fairness",
+#'     ci = TRUE,
+#'     ci.level = 0.95,
+#'     ellipse.col = "orange",
+#'     view = c(15, 20, 0.6))
 #'}
 #' \dontrun{
 #' # Export an open RGL device to the console to be saved as html or image file
-#' plot(g, constructs = TRUE)
+#' plot(mod, constructs = TRUE)
 #' s <- scene3d()
 #' rgl::rglwidget(s,
 #'                width = 1040,
 #'                height = 1040)
 #'
 #' # Export a snap shoot of an open RGL device directly to file
-#' plot(g, constructs = TRUE)
+#' plot(mod, constructs = TRUE)
 #' rgl::rgl.snapshot('RGLdevice.png',
 #'                     fmt = 'png')
 #' }
 #' @export
 plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, diff.level = NULL, items = NULL, item.names = TRUE,  item.lab = NULL,
-                        constructs = FALSE, construct.lab = NULL, adjust.lab = c(0.5, -0.8),
-                        x.lab = "X", y.lab="Y", z.lab="Z", font = 1, cex = 1, title="", line = -5,
-                        axis.scalar = 1.1, axis.length = NULL, axis.col = "black", axis.points = "black",
-                        points = TRUE, axis.ticks = TRUE, nticks = 4,  width.rgl.x = 1040, width.rgl.y= 1040, view = c(15, 20, 0.6),
-                        show.plane = TRUE, plane.col = "grey80", background = "white",
-                        type = "rotation", col = c("black", "grey20", "grey40", "grey60", "grey80"),
-                        arrow.width = 0.6, n = 20, theta = 0.2, barblen = 0.03,
-                        c.scalars = c(1,1),
-                        c.type = "rotation", c.col = "black", c.arrow.width = 0.6,
-                        c.n = 20, c.theta = 0.2, c.barblen = 0.03,
-                        profiles = NULL, levels = NULL, sphere.col = c("black", "grey20", "grey40", "grey60", "grey80"), spheres.r = 0.05,
-                        ci = FALSE, ci.level = 0.95, ellipse.col = "grey80", ellipse.alpha = 0.20, ...){
+                         constructs = FALSE, construct.lab = NULL, adjust.lab = c(0.5, -0.8),
+                         x.lab = "X", y.lab="Y", z.lab="Z", font = 1, cex = 1, title="", line = -5,
+                         axis.scalar = 1.1, axis.length = NULL, axis.col = "black", axis.points = "black",
+                         points = TRUE, axis.ticks = TRUE, nticks = 4,  width.rgl.x = 1040, width.rgl.y= 1040, view = c(15, 20, 0.6),
+                         show.plane = TRUE, plane.col = "grey80", background = "white",
+                         type = "rotation", col = c("black", "grey20", "grey40", "grey60", "grey80"),
+                         arrow.width = 0.6, n = 20, theta = 0.2, barblen = 0.03,
+                         c.scalars = c(1,1),
+                         c.type = "rotation", c.col = "black", c.arrow.width = 0.6,
+                         c.n = 20, c.theta = 0.2, c.barblen = 0.03, ind.scores = FALSE,
+                         profiles = NULL, levels = NULL, sphere.col = c("black", "grey20", "grey40", "grey60", "grey80"), spheres.r = 0.05,
+                         ci = FALSE, ci.level = 0.95, ellipse.col = "grey80", ellipse.alpha = 0.20, ...){
   if (!isa(x, "D3mirt")) stop("The input object must be of class D3mirt")
   rgl::open3d()
   rgl::par3d(windowRect = 50 + c( 0, 0, width.rgl.x, width.rgl.y))
@@ -258,24 +231,24 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, diff.level = NULL, item
     if (!is.numeric(axis.scalar)) stop("The elements in axis.scalar are not numeric")
     if (length(axis.scalar) > 1) stop ("The axis.scalar vector must be of length one")
     if (is.null(ncol(x$dir.vec))){
-    ax <- x$dir.vec
-    low <- as.data.frame(ax[1])
-    hig <- as.data.frame(ax[length(ax)])
-    xaxis.min <- min(low[,1])*axis.scalar
-    xaxis.max <- max(hig[,1])*axis.scalar
-    yaxis.min <- min(low[,2])*axis.scalar
-    yaxis.max <- max(hig[,2])*axis.scalar
-    zaxis.min <- min(low[,3])*axis.scalar
-    zaxis.max <- max(hig[,3])*axis.scalar
-  } else {
-    ax <- x$dir.vec
-    xaxis.min <- min(ax[,1])*axis.scalar
-    xaxis.max <- max(ax[,1])*axis.scalar
-    yaxis.min <- min(ax[,2])*axis.scalar
-    yaxis.max <- max(ax[,2])*axis.scalar
-    zaxis.min <- min(ax[,3])*axis.scalar
-    zaxis.max <- max(ax[,3])*axis.scalar
-  }
+      ax <- x$dir.vec
+      low <- as.data.frame(ax[1])
+      hig <- as.data.frame(ax[length(ax)])
+      xaxis.min <- min(low[,1])*axis.scalar
+      xaxis.max <- max(hig[,1])*axis.scalar
+      yaxis.min <- min(low[,2])*axis.scalar
+      yaxis.max <- max(hig[,2])*axis.scalar
+      zaxis.min <- min(low[,3])*axis.scalar
+      zaxis.max <- max(hig[,3])*axis.scalar
+    } else {
+      ax <- x$dir.vec
+      xaxis.min <- min(ax[,1])*axis.scalar
+      xaxis.max <- max(ax[,1])*axis.scalar
+      yaxis.min <- min(ax[,2])*axis.scalar
+      yaxis.max <- max(ax[,2])*axis.scalar
+      zaxis.min <- min(ax[,3])*axis.scalar
+      zaxis.max <- max(ax[,3])*axis.scalar
+    }
   } else {
     if (!is.numeric(axis.length)) stop("The elements in axis.length are not numeric")
     if (length(axis.length) > 6) warning("The axis.length argument contains too many indicators")
@@ -302,7 +275,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, diff.level = NULL, item
     if (length(nticks) < 3){
       a <-  rep(nticks[length(nticks)], (3-length(nticks)))
       nticks <- append(nticks, a)
-      }
+    }
     rgl::axis3d('x', pos = c(0, 0, 0), ticks = TRUE, nticks=nticks[1], cex = cex, font = font)
     rgl::axis3d('y', pos = c(0, 0, 0), ticks = TRUE, nticks=nticks[2], cex = cex, font = font)
     rgl::axis3d('z',pos = c(0, 0, 0), ticks = TRUE, nticks=nticks[3], cex = cex, font = font)
@@ -323,343 +296,351 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, diff.level = NULL, item
   }
   if (hide == FALSE){
     if (scale == FALSE){
-    vec <- x$dir.vec
-    if (!is.null(items)){
-      if(any(!items <= nrow(x$loadings))) stop("The items argument contains one or more item indicators that are higher than the total number of items")
-      if (any(duplicated(items))) stop("The items argument has duplicate elements")
-      if (is.null(diff.level)){
-        if (is.null(ncol(vec))){
-          for (i in seq_along(items)){
-            m <- items[i]*2-1
-            sapply(seq_along(vec), function(i){
-              rgl::arrow3d(vec[[i, drop = FALSE]][m,], vec[[i, drop = FALSE]][m+1,], type = type, col = col[i], width = arrow.width, n = n, theta = theta, barblen = barblen)
-            })
+      vec <- x$dir.vec
+      if (!is.null(items)){
+        if(any(!items <= nrow(x$loadings))) stop("The items argument contains one or more item indicators higher than the total number of items")
+        if (any(duplicated(items))) stop("The items argument has duplicate elements")
+        if (is.null(diff.level)){
+          if (is.null(ncol(vec))){
+            for (i in seq_along(items)){
+              m <- items[i]*2-1
+              vapply(seq_along(vec), function(i){
+                rgl::arrow3d(vec[[i, drop = FALSE]][m,], vec[[i, drop = FALSE]][m+1,], type = type, col = col[i], width = arrow.width, n = n, theta = theta, barblen = barblen)
+              }, integer(2))
+            }
+          } else {
+            if(ncol(vec) == 1) stop("The data only has one level of difficulty")
+            m <- items*2-1
+            vapply(m, function(x){
+              rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(2))
           }
         } else {
-          if(ncol(vec) == 1) stop("The data only has one level of difficulty")
+          if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
+          if(!is.null(ncol(vec))) stop("The data only has one level of difficulty")
+          if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
+          v <- vec[[diff.level]]
           m <- items*2-1
-          sapply(m, function(x){
-            rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
+          vapply(m, function(i){
+            rgl::arrow3d(v[i,], v[i+1,], type = type, col = col[diff.level], width = arrow.width, n = n, theta = theta, barblen = barblen)
+          }, integer(2))
         }
-      } else {
+      }
+      else if (!is.null(diff.level)) {
         if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
         if(!is.null(ncol(vec))) stop("The data only has one level of difficulty")
         if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
-        v <- vec[[diff.level]]
-        m <- items*2-1
-        sapply(m, function(i){
-          rgl::arrow3d(v[i,], v[i+1,], type = type, col = col[diff.level], width = arrow.width, n = n, theta = theta, barblen = barblen)
-        })
+        for (i in seq_along(diff.level)){
+          d <- diff.level[i]
+          v <- as.data.frame(vec[d, drop = FALSE])
+          color <- col[d]
+          for (i in seq(from = 1, to = nrow(v), by = 2)){
+            rgl::arrow3d(v[i,], v[i+1,], type = type, col = color, width = arrow.width, n = n, theta = theta, barblen = c.barblen)
+          }
+        }
+      } else {
+        if (is.null(ncol(vec))){
+          for (i in seq_along(vec)){
+            v <- vec[[i]]
+            color <- col[i]
+            for (i in seq(from = 1, to = nrow(v), by=2)){
+              rgl::arrow3d(v[i,], v[i+1,], type = c.type, col = color, width = arrow.width, n = n, theta = theta, barblen = barblen)
+            }
+          }
+        } else {
+          vapply(seq(from = 1, to = nrow(vec), by=2), function(i){
+            rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(2))
+        }
       }
-    }
-    else if (!is.null(diff.level)) {
-      if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
-      if(!is.null(ncol(vec))) stop("The data only has one level of difficulty")
-      if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
-      for (i in seq_along(diff.level)){
-        d <- diff.level[i]
-        v <- as.data.frame(vec[d, drop = FALSE])
-        color <- col[d]
-        for (i in seq(from = 1, to = nrow(v), by = 2)){
-          rgl::arrow3d(v[i,], v[i+1,], type = type, col = color, width = arrow.width, n = n, theta = theta, barblen = c.barblen)
+      if (item.names == TRUE && is.null(items)){
+        if (is.null(diff.level)){
+          if (is.null(item.lab)){
+            inames <- rownames(x$loadings)
+            if (is.null(ncol(vec))){
+              max <-  x$dir.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$dir.vec
+            }
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(inames[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          } else {
+            if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
+            if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
+            if (is.null(ncol(vec))){
+              max <-  x$dir.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$dir.vec
+            }
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          }
+        } else {
+          if (is.null(item.lab)){
+            inames <- rownames(x$loadings)
+            dl <-  x$dir.vec[[diff.level]]
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(dl[(i*2),1],dl[(i*2),2], dl[(i*2),3], text = c(inames[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          } else {
+            if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
+            if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
+            max <-  x$dir.vec[[diff.level]]
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          }
+        }
+      }
+      if (item.names == TRUE && !is.null(items)){
+        if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
+        if (is.null(diff.level)){
+          if (is.null(item.lab)){
+            inames <- rownames(x$loadings)
+            if (is.null(ncol(vec))){
+              max <-  x$dir.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$dir.vec
+            }
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(inames[m]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          } else {
+            if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
+            if(length(item.lab) < length(items)) warning("There are too few item labels")
+            if (is.null(ncol(vec))){
+              max <-  x$dir.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$dir.vec
+            }
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          }
+        } else {
+          if (is.null(item.lab)){
+            dl <-  x$dir.vec[[diff.level]]
+            inames <- rownames(x$loadings)
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(inames[m]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          } else {
+            if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
+            if(length(item.lab) < length(items)) warning("There are too few item labels")
+            dl <-  as.data.frame(x$dir.vec[diff.level, drop = FALSE])
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          }
         }
       }
     } else {
-      if (is.null(ncol(vec))){
-        for (i in seq_along(vec)){
-          v <- vec[[i]]
-          color <- col[i]
-          for (i in seq(from = 1, to = nrow(v), by=2)){
-            rgl::arrow3d(v[i,], v[i+1,], type = c.type, col = color, width = arrow.width, n = n, theta = theta, barblen = barblen)
-          }
-        }
-      } else {
-        sapply(seq(from = 1, to = nrow(vec), by=2), function(i){
-          rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
-      }
-    }
-    if (item.names == TRUE && is.null(items)){
-      if (is.null(diff.level)){
-        if (is.null(item.lab)){
-          inames <- rownames(x$loadings)
+      vec <- x$scal.vec
+      if (!is.null(items)){
+        if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
+        if (is.null(diff.level)){
           if (is.null(ncol(vec))){
-            max <-  x$dir.vec[[ncol(x$mdiff)]]
+            for (i in seq_along(items)){
+              m <- items[i]*2-1
+              vapply(seq_along(vec), function(i){
+                rgl::arrow3d(vec[[i, drop = FALSE]][m,], vec[[i, drop = FALSE]][m+1,], type = type, col = col[i], width = arrow.width, n = n, theta = theta, barblen = barblen)
+              })
+            }
           } else {
-            max <-  x$dir.vec
-          }
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(inames[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        } else {
-          if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
-          if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
-          if (is.null(ncol(vec))){
-            max <-  x$dir.vec[[ncol(x$mdiff)]]
-          } else {
-            max <-  x$dir.vec
-          }
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          } )
-        }
-      } else {
-        if (is.null(item.lab)){
-        inames <- rownames(x$loadings)
-        dl <-  x$dir.vec[[diff.level]]
-        sapply(seq(nrow(x$mdisc)), function(i){
-          rgl::text3d(dl[(i*2),1],dl[(i*2),2], dl[(i*2),3], text = c(inames[i]), color = axis.col,
-                      adj = adjust.lab, font = font, cex = cex)
-        })
-        } else {
-          if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
-          if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
-          max <-  x$dir.vec[[diff.level]]
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          } )
-        }
-        }
-      }
-    if (item.names == TRUE && !is.null(items)){
-      if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
-      if (is.null(diff.level)){
-        if (is.null(item.lab)){
-          inames <- rownames(x$loadings)
-          if (is.null(ncol(vec))){
-            max <-  x$dir.vec[[ncol(x$mdiff)]]
-          } else {
-            max <-  x$dir.vec
-          }
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(inames[m]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        } else {
-          if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
-          if(length(item.lab) < length(items)) warning("There are too few item labels")
-          if (is.null(ncol(vec))){
-            max <-  x$dir.vec[[ncol(x$mdiff)]]
-          } else {
-            max <-  x$dir.vec
-          }
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        }
-      } else {
-        if (is.null(item.lab)){
-          dl <-  x$dir.vec[[diff.level]]
-          inames <- rownames(x$loadings)
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(inames[m]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        } else {
-          if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
-          if(length(item.lab) < length(items)) warning("There are too few item labels")
-          dl <-  as.data.frame(x$dir.vec[diff.level, drop = FALSE])
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        }
-      }
-    }
-  } else {
-    vec <- x$scal.vec
-    if (!is.null(items)){
-      if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
-      if (is.null(diff.level)){
-        if (is.null(ncol(vec))){
-          for (i in seq_along(items)){
-            m <- items[i]*2-1
-            sapply(seq_along(vec), function(i){
-              rgl::arrow3d(vec[[i, drop = FALSE]][m,], vec[[i, drop = FALSE]][m+1,], type = type, col = col[i], width = arrow.width, n = n, theta = theta, barblen = barblen)
-            })
+            m <- items*2-1
+            vapply(m, function(x){
+              rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(2))
           }
         } else {
+          if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
+          if(!is.null(ncol(vec))) stop("The data only has one level of difficulty")
+          if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
+          v <- vec[[diff.level]]
           m <- items*2-1
-          sapply(m, function(x){
-            rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
+          vapply(m, function(i){
+            rgl::arrow3d(v[i,], v[i+1,], type = type, col = col[diff.level], width = arrow.width, n = n, theta = theta, barblen = barblen)
+          }, integer(2))
         }
-      } else {
+      }
+      else if (!is.null(diff.level)) {
         if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
         if(!is.null(ncol(vec))) stop("The data only has one level of difficulty")
         if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
-        v <- vec[[diff.level]]
-        m <- items*2-1
-        sapply(m, function(i){
-          rgl::arrow3d(v[i,], v[i+1,], type = type, col = col[diff.level], width = arrow.width, n = n, theta = theta, barblen = barblen)
-        })
-      }
-    }
-    else if (!is.null(diff.level)) {
-      if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
-      if(!is.null(ncol(vec))) stop("The data only has one level of difficulty")
-      if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
-      for (i in seq_along(diff.level)){
-        d <- diff.level[i]
-        v <- as.data.frame(vec[d, drop = FALSE])
-        color <- col[d]
-        for (i in seq(from = 1, to = nrow(v), by = 2)){
-          rgl::arrow3d(v[i,], v[i+1,], type = type, col = color, width = arrow.width, n = n, theta = theta, barblen = c.barblen)
-        }
-      }
-    } else {
-      if (is.null(ncol(vec))){
-        for (i in seq_along(vec)){
-          v <- vec[[i]]
-          color <- col[i]
-          for (i in seq(from = 1, to = nrow(v), by=2)){
-            rgl::arrow3d(v[i,], v[i+1,], type = c.type, col = color, width = arrow.width, n = n, theta = theta, barblen = barblen)
+        for (i in seq_along(diff.level)){
+          d <- diff.level[i]
+          v <- as.data.frame(vec[d, drop = FALSE])
+          color <- col[d]
+          for (i in seq(from = 1, to = nrow(v), by = 2)){
+            rgl::arrow3d(v[i,], v[i+1,], type = type, col = color, width = arrow.width, n = n, theta = theta, barblen = c.barblen)
           }
         }
       } else {
-        sapply(seq(from = 1, to = nrow(vec), by=2), function(i){
-          rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
-      }
-    }
-    if (item.names == TRUE && is.null(items)){
-      if (is.null(diff.level)){
-        if (is.null(item.lab)){
-          inames <- rownames(x$loadings)
-          if (is.null(ncol(vec))){
-            max <-  x$scal.vec[[ncol(x$mdiff)]]
-          } else {
-            max <-  x$scal.vec
+        if (is.null(ncol(vec))){
+          for (i in seq_along(vec)){
+            v <- vec[[i]]
+            color <- col[i]
+            for (i in seq(from = 1, to = nrow(v), by=2)){
+              rgl::arrow3d(v[i,], v[i+1,], type = c.type, col = color, width = arrow.width, n = n, theta = theta, barblen = barblen)
+            }
           }
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(inames[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
         } else {
-          if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
-          if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
-          if (is.null(ncol(vec))){
-            max <-  x$scal.vec[[ncol(x$mdiff)]]
-          } else {
-            max <-  x$scal.vec
-          }
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          } )
+          vapply(seq(from = 1, to = nrow(vec), by=2), function(i){
+            rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(2))
         }
+      }
+      if (item.names == TRUE && is.null(items)){
+        if (is.null(diff.level)){
+          if (is.null(item.lab)){
+            inames <- rownames(x$loadings)
+            if (is.null(ncol(vec))){
+              max <-  x$scal.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$scal.vec
+            }
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(inames[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          } else {
+            if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
+            if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
+            if (is.null(ncol(vec))){
+              max <-  x$scal.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$scal.vec
+            }
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          }
 
-      } else {
-        if (is.null(item.lab)){
-          inames <- rownames(x$loadings)
-          dl <-  x$scal.vec[[diff.level]]
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(dl[(i*2),1],dl[(i*2),2], dl[(i*2),3], text = c(inames[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
         } else {
-          if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
-          if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
-          max <-  x$scal.vec[[diff.level]]
-          sapply(seq(nrow(x$mdisc)), function(i){
-            rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          } )
+          if (is.null(item.lab)){
+            inames <- rownames(x$loadings)
+            dl <-  x$scal.vec[[diff.level]]
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(dl[(i*2),1],dl[(i*2),2], dl[(i*2),3], text = c(inames[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          } else {
+            if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
+            if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
+            max <-  x$scal.vec[[diff.level]]
+            vapply(seq(nrow(x$mdisc)), function(i){
+              rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
+          }
         }
       }
-    }
-    if (item.names == TRUE && !is.null(items)){
-      if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
-      if (is.null(diff.level)){
-        if (is.null(item.lab)){
-          inames <- rownames(x$loadings)
-          if (is.null(ncol(vec))){
-            max <-  x$scal.vec[[ncol(x$mdiff)]]
+      if (item.names == TRUE && !is.null(items)){
+        if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
+        if (is.null(diff.level)){
+          if (is.null(item.lab)){
+            inames <- rownames(x$loadings)
+            if (is.null(ncol(vec))){
+              max <-  x$scal.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$scal.vec
+            }
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(inames[m]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
           } else {
-            max <-  x$scal.vec
+            if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
+            if(length(item.lab) < length(items)) warning("There are too few item labels")
+            if (is.null(ncol(vec))){
+              max <-  x$scal.vec[[ncol(x$mdiff)]]
+            } else {
+              max <-  x$scal.vec
+            }
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
           }
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(inames[m]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
         } else {
-          if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
-          if(length(item.lab) < length(items)) warning("There are too few item labels")
-          if (is.null(ncol(vec))){
-            max <-  x$scal.vec[[ncol(x$mdiff)]]
+          if (is.null(item.lab)){
+            dl <-  x$scal.vec[[diff.level]]
+            inames <- rownames(x$loadings)
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(inames[m]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
           } else {
-            max <-  x$scal.vec
+            if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
+            if(length(item.lab) < length(items)) warning("There are too few item labels")
+            dl <-  as.data.frame(x$scal.vec[diff.level, drop = FALSE])
+            vapply(seq_along(items), function(i){
+              m <- items[i]
+              rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(item.lab[i]), color = axis.col,
+                          adj = adjust.lab, font = font, cex = cex)
+            }, integer(1))
           }
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        }
-      } else {
-        if (is.null(item.lab)){
-          dl <-  x$scal.vec[[diff.level]]
-          inames <- rownames(x$loadings)
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(inames[m]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
-        } else {
-          if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
-          if(length(item.lab) < length(items)) warning("There are too few item labels")
-          dl <-  as.data.frame(x$scal.vec[diff.level, drop = FALSE])
-          sapply(seq_along(items), function(i){
-            m <- items[i]
-            rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(item.lab[i]), color = axis.col,
-                        adj = adjust.lab, font = font, cex = cex)
-          })
         }
       }
     }
   }
-}
   if (constructs == TRUE){
-    if (is.null(x$c.vec)) warning("The D3mirt object does not contain any constructs")
+    if (is.null(x$c.vec)) stop("The D3mirt object does not contain any constructs")
     cvec <- x$c.vec
-    sapply(seq(from = 1, to = nrow(cvec), by=2), function(x){
+    vapply(seq(from = 1, to = nrow(cvec), by=2), function(x){
       rgl::arrow3d(cvec[x,]*c.scalars[2], cvec[x+1,]*c.scalars[1], type = c.type, col = c.col, width = c.arrow.width, n = c.n, theta = c.theta, barblen = c.barblen)
-    })
+    }, integer(2))
     if (!is.null(construct.lab) && constructs == TRUE){
       if(!length(construct.lab) <= nrow(x$c.vec)) warning("There are more construct labels than constructs")
       clab <-  x$c.vec*c.scalars[1]
-      sapply(seq(nrow(x$c.dir.cos)), function(i){
+      vapply(seq(nrow(x$c.dir.cos)), function(i){
         rgl::text3d(clab[(i*2),1],clab[(i*2),2], clab[(i*2),3], text = c(construct.lab[i]), color = axis.col,
                     adj = adjust.lab, font = font, cex = cex)
-      })
+      }, integer(1))
     }
   }
-  if (!is.null(profiles)){
-    x <- profiles[,1]
-    y <- profiles[,2]
-    z <- profiles[,3]
+  if (ind.scores == TRUE || !is.null(profiles)){
+    if(ind.scores == TRUE && !is.null(profiles)) stop("Do not use the profiles argument when individual scores is set to TRUE")
+    if (is.null(profiles)){
+      profiles <- x$fscores
+      x <- profiles[,1]
+      y <- profiles[,2]
+      z <- profiles[,3]
+    } else {
+      x <- profiles[,1]
+      y <- profiles[,2]
+      z <- profiles[,3]
+    }
     if (!is.null(levels)){
       grad <- function (levels, sphere.col){
-      levels <- as.factor(levels)
-      if (nlevels(levels) > length(sphere.col)) stop ("The number of factor levels are higher than the number of available sphere colors")
-      color <- sphere.col[as.numeric(levels)]
-      names(color) <- as.vector(levels)
-      color
+        levels <- as.factor(levels)
+        if (nlevels(levels) > length(sphere.col)) stop ("The number of factor levels are higher than the number of available sphere colors")
+        color <- sphere.col[as.numeric(levels)]
+        names(color) <- as.vector(levels)
+        color
       }
       rgl::spheres3d(x,y,z, radius = spheres.r, color = grad(levels, sphere.col))
       if (ci == TRUE){
         ellipse <- rgl::ellipse3d(cov(cbind(x,y,z)),
                                   centre=c(mean(x), mean(y), mean(z)), level = ci.level)
         rgl::shade3d(ellipse, col = ellipse.col, alpha = ellipse.alpha)
-    }
+      }
     } else {
-    rgl::spheres3d(x,y,z, radius = spheres.r, color = sphere.col[1])
+      rgl::spheres3d(x,y,z, radius = spheres.r, color = sphere.col[1])
       if (ci == TRUE){
         ellipse <- rgl::ellipse3d(cov(cbind(x,y,z)),
                                   centre=c(mean(x), mean(y), mean(z)), level = ci.level)

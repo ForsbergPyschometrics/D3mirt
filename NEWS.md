@@ -1,3 +1,9 @@
+# D3mirt 2.0.0
+- New workflow integrating fitting of the compensatory model in the D3mirt function
+- Minor updates: R >= 3.6.0
+- New functions: respondent scores included in the exported object
+- Minor revisions of documentation
+
 # D3mirt 1.1.0
 - Examples in README extended
 - Revisions of documentation
