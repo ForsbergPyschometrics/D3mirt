@@ -34,21 +34,43 @@ summary.D3mirt <- function(object, ..., digits = 4){
   tab4 <- as.data.frame(object$mdisc)
   tab4 <- as.data.frame(cbind(tab4, tab3))
   tab5 <- as.data.frame(cbind(object$dir.cos, object$spherical))
+  if (length(object$diff) > 1){
+    cat(paste("\nD3mirt:", nrow(tab1), "items and", length(tab2), "levels of difficulty\n\n"))
+  } else {
+    cat(paste("\nD3mirt:", nrow(tab1), "items and", length(tab2), "level of difficulty\n\n"))
+  }
+    if (length(object$modid) == 2 ){
+      cat(paste("Compensatory model:\n"))
+      cat(paste("Model identification items:", paste(object$modid[1], sep = ""), paste (object$modid[2], sep = "") , "\n", sep = ""))
+    }
+      if (length(object$modid) > 2 ){
+        for (i in seq_along(object$con.sph)){
+          n <- unlist(object$modid[i])
+          cat(paste("Orthogonal model:\n"))
+        cat(paste("Latent dimension:", i, ": ", paste(n[1], "°", ", ", collapse="", sep = ""), paste(n[2], "°", collapse="", sep = ""), "\n", sep = ""))
+        }
+      }
   if (!is.null(object$c.dir.cos)){
     tab6 <- as.data.frame(cbind(object$c.dir.cos, object$c.spherical))
     tab7 <- as.data.frame(cbind(object$ddisc))
-    cat(paste("\nD3mirt:", nrow(tab1), "items and", ncol(tab2), "levels of difficulty\n\n"))
+    if (!is.null(object$con.items)){
+      cat(paste("Constructs:\n"))
+      for (i in seq_along(object$con.items)){
+        n <- unlist(object$con.items[i])
+        z <- as.character(rownames(tab1[n, ]))
+        # for (i in seq_along(n)) {
+        cat(paste("Item vector ", i, ": ", paste(z, collapse=", ", sep = ""), "\n", sep = ""))
+        #    }
+      }
+    }
+  if (!is.null(object$con.sph)){
     cat(paste("Constructs:\n"))
-    for (i in seq_along(object$c)){
-      n <- unlist(object$c[i])
-      z <- sapply(n, function (x){
-        q <- as.character(rownames(tab1[x,]))
-      })
-      cat(paste("Vector ", i, ": ", paste(z, collapse=", "), "\n", sep = ""))
+      for (i in seq_along(object$con.sph)){
+        n <- unlist(object$con.sph[i])
+        cat(paste("Spherical coordinate vector ", i, ": ", paste(n[1], "°", ", ", collapse="", sep = ""), paste(n[2], "°", collapse="", sep = ""), "\n", sep = ""))
+      }
     }
     cat(paste("\n"))
-  } else {
-    cat(paste("\nD3mirt:", nrow(tab1), "items and", ncol(tab2), "levels of difficulty\n\n"))
   }
   if (!is.null(object$c.dir.cos)){
     print(round(tab1,digits))
@@ -60,7 +82,7 @@ summary.D3mirt <- function(object, ..., digits = 4){
     print(round(tab6, digits))
     cat(paste("\n"))
     print(round(tab7, digits))
-  } else{
+  } else {
     print(round(tab1,digits))
     cat(paste("\n"))
     print(round(tab4,digits))

@@ -339,16 +339,16 @@ D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NU
     }
   }
   if (!is.null(con.items)){
-    D3mirt <- list(loadings = a, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, c.dir.cos = ncos , c.spherical = csph, ddisc = ddisc,
+    D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, c.dir.cos = ncos , c.spherical = csph, ddisc = ddisc,
                    dir.vec = dir.vec, scal.vec = scal.vec, con.items = con.items,  c.vec = con, fscores = trait)
   } else if (!is.null(con.sph)){
-    D3mirt <- list(loadings = a, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, c.dir.cos = ncos , c.spherical = csph, ddisc = ddisc,
+    D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, c.dir.cos = ncos , c.spherical = csph, ddisc = ddisc,
                    dir.vec = dir.vec, scal.vec = scal.vec, con.sph = con.sph,  c.vec = con, fscores = trait)
   } else if (!is.null(trait)) {
-    D3mirt <- list(loadings = a, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, diff = diff,
+    D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, diff = diff,
                    dir.vec = dir.vec, scal.vec = scal.vec, fscores = trait)
   } else {
-    D3mirt <- list(loadings = a, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, diff = diff,
+    D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, diff = diff,
                    dir.vec = dir.vec, scal.vec = scal.vec)
   }
   class(D3mirt) <- "D3mirt"
