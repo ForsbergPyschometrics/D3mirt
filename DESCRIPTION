@@ -11,8 +11,9 @@ BugReports: https://github.com/ForsbergPyschometrics/D3mirt/issues
 Depends:
     R (>= 3.6.0),
     rgl (>= 1.0.1)
-Suggests:
+Imports:
     mirt,
+Suggests:
     knitr,
     rmarkdown,
     stats,
