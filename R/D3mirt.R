@@ -206,8 +206,8 @@ D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NU
     xyz <- dist*dcos
     uvw1 <- mdisc*dcos+xyz
     uvw2 <- dcos+xyz
-    vec1 <- do.call(rbind,list(xyz,uvw1))[order(sequence(sapply(list(xyz,uvw1),nrow))),]
-    vec2 <- do.call(rbind,list(xyz,uvw2))[order(sequence(sapply(list(xyz,uvw2),nrow))),]
+    vec1 <- do.call(rbind,list(xyz,uvw1))[order(sequence(vapply(list(xyz,uvw1),nrow, integer(1)))),]
+    vec2 <- do.call(rbind,list(xyz,uvw2))[order(sequence(vapply(list(xyz,uvw2),nrow, integer(1)))),]
     vector1 <- as.matrix(rbind(vector1,vec1), ncol = 3)
     vector2 <- as.matrix(rbind(vector2,vec2), ncol = 3)
     mdiff <- as.matrix(cbind(mdiff, dist), ncol = 1)

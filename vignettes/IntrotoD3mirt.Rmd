@@ -271,11 +271,14 @@ load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
 ```
 
 ```{r, eval = FALSE}
-x <- x[, -16] # Remove misfitting item W7Q16
+y <- x[, -16] # Remove misfitting item W7Q16
 # Call D3mirt() and using the orthogonal model
-mod2 <- D3mirt(x, modid = list(c(1:10),   # x-axis
+mod2 <- D3mirt(y, modid = list(c(1:10),   # x-axis
                              c(15:19),  # y-axis
                              c(11:14))) # z-axis
+modid = list(c(1:10),   # x-axis
+                             c(15:19),  # y-axis
+                             c(11:14))
 ```
 
 ```{r}

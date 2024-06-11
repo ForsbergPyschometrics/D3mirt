@@ -27,8 +27,20 @@ print.D3mirt <- function(x, ...){
     } else {
     cat(paste("\nD3mirt:", nrow(tab1), "items and", length(tab2), "level of difficulty\n\n"))
     }
+  if (length(x$modid) == 2 ){
+    cat(paste("Compensatory model\n"))
+    cat(paste("Model identification items: ", paste(object$modid[1],", ", sep = ""), paste (object$modid[2], sep = "") , "\n\n", sep = ""))
+  }
+  if (length(x$modid) > 2 ){
+    cat(paste("Orthogonal model\n"))
+    for (i in seq_along(x$modid)){
+      n <- unlist(x$modid[i])
+      z <- as.character(rownames(tab1[n, ]))
+      cat(paste("Item vector ", i, ": ", paste(z, collapse=", ", sep = ""), "\n", sep = ""))
+    }
+  }
     if (!is.null(x$con.items)){
-    cat(paste("Constructs:\n"))
+    cat(paste("Constructs\n"))
     for (i in seq_along(x$con.items)){
       n <- unlist(x$con.items[i])
       z <- as.character(rownames(tab1[n, ]))
@@ -36,7 +48,7 @@ print.D3mirt <- function(x, ...){
   }
   }
    if (!is.null(x$con.sph)){
-      cat(paste("Constructs:\n"))
+      cat(paste("Constructs\n"))
       for (i in seq_along(x$con.sph)){
         n <- unlist(x$con.sph[i])
           cat(paste("Spherical coordinate vector ", i, ": ", paste(n[1], "°", ", ", collapse="", sep = ""), paste(n[2], "°", collapse="", sep = ""), "\n", sep = ""))

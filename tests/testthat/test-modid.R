@@ -1,0 +1,23 @@
+test_that("Test unit modid", {
+  data(anes0809offwaves)
+  anes <- anes0809offwaves[,3:22]
+  x <- modid(anes, efa = TRUE)
+  expect_s3_class(x, "modid")
+  expect_snapshot(x)
+  expect_snapshot(summary(x))
+  anes <- x$loadings
+  x <- modid(anes, efa = FALSE, lower = 1, upper = 1)
+  expect_s3_class(x, "modid")
+  expect_snapshot(x)
+  expect_snapshot(summary(x))
+  x <- modid(anes, efa = FALSE, fac.order = c(3, 2, 1))
+  expect_s3_class(x, "modid")
+  expect_snapshot(x)
+  expect_snapshot(summary(x))
+  data("angles")
+  id <- rbind(angles[1,1:3], angles[8, 1:3], angles[9, 1:3], angles[13,1:3])
+  x <- modid(id, efa = FALSE)
+  expect_s3_class(x, "modid")
+  expect_snapshot(x)
+  expect_snapshot(summary(x))
+})
