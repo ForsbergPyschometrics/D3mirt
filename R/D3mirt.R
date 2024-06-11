@@ -16,6 +16,8 @@
 #' @param QMC Integration method for [mirt::fscores] (Chalmers, 2012). The default is `QMC = TRUE`.
 #'
 #' @importFrom mirt mirt
+#' @importFrom mirt fscores
+#' @importFrom mirt coef
 #'
 #' @details The `D3mirt()` function takes in model parameters from a compensatory three-dimensional multidimensional two-parameter logistic model (M2PL) or a multidimensional graded
 #' response model (MGRM), either in the form of a data frame with item data, or a data frame with factor loadings or an S4 object of class 'SingleGroupClass' exported from [mirt::mirt] (Chalmers, 2012) function fitted in accordance with descriptive item response theory model specifications (see package vignette).
@@ -62,16 +64,10 @@
 #' x <- anes0809offwaves
 #' x <- x[, 3:22] # Remove columns for age and gender
 #'
-#' # Call D3mirt() using x as input and model identification items W7Q3 and W7Q20
-#' mod <- D3mirt(x, modid = c("W7Q3", "W7Q20"))
-#'
-#' # Show summary of results
-#' summary(mod)
-#'
 #' # Call to D3mirt(), including optional nested lists for three constructs
 #' # Item W7Q16 is not included in any construct because of model violations
-#' # The model violations for the item W7Q16 can be seen when plotting the model
 #' # Constructs can also be defined using interval notation, i.e., c(1:10) and so on.
+#'
 #' con <- list(c(1,2,3,4,5,6,7,8,9,10),
 #'             c(11,12,13,14),
 #'             c(15,17,18,19,20))
@@ -86,10 +82,13 @@
 #' # The second angle the angle away from the y-axis.
 #' # The specification below indicate three constructs located at an 45 degree angle
 #' # between the three axes in the positive orientation.
+#' # To skip fitting the compensatory model with each function call to D3mirt,
+#' # it is possible to assign factor loadings and difficulty paramters from mod to a new data frame
+#' y <- cbind(mod$loadings, mod$diff)
 #' con <- list(c(0, 45),
 #'             c(45, 90),
 #'             c(90, 45))
-#' mod <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.sph = con)
+#' mod <- D3mirt(y, con.sph = con)
 #'
 #' # Show summary of results
 #' summary(mod)

@@ -9,58 +9,58 @@ b <- matrix(c(-1, 0, 0,
               0, 0, -1,
               .5, .5, .5), ncol = 4)
 
-c <- matrix(c(1/2, sqrt(2)/2, sqrt(3)/2, # standardvinklar mot x
+c <- matrix(c(1/2, sqrt(2)/2, sqrt(3)/2,
               sqrt(3)/2, sqrt(2)/2, 1/2,
               0, 0, 0,
               .5, .5, .5), ncol = 4)
 
-d <- matrix(c(-1/2, -sqrt(2)/2, -sqrt(3)/2, # standardvinklar mot -x
+d <- matrix(c(-1/2, -sqrt(2)/2, -sqrt(3)/2,
               sqrt(3)/2, sqrt(2)/2, 1/2,
               0, 0, 0,
               .5, .5, .5), ncol = 4)
 
-e <- matrix(c(0, 0, 0, # standardvinklar mot z
+e <- matrix(c(0, 0, 0,
               1/2, sqrt(2)/2, sqrt(3)/2,
               sqrt(3)/2, sqrt(2)/2, 1/2,
               .5, .5, .5), ncol = 4)
 
-f <- matrix(c(0, 0, 0, # standardvinklar mot -z
+f <- matrix(c(0, 0, 0,
               1/2, sqrt(2)/2, sqrt(3)/2,
               -sqrt(3)/2, -sqrt(2)/2, -1/2,
               .5, .5, .5), ncol = 4)
 
-g <- matrix(c(1/2, sqrt(2)/2, sqrt(3)/2, # standardvinklar mot x, -y
+g <- matrix(c(1/2, sqrt(2)/2, sqrt(3)/2,
               -sqrt(3)/2, -sqrt(2)/2, -1/2,
               0, 0, 0,
               .5, .5, .5), ncol = 4)
 
-h <- matrix(c(-1/2, -sqrt(2)/2, -sqrt(3)/2, # standardvinklar mot -x, -y
+h <- matrix(c(-1/2, -sqrt(2)/2, -sqrt(3)/2,
               -sqrt(3)/2, -sqrt(2)/2, -1/2,
               0, 0, 0,
               .5, .5, .5), ncol = 4)
 
-i <- matrix(c(0, 0, 0, # standardvinklar mot z, -y
+i <- matrix(c(0, 0, 0,
               -1/2, -sqrt(2)/2, -sqrt(3)/2,
               sqrt(3)/2, sqrt(2)/2, 1/2,
               .5, .5, .5), ncol = 4)
 
 
-j <- matrix(c(0, 0, 0, # standardvinklar mot -z, -y
+j <- matrix(c(0, 0, 0,
               -1/2, -sqrt(2)/2, -sqrt(3)/2,
               -sqrt(3)/2, -sqrt(2)/2, -1/2,
               .5, .5, .5), ncol = 4)
 
-k <- matrix(c(sqrt(1/3), -sqrt(1/3), -sqrt(1/3), sqrt(1/3), # .57 positiv
+k <- matrix(c(sqrt(1/3), -sqrt(1/3), -sqrt(1/3), sqrt(1/3),
               sqrt(1/3), sqrt(1/3), sqrt(1/3), sqrt(1/3),
               sqrt(1/3), sqrt(1/3), -sqrt(1/3), -sqrt(1/3),
               .5, .5, .5, .5), ncol = 4)
 
-l <- matrix(c(sqrt(1/3), -sqrt(1/3), -sqrt(1/3), sqrt(1/3), # .57 negativ
+l <- matrix(c(sqrt(1/3), -sqrt(1/3), -sqrt(1/3), sqrt(1/3), #
               -sqrt(1/3), -sqrt(1/3), -sqrt(1/3), -sqrt(1/3),
               sqrt(1/3), sqrt(1/3), -sqrt(1/3), -sqrt(1/3),
               .5, .5, .5, .5), ncol = 4)
 
-m <- matrix(c(sqrt(2)/2, -sqrt(2)/2, -sqrt(2)/2, sqrt(2)/2, # 45 i planet alla riktningar
+m <- matrix(c(sqrt(2)/2, -sqrt(2)/2, -sqrt(2)/2, sqrt(2)/2,
               0, 0, 0, 0,
               sqrt(2)/2, sqrt(2)/2, -sqrt(2)/2, -sqrt(2)/2,
               .5, .5, .5, .5), ncol = 4)

@@ -29,7 +29,7 @@ print.D3mirt <- function(x, ...){
     }
   if (length(x$modid) == 2 ){
     cat(paste("Compensatory model\n"))
-    cat(paste("Model identification items: ", paste(object$modid[1],", ", sep = ""), paste (object$modid[2], sep = "") , "\n\n", sep = ""))
+    cat(paste("Model identification items: ", paste(x$modid[1],", ", sep = ""), paste (x$modid[2], sep = "") , "\n\n", sep = ""))
   }
   if (length(x$modid) > 2 ){
     cat(paste("Orthogonal model\n"))
@@ -51,7 +51,7 @@ print.D3mirt <- function(x, ...){
       cat(paste("Constructs\n"))
       for (i in seq_along(x$con.sph)){
         n <- unlist(x$con.sph[i])
-          cat(paste("Spherical coordinate vector ", i, ": ", paste(n[1], "°", ", ", collapse="", sep = ""), paste(n[2], "°", collapse="", sep = ""), "\n", sep = ""))
+          cat(paste("Spherical coordinate vector ", i, ": ", paste(n[1], ", ", collapse="", sep = ""), paste(n[2], collapse="", sep = ""), "\n", sep = ""))
       }
   }
   cat(paste("\n"))

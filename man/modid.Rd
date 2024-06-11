@@ -85,9 +85,6 @@ x <- x[,3:22] # Remove columns for age and gender
 # Identify the DMIRT model using a three-factor EFA
 id <- modid(x)
 
-# Optional: Load the EFA data for this example directly from the package file
-# load(system.file("extdata/efa.Rdata", package = "D3mirt"))
-
 # Call to summary
 summary(id)
 

@@ -60,9 +60,6 @@
 #' # Identify the DMIRT model using a three-factor EFA
 #' id <- modid(x)
 #'
-#' # Optional: Load the EFA data for this example directly from the package file
-#' # load(system.file("extdata/efa.Rdata", package = "D3mirt"))
-#'
 #' # Call to summary
 #' summary(id)
 #'
@@ -101,7 +98,8 @@ modid <- function(x, efa = TRUE, factors = 3, lower = 0.5, upper = .10, fac.orde
     a <- a[order(a[, 1], decreasing = TRUE),]
     s <- scale(a[, 1, drop = FALSE], center= TRUE, scale=TRUE)
     s <- subset(s, s >= (s[1, 1] - lower))
-    b <- a[1:nrow(s), ]
+    n <- nrow(s)
+    b <- a[seq_len(n), ]
     b <- b[(b[, 2]) <= upper, ]
     if (nrow(b) == 0) stop ("The model identification failed, try changing factor rotation method or adjusting lower or upper bound")
     c <- b[order(b[, 2]), ]

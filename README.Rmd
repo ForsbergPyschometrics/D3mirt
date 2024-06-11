@@ -378,12 +378,12 @@ An example of how the output can be described could be as follows.
 
 # 4. Exporting The RGL Device
 
-Some options for exporting the RGL device are shown below. Over and above these, it is also possible to export graphical devices in R Markdown documents with `rgl::hookwebgl()` together with graphical options for knitr, as was done when creating the package vignette.
+Some options for exporting the RGL device are shown below. Over and above these, it is also possible to export graphical devices in R Markdown documents with `rgl::hook_webgl()` together with graphical options for knitr, as was done when creating the package vignette.
 
 ```{r, eval = FALSE}
 # Export an open RGL device to the console that can be saved as an html or image file
 plot(g, constructs = TRUE)
-s <- scene3d()
+s <- rgl::scene3d()
 rgl::rglwidget(s, 
                width = 1040, 
                height = 1040)

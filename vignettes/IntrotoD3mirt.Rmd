@@ -228,7 +228,7 @@ If constructs are used, the function also returns construct direction cosines, s
 
 To use the compensatory model, the user only needs specify the model identification items from `modid()` in the `modid` argument when calling `D3mirt` as follows. In the example, above, `modid()` selected items W7Q3 as item 1 and W7Q20 as item 2. Accordingly, to fit the compensatory model simply impute a charachter vector containing the items in the `modid` argument.
 
-Note that because the fitting of the compensatory model in the `mirt()` function takes a long time, the item parameters for this example are contained in a data frame that is available in the package file "mod1.Rdata". to save time studying these examples, the package file can be loaded and used in the function call.
+Note that because the fitting of the compensatory model in the `mirt()` function takes a long time, the item parameters for this example are contained in a data frame that is available in the package file "mod1.Rdata". to save time studying these examples, the package file can be loaded and used in the function call. 
 
 ```{r, include = FALSE}
 load("mod1.Rdata")
@@ -276,9 +276,6 @@ y <- x[, -16] # Remove misfitting item W7Q16
 mod2 <- D3mirt(y, modid = list(c(1:10),   # x-axis
                              c(15:19),  # y-axis
                              c(11:14))) # z-axis
-modid = list(c(1:10),   # x-axis
-                             c(15:19),  # y-axis
-                             c(11:14))
 ```
 
 ```{r}
@@ -295,7 +292,8 @@ Regarding the first option, nested lists can be created containing all items in 
 
 This type of construct can contribute to the analysis by (a) visualizing the average direction for a subset set of items, and (b) showing how all items discriminate locally in the direction of the construct vector with the help of the $DDISC$ index.
 
-The constructs included below were grouped based on exploratory reasons, i.e., because these items cluster in the model (observable in the graphical output). To call `D3mirt` with constructs calculated as the average direction of a subset of items, use the `con.items` argument and create nested lists as the example below illustrates.
+The constructs included below were grouped based on exploratory reasons, i.e., because these items cluster in the model (observable in the graphical output). To call `D3mirt` with constructs calculated as the average direction of a subset of items, use the `con.items` argument and create nested lists as the example below illustrates. Note that if a `D3mirt` object already exists, it is possible to extract factor loadings and the difficulty parameters from the compensatory model from the `D3mirt` object and assign them to a new data frame. This new data frame can then be used to refit the object for the purpose of adding constructs, for instance. Following this procedure, the call to `D3mirt` will skip fitting the compensatory model and calculation of parameters will be instant.
+
 ```{r, include = FALSE}
 load("mod3.Rdata")
 ```
@@ -603,12 +601,12 @@ An example of how the output can be described is as follows.
 
 # 4. Exporting The RGL Device
 
-Below are some options for exporting the RGL device. In addition to these, it is also possible to export graphical devices in R Markdown documents with `rgl::hookwebgl()` together with graphical options for knitr, as was done when creating this vignette.
+Below are some options for exporting the RGL device. In addition to these, it is also possible to export graphical devices in R Markdown documents with `rgl::hook_webgl()` together with graphical options for knitr, as was done when creating this vignette.
 
 ```{r, eval = FALSE}
 # Export an open RGL device to the console that can be saved as an html or image file
 plot(mod3, constructs = TRUE)
-s <- scene3d()
+s <- rgl::scene3d()
 rgl::rglwidget(s, 
                width = 1040, 
                height = 1040)

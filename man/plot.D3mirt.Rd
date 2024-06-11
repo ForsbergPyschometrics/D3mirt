@@ -8,6 +8,7 @@
   x,
   scale = FALSE,
   hide = FALSE,
+  ind.scores = FALSE,
   diff.level = NULL,
   items = NULL,
   item.names = TRUE,
@@ -18,13 +19,13 @@
   x.lab = "X",
   y.lab = "Y",
   z.lab = "Z",
-  font = 1,
-  cex = 1,
   title = "",
   line = -5,
+  font = 1,
+  cex = 1,
+  font.col = "black",
   axis.scalar = 1.1,
   axis.length = NULL,
-  axis.col = "black",
   axis.points = "black",
   points = TRUE,
   axis.ticks = TRUE,
@@ -48,7 +49,6 @@
   c.n = 20,
   c.theta = 0.2,
   c.barblen = 0.03,
-  ind.scores = FALSE,
   profiles = NULL,
   levels = NULL,
   sphere.col = c("black", "grey20", "grey40", "grey60", "grey80"),
@@ -66,6 +66,8 @@
 \item{scale}{Logical, if item vector arrow length should visualize the MDISC. If set to FALSE, the vector arrow length will be of one unit length. The default is \code{scale = FALSE}.}
 
 \item{hide}{Logical, if items should be plotted. The default is \code{hide = FALSE}.}
+
+\item{ind.scores}{Logical, should output plot respondents trait scores. The default is \code{ind.scores = FALSE}.}
 
 \item{diff.level}{Optional. Plotting of a single level of difficulty indicated by an integer.}
 
@@ -92,13 +94,15 @@ The first value is for horizontal adjustment and the second is for vertical adju
 
 \item{z.lab}{Labels for y-axis, the default is \code{z.lab = "Z"}.}
 
+\item{title}{The main title for the graphical device, plotted with the \code{title3d()} function. The default is no title.}
+
+\item{line}{Title placement for \code{title3d()}. The default is \code{line = -5}.}
+
 \item{font}{A numeric font number from 1 to 5, the default is \code{font = 1}. See \link[rgl:texts]{rgl::text3d} for more on font options.}
 
 \item{cex}{A numeric character expansion value to adjust font size, the default is \code{cex = 1}.}
 
-\item{title}{The main title for the graphical device, plotted with the \code{title3d()} function. The default is no title.}
-
-\item{line}{Title placement for \code{title3d()}. The default is \code{line = -5}.}
+\item{font.col}{Color of axes, numbers and fonts. The default is \code{font.col = "black"}.}
 
 \item{axis.scalar}{Scalar multiple for adjusting the length of all axes (x, y, z) in the 3D model proportionally. The default is \code{axis.scalar = 1.1}.}
 
@@ -106,8 +110,6 @@ The first value is for horizontal adjustment and the second is for vertical adju
 For instance, c(3,2,4,3,3,2) indicate axis coordinates x = 3, -x = 3, y = 4, -y = 3, z = 3, -z = 2.
 Note, a symmetric model can be created easily by adding a single numeric in the \code{axis.length} argument (e.g., \code{axis.length = 4}) because the function repeats the last value in the vector to cover all axis points.
 The default is \code{axis.length = NULL}.}
-
-\item{axis.col}{Color of axis for the \code{segment3D()}function, the default is \code{axis.col = "black"}.}
 
 \item{axis.points}{Color of axis points for the \code{points3d()} function. The default is \code{axis.points = "black"}.}
 
@@ -158,8 +160,6 @@ The first numeric adjusts the length in the positive direction and the second nu
 \item{c.theta}{Opening angle of barbs for construct vector arrows from \code{arrow3d()}. The default is \code{c.theta = 0.2}.}
 
 \item{c.barblen}{The length of the barbs for construct vector arrows from \code{arrow3d()}. The default is \code{c.barblen = 0.03}.}
-
-\item{ind.scores}{Logical, should output plot respondents trait scores. The default is \code{ind.scores = FALSE}.}
 
 \item{profiles}{Data frame with coordinates for spheres representing subset of respondent scores. The default is \code{profiles = NULL}.}
 
@@ -304,7 +304,7 @@ plot(mod, hide = TRUE,
 \dontrun{
 # Export an open RGL device to the console to be saved as html or image file
 plot(mod, constructs = TRUE)
-s <- scene3d()
+s <- rgl::scene3d()
 rgl::rglwidget(s,
                width = 1040,
                height = 1040)

@@ -9,10 +9,10 @@ License: GPL (>= 3)
 URL: https://github.com/ForsbergPyschometrics/D3mirt
 BugReports: https://github.com/ForsbergPyschometrics/D3mirt/issues
 Depends:
-    mirt,
     R (>= 3.6.0),
     rgl (>= 1.0.1)
 Suggests:
+    mirt,
     knitr,
     rmarkdown,
     stats,
