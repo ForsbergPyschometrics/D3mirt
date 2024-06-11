@@ -12,7 +12,7 @@ Depends:
     R (>= 3.6.0),
     rgl (>= 1.0.1)
 Imports:
-    mirt,
+    mirt
 Suggests:
     knitr,
     rmarkdown,
