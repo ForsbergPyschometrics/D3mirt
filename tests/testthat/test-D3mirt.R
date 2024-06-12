@@ -20,63 +20,48 @@ test_that("Test unit D3mirt and plot", {
   for (i in seq_along(row)){
     expect_equal(row[i,1], 1)
   }
-
   plot(x, constructs = TRUE, ind.scores = TRUE, title = "Plot Test 1.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, item.names = FALSE, title = "Plot Test 1.2")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(y, title = "Plot Test 2.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(y, item.names = FALSE, title = "Plot Test 2.2")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(y, items = c(1:10), title = "Plot Test 3.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(y, item.names = FALSE, items = c(1:10), title = "Plot Test 3.2")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(y, items = c(1:10), item.lab = c(1:10), title = "Plot Test 4.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(y, item.names = FALSE, items = c(1:10), item.lab = c(1:10), title = "Plot Test 4.2")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, diff.level = 3, title = "Plot Test 5.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, item.names = FALSE, diff.level = 3, title = "Plot Test 5.2")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x,  items = c(15:20), diff.level = 1, title = "Plot Test 6.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, item.names = FALSE, items = c(15:20), diff.level = 1, title = "Plot Test 6.2")
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, items = c(15:20), diff.level = 5, item.lab = c(1:6), title = "Plot Test 7.1", axis.scalar = 2.1, show.plane = FALSE)
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, item.names = FALSE, items = c(15:20), diff.level = 5, item.lab = c(1:6), title = "Plot Test 7.2", axis.scalar = 2.1, show.plane = FALSE)
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   anes3 <- anes0809offwaves
   z <- data.frame(cbind(x$fscores, anes3[, 1]))
   z1 <- subset(z, z[, 4] <= 30)
@@ -91,8 +76,7 @@ test_that("Test unit D3mirt and plot", {
        ci = TRUE, ci.level = 0.90, ellipse.col = "grey99", ellipse.alpha = 0.40)
   p <- rgl::scene3d()
   expect_snapshot(p)
-
-  anes1 <- anes1[,-16]
+  anes1 <- data.frame(anes1[,-16])
   x <- D3mirt(anes1, modid = list(c(1:10), c(15:19), c(11:14)))
   expect_snapshot(x)
   expect_snapshot(print(x))
