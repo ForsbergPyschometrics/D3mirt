@@ -110,7 +110,7 @@
 #' }
 #' @export
 D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NULL, itemtype = "graded", method.mirt = "QMCEM", method.fscores = "EAP", QMC = TRUE){
-  if (!(itemtype == "graded" || itemtype == "2PL")) stop("The item model must be the graded response model or the 2PL model")
+  if (!(itemtype == "graded" || itemtype == "2PL")) stop("The item model must be the GRM or the 2PL")
   if (!is.null(con.items) && !is.null(con.sph)) stop("Use either items or spherical coordinates for constructs, not both")
   if (isS4(x)){
     trait <- mirt::fscores(x, method = method.fscores, full.scores = TRUE, full.scores.SE = FALSE, QMC = TRUE)
@@ -164,8 +164,8 @@ D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NU
       model <- paste(mod, sep="",collapse="")
     }
     if (is.null(model)) stop("The model must be identified, use model identification items or constrain all items to parallell with the axes")
-    if (length(unique(x[, 1])) > 2 && itemtype == "2PL") stop("Use the graded response model as item model if the items have more than two response options")
-    if (length(unique(x[, 1])) == 2 && itemtype == "graded") warning("Use the 2PL model as item model if the items have only two response options")
+    if (length(unique(x[, 1])) > 2 && itemtype == "2PL") stop("Use the GRM as item model if the items have more than two response options")
+    if (length(unique(x[, 1])) == 2 && itemtype == "graded") warning("Use the 2PL as item model if the items have two response options")
     x <- mirt::mirt(x, model = model, itemtype = itemtype, SE = TRUE, method = method.mirt)
     trait <- mirt::fscores(x, method = method.fscores, full.scores = TRUE, full.scores.SE = FALSE, QMC = QMC)
     k <- x@Data$K[1]-1

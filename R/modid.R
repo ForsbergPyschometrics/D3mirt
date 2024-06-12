@@ -72,7 +72,7 @@
 #' @export
 modid <- function(x, efa = TRUE, factors = 3, lower = 0.5, upper = .10, fac.order = NULL, itemtype = "graded", method = "EM", rotate = "oblimin", ...){
   if (efa == TRUE){
-  if (!(itemtype %in% c("graded", "2PL"))) stop ("The item model must be of type graded or 2PL")
+  if (!(itemtype %in% c("graded", "2PL"))) stop ("The item model must be of type GRM or 2PL")
   x <- as.matrix(x)
   if(any(!x == round(x))) stop("Set efa to FALSE if the data frame contains factor loadings")
   e <- mirt::mirt(x, model = factors, itemtype = itemtype, method = method, ...)

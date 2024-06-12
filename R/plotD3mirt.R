@@ -355,9 +355,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           if (is.null(item.lab)){
             inames <- rownames(x$loadings)
             if (is.null(ncol(vec))){
-              max <-  x$dir.vec[[ncol(x$mdiff)]]
+              max <-  vec[[ncol(x$mdiff)]]
             } else {
-              max <-  x$dir.vec
+              max <-  vec
             }
             vapply(seq(nrow(x$mdisc)), function(i){
               rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(inames[i]), color = font.col,
@@ -367,9 +367,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
             if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
             if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
             if (is.null(ncol(vec))){
-              max <-  x$dir.vec[[ncol(x$mdiff)]]
+              max <-  vec[[ncol(x$mdiff)]]
             } else {
-              max <-  x$dir.vec
+              max <-  vec
             }
             vapply(seq(nrow(x$mdisc)), function(i){
               rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = font.col,
@@ -379,7 +379,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
         } else {
           if (is.null(item.lab)){
             inames <- rownames(x$loadings)
-            dl <-  x$dir.vec[[diff.level]]
+            dl <-  vec[[diff.level]]
             vapply(seq(nrow(x$mdisc)), function(i){
               rgl::text3d(dl[(i*2),1],dl[(i*2),2], dl[(i*2),3], text = c(inames[i]), color = font.col,
                           adj = adjust.lab, font = font, cex = cex)
@@ -387,7 +387,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           } else {
             if(!length(item.lab) <= nrow(x$loadings)) warning("There are more item labels than items")
             if(length(item.lab) < nrow(x$loadings)) warning("There are too few item labels")
-            max <-  x$dir.vec[[diff.level]]
+            max <-  vec[[diff.level]]
             vapply(seq(nrow(x$mdisc)), function(i){
               rgl::text3d(max[(i*2),1],max[(i*2),2], max[(i*2),3], text = c(item.lab[i]), color = font.col,
                           adj = adjust.lab, font = font, cex = cex)
@@ -401,9 +401,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           if (is.null(item.lab)){
             inames <- rownames(x$loadings)
             if (is.null(ncol(vec))){
-              max <-  x$dir.vec[[ncol(x$mdiff)]]
+              max <-  vec[[ncol(x$mdiff)]]
             } else {
-              max <-  x$dir.vec
+              max <-  vec
             }
             vapply(seq_along(items), function(i){
               m <- items[i]
@@ -414,9 +414,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
             if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
             if(length(item.lab) < length(items)) warning("There are too few item labels")
             if (is.null(ncol(vec))){
-              max <-  x$dir.vec[[ncol(x$mdiff)]]
+              max <-  vec[[ncol(x$mdiff)]]
             } else {
-              max <-  x$dir.vec
+              max <-  vec
             }
             vapply(seq_along(items), function(i){
               m <- items[i]
@@ -426,7 +426,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           }
         } else {
           if (is.null(item.lab)){
-            dl <-  x$dir.vec[[diff.level]]
+            dl <-  vec[[diff.level]]
             inames <- rownames(x$loadings)
             vapply(seq_along(items), function(i){
               m <- items[i]
@@ -436,7 +436,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           } else {
             if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
             if(length(item.lab) < length(items)) warning("There are too few item labels")
-            dl <-  as.data.frame(x$dir.vec[diff.level, drop = FALSE])
+            dl <-  as.data.frame(vec[diff.level, drop = FALSE])
             vapply(seq_along(items), function(i){
               m <- items[i]
               rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(item.lab[i]), color = font.col,
@@ -445,56 +445,6 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           }
         }
       }
-      }
-      if (item.names == TRUE && !is.null(items)){
-        if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
-        if (is.null(diff.level)){
-          if (is.null(item.lab)){
-            inames <- rownames(x$loadings)
-            if (is.null(ncol(vec))){
-              max <-  x$scal.vec[[ncol(x$mdiff)]]
-            } else {
-              max <-  x$scal.vec
-            }
-            vapply(seq_along(items), function(i){
-              m <- items[i]
-              rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(inames[m]), color = font.col,
-                          adj = adjust.lab, font = font, cex = cex)
-            }, integer(1))
-          } else {
-            if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
-            if(length(item.lab) < length(items)) warning("There are too few item labels")
-            if (is.null(ncol(vec))){
-              max <-  x$scal.vec[[ncol(x$mdiff)]]
-            } else {
-              max <-  x$scal.vec
-            }
-            vapply(seq_along(items), function(i){
-              m <- items[i]
-              rgl::text3d(max[m*2,1],max[m*2,2], max[m*2,3], text = c(item.lab[i]), color = font.col,
-                          adj = adjust.lab, font = font, cex = cex)
-            }, integer(1))
-          }
-        } else {
-          if (is.null(item.lab)){
-            dl <-  x$scal.vec[[diff.level]]
-            inames <- rownames(x$loadings)
-            vapply(seq_along(items), function(i){
-              m <- items[i]
-              rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(inames[m]), color = font.col,
-                          adj = adjust.lab, font = font, cex = cex)
-            }, integer(1))
-          } else {
-            if(!length(item.lab) <= length(items)) warning("There are more item labels than items in the items list")
-            if(length(item.lab) < length(items)) warning("There are too few item labels")
-            dl <-  as.data.frame(x$scal.vec[diff.level, drop = FALSE])
-            vapply(seq_along(items), function(i){
-              m <- items[i]
-              rgl::text3d(dl[m*2,1],dl[m*2,2], dl[m*2,3], text = c(item.lab[i]), color = font.col,
-                          adj = adjust.lab, font = font, cex = cex)
-            }, integer(1))
-          }
-        }
       }
   if (constructs == TRUE){
     if (is.null(x$c.vec)) stop("The D3mirt object does not contain any constructs")
