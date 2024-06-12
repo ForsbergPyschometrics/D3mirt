@@ -96,7 +96,7 @@
 #' # Call D3mirt() using the orthogonal optional model
 #' # often requires removing items with poor fit
 #' # In this example item W7Q16 is removed from the data frame
-#' x <- x[, -16]
+#' x <- data.frame(x[,-16])
 #'
 #' # Items are constrained to the x, y, and z-axes using
 #' # nested lists with positive integers as item indicators
