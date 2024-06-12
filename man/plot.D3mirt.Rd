@@ -27,7 +27,6 @@
   axis.scalar = 1.1,
   axis.length = NULL,
   axis.points = "black",
-  points = TRUE,
   axis.ticks = TRUE,
   nticks = 4,
   width.rgl.x = 1040,
@@ -112,8 +111,6 @@ Note, a symmetric model can be created easily by adding a single numeric in the 
 The default is \code{axis.length = NULL}.}
 
 \item{axis.points}{Color of axis points for the \code{points3d()} function. The default is \code{axis.points = "black"}.}
-
-\item{points}{Logical, if axis from \code{points3d()} should have end points. The default is \code{points = TRUE}.}
 
 \item{axis.ticks}{Logical, if axis ticks from the \code{axis3d()} function should be plotted. The default is \code{axis.ticks = TRUE}.}
 

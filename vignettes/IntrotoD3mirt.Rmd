@@ -359,7 +359,7 @@ Graphing in default mode by calling `plot()` will return an RGL device that will
 
 ```{r, testg1, webgl = TRUE, fig.width = 7, fig.height = 7}
 # Plot RGL device
-plot(mod1, view = c(15, 20, 0.6))
+plot(mod1, view = c(15, 20, 0.6), scale = TRUE)
 ```
 
 An example of how the output can be described could be the following.
@@ -373,7 +373,7 @@ We can also study the orthogonal model by calling `plot()` by changing the first
 plot(mod2, view = c(15, 20, 0.6),
          x.lab = "Compassion", 
          y.lab = "Conformity", 
-         z.lab = "Fairness", )
+         z.lab = "Fairness")
 ```
 
 It can be observed that the discrimination scores are lower for all items in the orthogonal model compared to the compensatory model. It is also notable that the size of the reduction is related to how much the item orientation changed when the items are constrained to the axes. Accordingly, the discrimination scores for the Compassion items are less affected on average compared to the Fairness items and many of the Conformity items.
