@@ -64,10 +64,10 @@ summary.D3mirt <- function(object, ..., digits = 4){
         #    }
       }
     }
-  if (!is.null(object$con.sph)){
+  if (!is.null(object$con.sphe)){
     cat(paste("Constructs\n"))
-      for (i in seq_along(object$con.sph)){
-        n <- unlist(object$con.sph[i])
+      for (i in seq_along(object$con.sphe)){
+        n <- unlist(object$con.sphe[i])
         cat(paste("Spherical coordinate vector ", i, ": ", paste(n[1], ", ", collapse="", sep = ""), paste(n[2], collapse="", sep = ""), "\n", sep = ""))
       }
     }

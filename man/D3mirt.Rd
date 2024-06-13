@@ -9,7 +9,7 @@ D3mirt(
   modid = NULL,
   model = NULL,
   con.items = NULL,
-  con.sph = NULL,
+  con.sphe = NULL,
   itemtype = "graded",
   method.mirt = "QMCEM",
   method.fscores = "EAP",
@@ -28,7 +28,7 @@ The default is \code{model = NULL}.}
 
 \item{con.items}{Optional. Nested lists with integer values as item indicators to identify constructs. The default is \code{con.items = NULL}.}
 
-\item{con.sph}{Optional. Nested lists of spherical angles to identify constructs. The default is \code{con.sph = NULL}.}
+\item{con.sphe}{Optional. Nested lists of spherical angles to identify constructs. The default is \code{con.sphe = NULL}.}
 
 \item{itemtype}{What item type to use in the function call. Available options are \code{"2PL"} and \code{"graded"}. The default is \code{itemtype = "graded"}.}
 
@@ -105,7 +105,7 @@ y <- cbind(mod$loadings, mod$diff)
 con <- list(c(0, 45),
             c(45, 90),
             c(90, 45))
-mod <- D3mirt(y, con.sph = con)
+mod <- D3mirt(y, con.sphe = con)
 
 # Show summary of results
 summary(mod)
@@ -113,7 +113,7 @@ summary(mod)
 # Call D3mirt() using the orthogonal optional model
 # often requires removing items with poor fit
 # In this example item W7Q16 is removed from the data frame
-x <- x[, -16]
+x <- data.frame(x[,-16])
 
 # Items are constrained to the x, y, and z-axes using
 # nested lists with positive integers as item indicators

@@ -9,7 +9,7 @@
 #' @param model The user has the option of imputing a model specification schema that is used in the call to [mirt::mirt] (Chalmers, 2012).
 #' The default is `model = NULL`.
 #' @param con.items Optional. Nested lists with integer values as item indicators to identify constructs. The default is `con.items = NULL`.
-#' @param con.sph Optional. Nested lists of spherical angles to identify constructs. The default is `con.sph = NULL`.
+#' @param con.sphe Optional. Nested lists of spherical angles to identify constructs. The default is `con.sphe = NULL`.
 #' @param itemtype What item type to use in the function call. Available options are `"2PL"` and `"graded"`. The default is `itemtype = "graded"`.
 #' @param method.mirt Estimation algorithm for [mirt::mirt] (Chalmers, 2012) for fitting the model. The default is `method.mirt = "QMCEM"`.
 #' @param method.fscores Factor estimation algorithm for [mirt::fscores] (Chalmers, 2012) for extracting respondent trait scores. The default is `method.fscores = "EAP"`.
@@ -88,7 +88,7 @@
 #' con <- list(c(0, 45),
 #'             c(45, 90),
 #'             c(90, 45))
-#' mod <- D3mirt(y, con.sph = con)
+#' mod <- D3mirt(y, con.sphe = con)
 #'
 #' # Show summary of results
 #' summary(mod)
@@ -109,9 +109,9 @@
 #' summary(mod)
 #' }
 #' @export
-D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NULL, itemtype = "graded", method.mirt = "QMCEM", method.fscores = "EAP", QMC = TRUE){
+D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sphe = NULL, itemtype = "graded", method.mirt = "QMCEM", method.fscores = "EAP", QMC = TRUE){
   if (!(itemtype == "graded" || itemtype == "2PL")) stop("The item model must be the GRM or the 2PL")
-  if (!is.null(con.items) && !is.null(con.sph)) stop("Use either items or spherical coordinates for constructs, not both")
+  if (!is.null(con.items) && !is.null(con.sphe)) stop("Use either items or spherical coordinates for constructs, not both")
   if (isS4(x)){
     trait <- mirt::fscores(x, method = method.fscores, full.scores = TRUE, full.scores.SE = FALSE, QMC = TRUE)
     k <- x@Data$K[1]-1
@@ -254,15 +254,15 @@ D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NU
       ddisc <- as.matrix(cbind(ddisc, disc), ncol = 1)
     }
   }
-  if (!is.null(con.sph)){
-    if(!is.list(con.sph)) stop("The speherical coordinates for constructs must be of type list")
+  if (!is.null(con.sphe)){
+    if(!is.list(con.sphe)) stop("The speherical coordinates for constructs must be of type list")
     con <- NULL
     csph <- NULL
     ncos <- NULL
     cdcos <- NULL
     ddisc <- NULL
-    for (i in seq_along(con.sph)){
-      l <- unlist(con.sph[i])
+    for (i in seq_along(con.sphe)){
+      l <- unlist(con.sphe[i])
       if(l[1] > 180) stop("The theta angle must be between +/- 180 degrees")
       if(l[1] < -180) stop("The theta angle must be between +/- 180 degrees")
       if(l[2] > 180) stop("The phi angle must be between 0 and 180 degrees")
@@ -324,7 +324,7 @@ D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NU
     dir.vec <- split.data.frame(vector1, cut(seq_len(nrow(vector1)), ndiff))
     scal.vec <- split.data.frame(vector2, cut(seq_len(nrow(vector2)), ndiff))
   }
-  if (!is.null(con.items) || !is.null(con.sph)){
+  if (!is.null(con.items) || !is.null(con.sphe)){
     ncos <- as.data.frame(ncos)
     colnames(ncos) <- c("C.Cos X","C.Cos Y", "C.Cos Z")
     csph <- as.data.frame(csph)
@@ -340,9 +340,9 @@ D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sph = NU
   if (!is.null(con.items)){
     D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, c.dir.cos = ncos , c.spherical = csph, ddisc = ddisc,
                    dir.vec = dir.vec, scal.vec = scal.vec, con.items = con.items,  c.vec = con, fscores = trait)
-  } else if (!is.null(con.sph)){
+  } else if (!is.null(con.sphe)){
     D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, c.dir.cos = ncos , c.spherical = csph, ddisc = ddisc,
-                   dir.vec = dir.vec, scal.vec = scal.vec, con.sph = con.sph,  c.vec = con, fscores = trait)
+                   dir.vec = dir.vec, scal.vec = scal.vec, con.sphe = con.sphe,  c.vec = con, fscores = trait)
   } else if (!is.null(trait)) {
     D3mirt <- list(loadings = a, modid = modid, diff = diff, mdisc = mdisc, mdiff = mdiff, dir.cos = dcos, spherical = sph, diff = diff,
                    dir.vec = dir.vec, scal.vec = scal.vec, fscores = trait)

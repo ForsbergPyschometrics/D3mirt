@@ -47,10 +47,10 @@ print.D3mirt <- function(x, ...){
         cat(paste("Item vector ", i, ": ", paste(z, collapse=", ", sep = ""), "\n", sep = ""))
   }
   }
-   if (!is.null(x$con.sph)){
+   if (!is.null(x$con.sphe)){
       cat(paste("Constructs\n"))
-      for (i in seq_along(x$con.sph)){
-        n <- unlist(x$con.sph[i])
+      for (i in seq_along(x$con.sphe)){
+        n <- unlist(x$con.sphe[i])
           cat(paste("Spherical coordinate vector ", i, ": ", paste(n[1], ", ", collapse="", sep = ""), paste(n[2], collapse="", sep = ""), "\n", sep = ""))
       }
   }

@@ -20,54 +20,125 @@ test_that("Test unit D3mirt and plot", {
   for (i in seq_along(row)){
     expect_equal(row[i,1], 1)
   }
-  plot(x, constructs = TRUE, ind.scores = TRUE, title = "Plot Test 1.1")
+  plot(y, title = "Plot Test 1.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x, item.names = FALSE, title = "Plot Test 1.2")
+  plot(y, adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
+       cex = 2, title = "Plot Test 1.2", font.col = "pink", col = c("red"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(y, title = "Plot Test 2.1")
+  plot(y, item.names = FALSE, title = "Plot Test 2.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(y, item.names = FALSE, title = "Plot Test 2.2")
-  p <- rgl::scene3d()
+  plot(y, item.names = FALSE, adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
+       cex = 2, title = "Plot Test 2.2", font.col = "pink", col = c("red"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   expect_snapshot(p)
   plot(y, items = c(1:10), title = "Plot Test 3.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(y, item.names = FALSE, items = c(1:10), title = "Plot Test 3.2")
+  plot(y, items = c(1:10), adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
+       cex = 2, title = "Plot Test 3.2", font.col = "pink", col = c("red"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(y, items = c(1:10), item.lab = c(1:10), title = "Plot Test 4.1")
+  plot(y, item.names = FALSE, items = c(1:10), title = "Plot Test 4.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(y, item.names = FALSE, items = c(1:10), item.lab = c(1:10), title = "Plot Test 4.2")
+  plot(y, item.names = FALSE, items = c(1:10), adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
+       cex = 2, title = "Plot Test 4.2", font.col = "pink", col = c("red"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x, diff.level = 3, title = "Plot Test 5.1")
+  plot(y, items = c(1:10), item.lab = c(1:10), title = "Plot Test 5.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x, item.names = FALSE, diff.level = 3, title = "Plot Test 5.2")
+  plot(y, items = c(1:10), item.lab = c(1:10), adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 5.2", font.col = "pink", col = c("red"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x,  items = c(15:20), diff.level = 1, title = "Plot Test 6.1")
+  plot(y, item.names = FALSE, items = c(1:10), item.lab = c(1:10), title = "Plot Test 6.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x, item.names = FALSE, items = c(15:20), diff.level = 1, title = "Plot Test 6.2")
+  plot(y, item.names = FALSE, items = c(1:10), item.lab = c(1:10), adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 6.2", font.col = "pink", col = c("red"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x, items = c(15:20), diff.level = 5, item.lab = c(1:6), title = "Plot Test 7.1", axis.scalar = 2.1, show.plane = FALSE)
+  plot(x, constructs = TRUE, ind.scores = TRUE, title = "Plot Test 7.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  plot(x, item.names = FALSE, items = c(15:20), diff.level = 5, item.lab = c(1:6), title = "Plot Test 7.2", axis.scalar = 2.1, show.plane = FALSE)
+  plot(x, constructs = TRUE, ind.scores = TRUE, adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 7.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03,
+       spheres.r = 0.08, sphere.col = c(rep("red", 14),
+       ci = TRUE, ci.level = 0.90, ellipse.col = "grey99", ellipse.alpha = 0.40))
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, title = "Plot Test 8.1")
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 8.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+
+  plot(x, diff.level = 3, title = "Plot Test 9.1")
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, diff.level = 3, adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 9.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, diff.level = 3, title = "Plot Test 10.1")
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, diff.level = 3, adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 10.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x,  items = c(15:20), diff.level = 1, title = "Plot Test 11.1")
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x,  items = c(15:20), diff.level = 1, adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 11.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, items = c(15:20), diff.level = 1, title = "Plot Test 12.1")
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, items = c(15:20), diff.level = 1, adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 12.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, items = c(15:20), diff.level = 5, item.lab = c(1:6), title = "Plot Test 13.1", axis.scalar = 2.1, show.plane = FALSE)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, items = c(15:20), diff.level = 5, item.lab = c(1:6), adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 13.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, items = c(15:20), diff.level = 5, item.lab = c(1:6), title = "Plot Test 14.1")
+  p <- rgl::scene3d()
+  expect_snapshot(p)
+  plot(x, item.names = FALSE, items = c(15:20), diff.level = 5, item.lab = c(1:6), adjust.lab = c(0.6, -0.9), font = 2,
+       cex = 2, title = "Plot Test 14.2", font.col = "pink", col = c("red", "purple", "cyan", "green", "yellow"),
+       axis.scalar = 2.1, show.plane = FALSE, type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
   anes3 <- anes0809offwaves
   z <- data.frame(cbind(x$fscores, anes3[, 1]))
   z1 <- subset(z, z[, 4] <= 30)
-  plot(x, constructs = TRUE, scale = TRUE, construct.lab = c("Con 1", "Con 2", "Con 3"), adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
-       line = -4, width.rgl.x = 1500, width.rgl.y = 1500, view = c(45, 45, 0.5),
-       cex = 2, axis.length = 4, x.lab = "A", y.lab="B", z.lab="C", title = "Plot Test 8", font.col = "pink", axis.points = "green",
+  plot(x, hide = TRUE, constructs = TRUE, scale = TRUE, construct.lab = c("Con 1", "Con 2", "Con 3"), adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
+       cex = 2, axis.length = 4, x.lab = "A", y.lab="B", z.lab="C", title = "Plot Test 15", font.col = "pink", axis.points = "green",
        nticks = 8, plane.col = "purple", background = "black", col = c("red", "purple", "cyan", "green", "yellow"),
        type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03,
        c.type = "extrusion", c.scalars = c(1.5,1.5),
@@ -87,7 +158,7 @@ test_that("Test unit D3mirt and plot", {
   for (i in seq_along(row)){
     expect_equal(row[i,1], 1)
   }
-  plot(x, contructs = TRUE, title = "Plot Test 9")
+  plot(x, contructs = TRUE, title = "Plot Test 16")
   p <- rgl::scene3d()
   expect_snapshot(p)
   data("angles")
@@ -116,16 +187,16 @@ test_that("Test unit D3mirt and plot", {
     expect_identical(s$c.spherical[1,2], sph[i,2])
   }
   for (i in nrow(angles)){
-    s <- D3mirt(angles[1:4], con.sph = list(c(sph[i,1], sph[i,2])))
+    s <- D3mirt(angles[1:4], con.sphe = list(c(sph[i,1], sph[i,2])))
     expect_equal(s$c.dir.cos[1,1], angles[i,1])
     expect_equal(s$c.dir.cos[1,2], angles[i,2])
     expect_equal(s$c.dir.cos[1,3], angles[i,3])
   }
-  plot(x, title = "Plot Test 10.1")
+  plot(x, title = "Plot Test 17.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
-  x <- D3mirt(angles[,1:4], con.sph= con <- list(c(0, 45), c(45, 90), c(90, 45)))
-  plot(x, constructs = TRUE, item.names = FALSE, construct.lab = c("Con 1", "Con 2", "Con3"), title = "Plot Test 10.2")
+  x <- D3mirt(angles[,1:4], con.sphe = con <- list(c(0, 45), c(45, 90), c(90, 45)))
+  plot(x, constructs = TRUE, item.names = FALSE, construct.lab = c("Con 1", "Con 2", "Con3"), title = "Plot Test 17.2")
   expect_snapshot(x)
   expect_snapshot(print(x))
   expect_snapshot(summary(x))
