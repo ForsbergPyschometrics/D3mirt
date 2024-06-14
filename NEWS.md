@@ -1,3 +1,5 @@
+# D3mirt 1.2.0
+
 # D3mirt 2.0.0
 - New workflow integrating fitting of the compensatory model in the D3mirt function
 - Minor updates: R >= 3.6.0
