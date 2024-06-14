@@ -149,20 +149,22 @@ x <- anes0809offwaves
 x <- x[, 3:22] # Remove columns for age and gender
 ```
 
-If the default mode `efa = TRUE` is not changed, the function performs an EFA with three factors as the default before performing the model identification. In this example, however, the factor loadings are already available in the package file "efa.Rdata" and so the function call will only identify the model and not perform an EFA (therefore `efa = FALSE`).
+If the default mode `efa = TRUE` is not changed, the function performs an EFA with three factors as the default before performing the model identification. If factor loadings are already available then it is possible to assign them to a data frame and use them in the call to `modid()` by setting `efa` to `FALSE`.
 
 ```{r, include = FALSE}
 load("efa.Rdata")
+x <- a$loadings
+a <- modid(x, efa = FALSE)
 ```
-
 ```{r, eval = FALSE}
 # Optional: Load the EFA data for this example directly from the package file
 load(system.file("extdata/efa.Rdata", package = "D3mirt"))
 ```
-
-```{r}
+```{r, eval = FALSE}
 # Call to modid()
-a <- modid(x, efa = FALSE)
+a <- modid(x)
+```
+```{r}
 summary(a)
 ```
 
@@ -240,12 +242,10 @@ Note that because the fitting of the compensatory model in the `mirt()` function
 ```{r, include = FALSE}
 load("mod1.Rdata")
 ```
-
 ```{r, eval = FALSE}
 # Optional: Load mod1 directly from the package file
 load(system.file("extdata/mod1.Rdata", package = "D3mirt"))
 ```
-
 ```{r, eval = FALSE}
 # Call D3mirt() with the model identification items
 mod1 <- D3mirt(x, modid = c("W7Q3", "W7Q20"))
@@ -271,12 +271,10 @@ On a side note, using an orthogonal model in `D3mirt` often requires removing po
 ```{r, include = FALSE}
 load("mod2.Rdata")
 ```
-
 ```{r, eval = FALSE}
 # Optional: Load mod2 directly from the package file
 load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
 ```
-
 ```{r, eval = FALSE}
 y <- data.frame(x[,-16])# Remove misfitting item W7Q16
 # Call D3mirt() and using the orthogonal model
@@ -284,7 +282,6 @@ mod2 <- D3mirt(y, modid = list(c(1:10),   # x-axis
                              c(15:19),  # y-axis
                              c(11:14))) # z-axis
 ```
-
 ```{r}
 summary(mod2)
 ```
@@ -304,12 +301,10 @@ The constructs included below were grouped based on exploratory reasons, i.e., b
 ```{r, include = FALSE}
 load("mod3.Rdata")
 ```
-
 ```{r, eval = FALSE}
 # Optional: Load mod3 directly from the package file
 load(system.file("extdata/mod3.Rdata", package = "D3mirt"))
 ```
-
 ```{r, eval = FALSE}
 # Call to D3mirt(), including optional nested lists for three constructs
 # Item W7Q16 is not included in any construct because of model violations
@@ -333,12 +328,10 @@ In the example below, the constructs are oriented $45^{\circ}$ between each axes
 ```{r, include = FALSE}
 load("mod4.Rdata")
 ```
-
 ```{r, eval = FALSE}
 # Optional: Load mod3 directly from the package file
 load(system.file("extdata/mod4.Rdata", package = "D3mirt"))
 ```
-
 ```{r, eval = FALSE}
 # Call to D3mirt(), including optional nested lists with spherical angles
 # Item W7Q16 is not included in any construct because of model violations
@@ -347,10 +340,6 @@ con <- list(c(0, 45),   # theta = 0°, phi = 45°
             c(90, 45))  # theta = 90°, phi = 45°
 mod4 <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.sphe = con)
 ```
-```{r}
-summary(o)
-```
-
 ```{r}
 summary(mod4)
 ```
