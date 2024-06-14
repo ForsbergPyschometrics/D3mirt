@@ -49,7 +49,8 @@ summary.D3mirt <- function(object, ..., digits = 4){
         n <- unlist(object$modid[i])
         z <- as.character(rownames(tab1[n, ]))
         cat(paste("Item vector ", i, ": ", paste(z, collapse=", ", sep = ""), "\n", sep = ""))
-        }
+      }
+      cat(paste("\n"))
       }
   if (!is.null(object$c.dir.cos)){
     tab6 <- as.data.frame(cbind(object$c.dir.cos, object$c.spherical))
@@ -59,10 +60,9 @@ summary.D3mirt <- function(object, ..., digits = 4){
       for (i in seq_along(object$con.items)){
         n <- unlist(object$con.items[i])
         z <- as.character(rownames(tab1[n, ]))
-        # for (i in seq_along(n)) {
         cat(paste("Item vector ", i, ": ", paste(z, collapse=", ", sep = ""), "\n", sep = ""))
-        #    }
       }
+      cat(paste("\n"))
     }
   if (!is.null(object$con.sphe)){
     cat(paste("Constructs\n"))

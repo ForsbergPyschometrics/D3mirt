@@ -345,7 +345,10 @@ load(system.file("extdata/mod4.Rdata", package = "D3mirt"))
 con <- list(c(0, 45),   # theta = 0°, phi = 45°
             c(45, 90),  # theta = 45°, phi = 90°
             c(90, 45))  # theta = 90°, phi = 45°
-mod4 <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.sph = con)
+mod4 <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.sphe = con)
+```
+```{r}
+summary(o)
 ```
 
 ```{r}
@@ -366,7 +369,7 @@ Graphing in default mode by calling `plot()` will return an RGL device that will
 
 ```{r, testg1, webgl = TRUE, fig.width = 7, fig.height = 7}
 # Plot RGL device
-plot(mod1, view = c(15, 20, 0.6), scale = TRUE)
+plot(mod1, scale = TRUE, view = c(15, 20, 0.6))
 ```
 
 An example of how the output can be described could be the following.
@@ -377,10 +380,10 @@ We can also study the orthogonal model by calling `plot()` and changing the firs
 
 ```{r, testg2, webgl = TRUE, fig.width = 7, fig.height = 7}
 # Plot RGL device
-plot(mod2, view = c(15, 20, 0.6),
-         x.lab = "Compassion", 
-         y.lab = "Conformity", 
-         z.lab = "Fairness")
+plot(mod2, x.lab = "Compassion", 
+           y.lab = "Conformity", 
+           z.lab = "Fairness",
+           view = c(15, 20, 0.6))
 ```
 
 It can be observed that the discrimination scores are lower for all items in the orthogonal model compared to the compensatory model. It is also notable that the size of the reduction is related to how much the item orientation changed when the items are constrained to the axes. Accordingly, the discrimination scores for the Compassion items are less affected on average compared to the Fairness items and many of the Conformity items.
@@ -482,7 +485,7 @@ plot(mod3, hide = TRUE, ind.scores = TRUE,
 Respondents can be separated by creating color categories for the spheres to aid the visual interpretation. This can be done using the `levels` argument in `plot()`. In brief, the `levels` argument calls `as.factor()` to count the number of factor levels in the data. This means that raw data can be used as is, but the number of colors in the color vectors argument (`sphere.col`) may need to be adapted. In the example below, the criteria variable for gender only holds two factor levels and therefore only two colors in the color vector are needed. To create an appropriate data frame for `levels` the gender variable must first be assigned to a data frame.
 
 ```{r}
-# Load the data set as a matrix to ensure that the data frame is numerical
+# Load the data set as a matrix to remove attributes
 data("anes0809offwaves")
 x <- as.matrix(anes0809offwaves)
 ```

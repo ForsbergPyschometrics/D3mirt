@@ -342,7 +342,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
             v <- vec[[i]]
             color <- col[i]
             for (i in seq(from = 1, to = nrow(v), by=2)){
-              rgl::arrow3d(v[i,], v[i+1,], type = c.type, col = color, width = arrow.width, n = n, theta = theta, barblen = barblen)
+              rgl::arrow3d(v[i,], v[i+1,], type = type, col = color, width = arrow.width, n = n, theta = theta, barblen = barblen)
             }
           }
         } else {

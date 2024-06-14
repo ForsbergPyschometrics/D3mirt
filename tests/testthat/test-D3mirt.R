@@ -85,7 +85,6 @@ test_that("Test unit D3mirt and plot", {
        type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   expect_snapshot(p)
-
   plot(x, diff.level = 3, title = "Plot Test 9.1")
   p <- rgl::scene3d()
   expect_snapshot(p)
