@@ -262,7 +262,7 @@ The summary function shows the factor loadings and the difficulty parameters fro
 
 ### 2.1.2. Calling the Orthogonal Model
 
-A new addition in version 2.0.0 of `D3mirt` is the option of fitting an orthogonal constrained version of the compensatory model. This model allows the user to restrict items in the model space to only load on one of the model axes respectively. This allows for investigating of the items under the assumption that they are strictly three-dimensional, i.e., that they form three independent sets in the three-dimensional space. The term *orthogonal*, in this context, refers to the geographical interpretation of the graphical output in which all three unidimensions are perpendicular in the model space.
+A new addition in version 2.0.0 of `D3mirt` is the option of fitting an orthogonal constrained version of the compensatory model. This model allows the user to restrict items in the model space to only load on one of the model axes respectively. The orthogonal model is foremost useful for studying the items under the assumption that the items are unidimensional and that the unidimensions are uncorrelated. The term *orthogonal*, in this context, refers to the geographical interpretation of the graphical output in which all three unidimensions are perpendicular in the model space.
 
 To tell `D3mirt` to use the orthogonal model, create a nested list of items specifying which items load to which the three dimensions. In the example below, items 1 to 10 will be constrained to the $x$-axis, items 15 to 19 to the $y$-axis, and items 11 to 14 to the $z$-axis.
 
