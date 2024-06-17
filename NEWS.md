@@ -1,3 +1,5 @@
+# D3mirt 1.3.0
+
 # D3mirt 2.0.0
 - New workflow integration which only requires the user to state what model identification items should be used by D3mirt()
 - New option model, referred to as the orthogonal model, which allows investigating a three-dimensional scale under the assumption that no within-multidimensionality exists
