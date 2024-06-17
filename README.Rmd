@@ -85,7 +85,7 @@ Begin by loading the item data. Note that all outputs are available as ready-mad
 # Load data
 data("anes0809offwaves")
 x <- anes0809offwaves
-x <- x[,3:22] # Remove columns for age and gender
+x <- x[, 3:22] # Remove columns for age and gender
 ```
 
 The `modid()` can take in raw item data or a data frame with item factor loadings. In the default mode (`efa = TRUE`), using raw data, the function performs an EFA using with the help of the `mirt()` function, from the `mirt` package (Chalmers, 2012), with three factors as the default (`factors = 3`). After sorting the results following the model identification procedure, the function finishes by presenting the model identification items. The function throws an error if no items can be located. Note that it is possible to use available factor loadings assigned to a data frame in the function call. This can be done by setting `efa ` to `FALSE`, which allows the function to skip the EFA and jump directly to the model identification procedure.
@@ -153,11 +153,11 @@ load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
 h <- mod2
 ```
 ```{r, eval = FALSE}
-y <- data.frame(x[,-16])# Remove misfitting item W7Q16
+y <- data.frame(x[, -16])# Remove misfitting item W7Q16
 # Call D3mirt() and using the orthogonal model
 h <- D3mirt(y, modid = list(c(1:10),   # x-axis
-                             c(15:19),  # y-axis
-                             c(11:14))) # z-axis
+                            c(15:19),  # y-axis
+                            c(11:14))) # z-axis
 ```
 ```{r}
 summary(h)
@@ -195,6 +195,7 @@ plot(h)
 ```
 
 ![](./images/o1.png)
+
 Figure 3: The orthogonal model plotted with the model rotated $15^{\circ}$ clockwise.
 
 ## 3.1. `items`
@@ -333,7 +334,7 @@ When a criterion variable has a wide data range, such as an age variable, `rep()
 
 ```{r, eval = FALSE}
 # Check number of factor levels with nlevels() and as.factor()
-nlevels(as.factor(z1[,4]))
+nlevels(as.factor(z1[, 4]))
 
 # Use rep() to create a color vector to color groups based on the nlevels() output
 # z1 has 14 factor levels
@@ -386,7 +387,7 @@ rgl::rgl.snapshot('RGLdevice.png',
                     fmt = 'png')
 ```
 
-# Getting Help and Providing Feedback
+# Getting Help, Feedback, and Questions
 
 If you encounter a bug, please file an issue with a minimal reproducible example on GitHub (<https://github.com/ForsbergPyschometrics/D3mirt>). For questions and suggestions on how to improve the code, please contact me on GitHub or via email ([forsbergpsychometrics\@gmail.com](mailto:forsbergpsychometrics@gmail.com){.email}).
 
@@ -402,7 +403,7 @@ McKinley, R. L., & Reckase, M. D. (1983). *An Extension of the Two-parameter Log
 
 Muraki, E., & Carlson, J. E. (1995). Full-Information Factor Analysis for Polytomous Item Responses. *Applied Psychological Measurement, 19*(1), 73-90. <https://doi.org/10.1177/014662169501900109>
 
-Reckase, M. D.(2009).*Multidimensional Item Response Theory*. Springer. <https://doi.org/10.1007/978-0-387-89976-3>
+Reckase, M. D.(2009). *Multidimensional Item Response Theory*. Springer. <https://doi.org/10.1007/978-0-387-89976-3>
 
 Reckase, M. D.(1985). The Difficulty of Test Items That Measure More Than One Ability. *Applied Psychological Measurement, 9*(4),401-412. <https://doi.org/10.1177/014662168500900409>
 

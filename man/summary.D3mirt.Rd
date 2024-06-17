@@ -22,19 +22,22 @@ The summary method for the \code{\link[=D3mirt]{D3mirt()}} function.
 }
 \examples{
 \dontrun{
-# Call D3mirt() and create list of constructs
-# The first argument can be a data frame with model parameters
-# or an S4 object of class 'SingleGroupClass' exported from mirt::mirt
-c <- list(list(1,2,3,4,5,6,7,8,9,10),
-          list(11,12,13,14),
-          list(15,17,18,19,20))
-g <- D3mirt(mod1, c)
+# Load data
+data("anes0809offwaves")
+x <- anes0809offwaves
+x <- x[, 3:22] # Remove columns for age and gender
+
+# Call D3mirt() with constructs
+con <- list(c(1,2,3,4,5,6,7,8,9,10),
+            c(11,12,13,14),
+            c(15,17,18,19,20))
+mod <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
 
 # Call to summary
-summary(g)
+summary(mod)
 
 #' # Call to summary rounded off to 2 digits
-summary(g, digits = 2)
+summary(mod, digits = 2)
 }
 }
 \author{

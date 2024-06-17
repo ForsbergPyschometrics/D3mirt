@@ -4,7 +4,7 @@
 #'
 #' @param x A data frame with rows for items and columns for model parameters or an S4 object of class 'SingleGroupClass' exported from [mirt::mirt] (Chalmers, 2012).
 #' Regarding the data frame, the number of columns must be more than or equal to 4, i.e., three columns with (\emph{a}) parameters and at least one column for difficulty (\emph{d}) parameters.
-#' @param modid Argument that either takes in the two model identification items as a combined vector. The user can also use nested list of item indicators to fit an orthogonal model.
+#' @param modid Use either the two model identification items from [D3mirt::modid] as a combined vector or use nested list of item indicators to fit an orthogonal model (see examples below).
 #' The default is `modid = NULL`.
 #' @param model The user has the option of imputing a model specification schema used in the call to [mirt::mirt] (Chalmers, 2012).
 #' The default is `model = NULL`.
@@ -82,8 +82,8 @@
 #' # The second angle is the angle away from the y-axis.
 #' # The specification below indicates three constructs located at a 45-degree angle
 #' # between the three axes in the positive orientation.
-#' # To skip fitting the compensatory model with each function call to D3mirt,
-#' # it is possible to assign factor loadings and difficulty parameters from mod to a new data frame
+#' # It is possible to assign factor loadings and difficulty parameters from mod to a new data frame
+#' # This skips fitting the compensatory model and makes fitting the model with D3mirt() instant
 #' y <- cbind(mod$loadings, mod$diff)
 #' con <- list(c(0, 45),
 #'             c(45, 90),

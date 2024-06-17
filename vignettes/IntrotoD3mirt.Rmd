@@ -125,7 +125,7 @@ The sections below are sorted under the following headings.
     -   3.2.3 Plotting Confidence Intervals
 
 4.  Exporting the RGL device
-5.  Getting Help and Providing Feedback
+5.  Getting Help, Feedback, and Questions
 6.  References
 7.  Appendix A: Compensatory Model Syntax
 
@@ -617,7 +617,7 @@ rgl::rgl.snapshot('RGLdevice.png',
                     fmt = 'png')
 ```
 
-# 5. Getting Help and Providing Feedback
+# 5. Getting Help, Feedback, and Questions
 
 If you encounter a bug, please file an issue with a minimal reproducible example on GitHub (<https://github.com/ForsbergPyschometrics/D3mirt>). For questions and suggestions on how to improve the code, please contact me on GitHub or via email ([forsbergpsychometrics\@gmail.com](mailto:forsbergpsychometrics@gmail.com){.email}).
 
@@ -633,7 +633,7 @@ McKinley, R. L., & Reckase, M. D. (1983). *An Extension of the Two-parameter Log
 
 Muraki, E., & Carlson, J. E. (1995). Full-Information Factor Analysis for Polytomous Item Responses. *Applied Psychological Measurement, 19*(1), 73-90. <https://doi.org/10.1177/014662169501900109>
 
-Reckase, M. D.(2009).*Multidimensional Item Response Theory*.Springer. <https://doi.org/10.1007/978-0-387-89976-3>
+Reckase, M. D.(2009). *Multidimensional Item Response Theory*.Springer. <https://doi.org/10.1007/978-0-387-89976-3>
 
 Reckase, M. D.(1985). The Difficulty of Test Items That Measure More Than One Ability. *Applied Psychological Measurement, 9*(4),401-412. <https://doi.org/10.1177/014662168500900409>
 

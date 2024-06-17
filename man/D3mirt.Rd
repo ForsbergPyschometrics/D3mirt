@@ -20,7 +20,7 @@ D3mirt(
 \item{x}{A data frame with rows for items and columns for model parameters or an S4 object of class 'SingleGroupClass' exported from \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
 Regarding the data frame, the number of columns must be more than or equal to 4, i.e., three columns with (\emph{a}) parameters and at least one column for difficulty (\emph{d}) parameters.}
 
-\item{modid}{Argument that either takes in the two model identification items as a combined vector. The user can also use nested list of item indicators to fit an orthogonal model.
+\item{modid}{Use either the two model identification items from \link{modid} as a combined vector or use nested list of item indicators to fit an orthogonal model (see examples below).
 The default is \code{modid = NULL}.}
 
 \item{model}{The user has the option of imputing a model specification schema used in the call to \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
@@ -99,8 +99,8 @@ summary(mod)
 # The second angle is the angle away from the y-axis.
 # The specification below indicates three constructs located at a 45-degree angle
 # between the three axes in the positive orientation.
-# To skip fitting the compensatory model with each function call to D3mirt,
-# it is possible to assign factor loadings and difficulty parameters from mod to a new data frame
+# It is possible to assign factor loadings and difficulty parameters from mod to a new data frame
+# This skips fitting the compensatory model and makes fitting the model with D3mirt() instant
 y <- cbind(mod$loadings, mod$diff)
 con <- list(c(0, 45),
             c(45, 90),
@@ -113,12 +113,12 @@ summary(mod)
 # Call D3mirt() using the orthogonal optional model
 # often requires removing items with poor fit
 # In this example item W7Q16 is removed from the data frame
-x <- data.frame(x[,-16])
+y <- data.frame(x[,-16])
 
 # Items are constrained to the x, y, and z-axes using
 # nested lists with positive integers as item indicators
-# Note that integers indicate the row in which the item is located in the data frame
-mod <- D3mirt(x, modid = list(c(1:10),
+# Note that integers indicate where the items are located in the data frame
+mod <- D3mirt(y, modid = list(c(1:10),
                             c(15:19),
                             c(11:14)))
 

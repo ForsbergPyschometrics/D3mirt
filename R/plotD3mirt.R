@@ -92,7 +92,7 @@
 #'
 #' The plot function can also display respondent scores in the three-dimensional model space, represented as spheres whose coordinates are derived from the respondent's factor scores.
 #' This allows for a profile analysis in which respondent rows are separated or selected conditioned on some external criteria.
-#' To do this, the user must first extract respondent factor scores with [mirt::fscores](Chalmers, 2012) and then use some selection process to separate or subset respondent rows.
+#' To do this, the user must first extract respondent factor scores with [mirt::fscores] (Chalmers, 2012) and then use some selection process to separate or subset respondent rows.
 #' The resulting data frame is used in the `profiles` argument.
 #' If desired, a confidence interval can be added to the spheres by setting `ci = TRUE`.
 #' A general advice is to hide vector arrows with `hide = TRUE` when analyzing respondent profiles to avoid visual cluttering.
@@ -122,25 +122,27 @@
 #'             c(11,12,13,14),
 #'             c(15,17,18,19,20))
 #' mod <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
+#'
+#' # Plot RGL device with constructs invisible
 #' plot(mod)
 #'
 #' # Plot RGL device with constructs visible and named
 #' plot(mod, constructs = TRUE,
 #'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
-#' # Item W7Q16 has location 6 in the data set (gender and age excluded)
+#* # A selection of Conformity items from the model plotted with constructs
+#' plot(mod, constructs = TRUE,
+#'      items = c(15, 17, 18, 19, 20),
+#'      construct.lab = c("Compassion", "Fairness", "Conformity"))
+#'
+#' # Item W7Q16 has location 16 in the data set (gender and age excluded)
 #' # Below, the item is plotted together with construct to aid the visual interpretation
 #' plot(mod, constructs = TRUE,
-#'      items = 6,
+#'      items = 16,
 #'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
 #' # Plot RGL device on item difficulty level 5
 #' plot(mod, diff.level = 5)
-#'
-#' # A selection of Conformity items from the model plotted with constructs
-#' plot(mod, constructs = TRUE,
-#'      items = c(5,7,8,9,10),
-#'      construct.lab = c("Compassion", "Fairness", "Conformity"))
 #'
 #' # Plot RGL device with scaled items and constructs visible and named
 #' plot(mod, scale = TRUE,

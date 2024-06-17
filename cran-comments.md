@@ -1,3 +1,5 @@
+## R CMD check results
+
 Duration: 55m 4.2s
 
 ❯ checking installed package size ... NOTE
@@ -14,7 +16,8 @@ Duration: 55m 4.2s
 
 Notes:
 - doc size is large because the package contains many examples and the output is highly grachical
-- Non-standard files are files connected to an article submitted to Journal of Open Source software nd they are not included in the R-package
+- A multitude of examples are necessary because the method is fairly unknown to the community
+- Non-standard files are files connected to an article submitted to Journal of Open Source software and they are not included when building the R-package
 
 Package Revisions:
 - New workflow integration which only requires the user to state what model identification items should be used by D3mirt()
