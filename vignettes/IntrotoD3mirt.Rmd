@@ -150,7 +150,7 @@ x <- anes0809offwaves
 x <- x[, 3:22] # Remove columns for age and gender
 ```
 
-If the default mode `efa = TRUE` is not changed, the function performs an EFA with three factors as the default before performing the model identification. If factor loadings are already available, it is possible to assign them to a data frame and use them in the call to `modid()` by setting `efa` to `FALSE`.
+If the default mode `efa = TRUE` is not changed, the function performs an EFA with three factors as the default before performing the model identification. If factor loadings are already available, it is possible to assign them to a data frame and use them in the call to `modid()` by setting `efa` to `FALSE`. This allows `modid()` to skip the efa and the model identification will be instant.
 
 ```{r, include = FALSE}
 load("efa.Rdata")
@@ -194,9 +194,14 @@ Sometimes, however, the model is hard to identify. If this happens, try the foll
 
 The latter (point 4) should, however, only be used as a last resort. This is because the upper bound sets the upper limit for item inclusion. Adjusting this limit too high compromises the necessary statistical requirements. The lower limit (point 2), however, only increases the size of the item pool used for the item selection. It is, therefore, recommended to adjust the lower limit up and down to see if the output differs, and from that make the final decision.
 
+```{r, eval = FALSE}
+# Assigns loadings from a to data frame x
+x <- a$loadings
+```
 ```{r}
 # Call to modid with increased lower and higher bound
-b <- modid(x, efa = FALSE, lower = 1, upper = 1 )
+# Set efa to false when using factor loadings as data frame
+b <- modid(x, efa = FALSE, lower = 1, upper = 1)
 summary(b)
 ```
 
@@ -206,10 +211,10 @@ Another option (point 3) is to override the factor order with the `fac.order` ar
 
 Since the squared factor loadings for factors 2 and 3 in this example are somewhat similar, it could be useful to compare the final results after manually overriding the factor order. The latter is, however, outside of the scope of this vignette.
 
-```{r}
+```{r, eval = FALSE}
 # Override factor order by reversing columns in the original data frame
-b <- modid(x, efa = FALSE, fac.order = c(3, 2, 1))
-summary(b)
+c <- modid(x, efa = FALSE, fac.order = c(3, 2, 1))
+summary(c)
 ```
 
 In this case, we find that item W7Q3, which was previously suggested for the $x$-axis, is now suggested for the $y$-axis. For the $x$-axis, we find a new item, W7Q13.
