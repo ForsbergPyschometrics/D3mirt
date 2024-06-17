@@ -1,6 +1,5 @@
-## R CMD check results
-
-Duration: 55m 4.2s
+── R CMD check results D3mirt 1.3.0 ────
+Duration: 56m 39s
 
 ❯ checking installed package size ... NOTE
     installed size is  7.8Mb
@@ -11,7 +10,7 @@ Duration: 55m 4.2s
   Non-standard files/directories found at top level:
     ‘anes1.png’ ‘paper.Rmd’ ‘paper.html’ ‘paper.md’ ‘paper.pdf’
     ‘refs.bib’
-  
+
 ## Comments to CRAN
 
 Notes:
