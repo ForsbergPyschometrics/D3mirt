@@ -4,13 +4,13 @@
 #' @param x A S3 object of class `D3mirt`.
 #' @param ... Additional arguments.
 #'
-#' @return A printed message reporting the number of items, levels of difficulty, the number of construct vectors and the row names of the respective items contained in each construct.
+#' @return A printed message reporting the number of items, levels of difficulty, the number of construct vectors, and the names of the respective items contained in each construct.
 #' @author Erik Forsberg
 #'
 #' @examples
 #' \dontrun{
 #' # Call D3mirt()
-#' # The first argument can be data frame with model parameters
+#' # The first argument can be a data frame with model parameters
 #' # or an S4 object of class 'SingleGroupClass' exported from mirt::mirt
 #' g <- D3mirt(mod1)
 #'

@@ -14,7 +14,7 @@
 \item{digits}{The number of digits shown per estimate. The default is \code{digits = 4}.}
 }
 \value{
-Model identification items (one less than the number of factors), factor loadings and absolute sum score for model identification items, squared factor loadings and factor loadings for all items.
+Model identification items (one less than the number of factors), factor loadings and absolute sum score for model identification items, squared factor loadings, and factor loadings for all items.
 }
 \description{
 The summary method for the \code{\link[=modid]{modid()}} function.

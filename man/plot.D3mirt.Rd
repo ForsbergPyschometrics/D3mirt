@@ -74,7 +74,7 @@
 
 \item{item.names}{Logical, if item labels should be plotted. The default is \code{item.names = TRUE}.}
 
-\item{item.lab}{Optional. String vector of item names that will override row names extracted from the data frame. Note, row names are not overwritten.
+\item{item.lab}{Optional. String vector of item names that will override row names extracted from the data frame. Note that row names are not overwritten.
 Instead, the string vector in \code{item.lab} prints item labels on the item vector arrows currently displayed following the order of item vector arrows in the graphical output.
 For example, when plotting in the default mode (plotting all item vectors) the labels will follow the order of the items in the data frame.
 If a selection of items is plotted with \code{items}, e.g., \code{items = c(24,34,25)}, then the item labels will be displayed following the order of the vector in \code{items} left to right.
@@ -85,7 +85,7 @@ In this case, item label 1 will be printed on item 24, item label 2 on item 34, 
 \item{construct.lab}{Optional. String vector of names for constructs, similar to \code{item.lab}.}
 
 \item{adjust.lab}{Vector of parameters for the position of the item and construct labels for the \code{text3d} function.
-The first value is for horizontal adjustment and the second is for vertical adjustment. The default is \code{adjust.lab = c(0.5, -0.8)}.}
+The first value is for horizontal adjustment, and the second is for vertical adjustment. The default is \code{adjust.lab = c(0.5, -0.8)}.}
 
 \item{x.lab}{Labels for x-axis, the default is \code{x.lab = "X"}.}
 
@@ -101,13 +101,13 @@ The first value is for horizontal adjustment and the second is for vertical adju
 
 \item{cex}{A numeric character expansion value to adjust font size, the default is \code{cex = 1}.}
 
-\item{font.col}{Color of axes, numbers and fonts. The default is \code{font.col = "black"}.}
+\item{font.col}{Color of axes, numbers, and fonts. The default is \code{font.col = "black"}.}
 
 \item{axis.scalar}{Scalar multiple for adjusting the length of all axes (x, y, z) in the 3D model proportionally. The default is \code{axis.scalar = 1.1}.}
 
 \item{axis.length}{Optional. For adjusting the length of the axis manually by entering a numeric or a numeric vector.
 For instance, c(3,2,4,3,3,2) indicate axis coordinates x = 3, -x = 3, y = 4, -y = 3, z = 3, -z = 2.
-Note, a symmetric model can be created easily by adding a single numeric in the \code{axis.length} argument (e.g., \code{axis.length = 4}) because the function repeats the last value in the vector to cover all axis points.
+Note that a symmetric model can be created easily by adding a single numeric in the \code{axis.length} argument (e.g., \code{axis.length = 4}) because the function repeats the last value in the vector to cover all axes points.
 The default is \code{axis.length = NULL}.}
 
 \item{axis.points}{Color of axis points for the \code{points3d()} function. The default is \code{axis.points = "black"}.}
@@ -144,7 +144,7 @@ The default is \code{nticks = 4}.}
 \item{barblen}{The length of the barbs for vector arrows from \code{arrow3d()}. The default is \code{barblen = 0.03}.}
 
 \item{c.scalars}{Set of scalars for adjusting construct arrow length proportionally.
-The first numeric adjusts the length in the positive direction and the second numeric the length in the negative direction. The default is \code{c.scalars = c(1,1)}.}
+The first numeric adjusts the length in the positive direction, and the second numeric the length in the negative direction. The default is \code{c.scalars = c(1,1)}.}
 
 \item{c.type}{Type of vector arrow for constructs. See \link[rgl:arrow3d]{rgl::arrow3d} for more options regarding arrow types. The default is \code{c.type = "rotation"}.}
 
@@ -158,7 +158,7 @@ The first numeric adjusts the length in the positive direction and the second nu
 
 \item{c.barblen}{The length of the barbs for construct vector arrows from \code{arrow3d()}. The default is \code{c.barblen = 0.03}.}
 
-\item{profiles}{Data frame with coordinates for spheres representing subset of respondent scores. The default is \code{profiles = NULL}.}
+\item{profiles}{Data frame with coordinates for spheres representing a subset of respondent scores. The default is \code{profiles = NULL}.}
 
 \item{levels}{Optional. A column with values indicating levels for sphere colors from the \code{sphere.col} vector. The default is \code{levels = NULL}.}
 
@@ -186,10 +186,10 @@ For graphing of objects of class \code{D3mirt} from the \code{\link[=D3mirt]{D3m
 The plotting function allows plotting of all items, a selection of items as well as plotting a single item.
 Length of the vector arrows can be set to one unit length across all item vector arrows by setting \code{scale = TRUE}.
 This removes the visualization of the MDISC parameter.
-Note, when scaling items with \code{scale = TRUE}, the \code{plot()} function does not change the length of the model axes.
+Note that when scaling items with \code{scale = TRUE}, the \code{plot()} function does not change the length of the model axes.
 This often means that the axes of the model may need to be adjusted, which can be achieved proportionally with \code{axis.scalar} or manually with \code{axis.length}.
 
-The user also has the option of adding constructs to the graphical output with \code{constructs = TRUE} (see the documentation for \link{D3mirt} or the package vignette regarding constructs).
+The user has the option of adding constructs to the graphical output with \code{constructs = TRUE} (see the documentation for \link{D3mirt} or the package vignette regarding constructs).
 Other options include plotting one level of difficulty at a time with the \code{diff.level} argument if polytomous items are used in the model.
 Item row names are displayed by default, but the user has the option of adding new item labels for the items with \code{item.lab}, as well as labeling constructs with \code{construct.lab}.
 
@@ -200,8 +200,8 @@ In contrast, an item located at 45 degrees between all three axes in a three-dim
 Such an item is within-multidimensional with respect to all three latent traits used in the analysis because its direction vector points in a neutral direction in the model.
 
 When plotting the \code{D3mirt} model with \code{plot()}, it is possible to visually observe statistical violations in the graphical output returned.
-For instance, shorter vector arrows indicate weaker discrimination and therefore also higher amounts of statistical violations.
-Moreover, if a polytomous item struggles or even fail to describe any of the latent variables in the model, it can often lead to an extreme stretch of the MDIFF range.
+For instance, shorter vector arrows indicate weaker discrimination and, therefore, higher amounts of statistical violations.
+Moreover, if a polytomous item struggles or even fails to describe any of the latent variables in the model, it can often lead to an extreme stretch of the MDIFF range.
 This is comparable to trace lines turning horizontal in a unidimensional item response theory model.
 
 The plot function can also display respondent scores in the three-dimensional model space, represented as spheres whose coordinates are derived from the respondent's factor scores.
@@ -209,11 +209,11 @@ This allows for a profile analysis in which respondent rows are separated or sel
 To do this, the user must first extract respondent factor scores with \link[mirt:fscores]{mirt::fscores}(Chalmers, 2012) and then use some selection process to separate or subset respondent rows.
 The resulting data frame is used in the \code{profiles} argument.
 If desired, a confidence interval can be added to the spheres by setting \code{ci = TRUE}.
-A general advice is also to hide vector arrows with \code{hide = TRUE} when analyzing respondent profiles to avoid visual cluttering.
+A general advice is to hide vector arrows with \code{hide = TRUE} when analyzing respondent profiles to avoid visual cluttering.
 For more on profile analysis (e.g., preparation and examples), see package vignette.
 
-The returned RGL device can, for example, be exported to the R console and be saved as an interactive html file or as a still shoot (see examples below).
-In the case of the latter, the model perspective in the still shoot can be manually adjusted by changing the \code{view} argument for the function.
+The returned RGL device can, for example, be exported to the R console and saved as an interactive HTML file or as a still shoot (see examples below).
+In the the latter case, the model perspective in the still shoot can be manually adjusted by changing the \code{view} argument for the function.
 }
 \examples{
 \donttest{
@@ -234,7 +234,7 @@ plot(mod, constructs = TRUE,
      construct.lab = c("Compassion", "Fairness", "Conformity"))
 
 # Item W7Q16 has location 6 in the data set (gender and age excluded)
-# Below the item is plotted together with construct to aid the visual interpretation
+# Below, the item is plotted together with construct to aid the visual interpretation
 plot(mod, constructs = TRUE,
      items = 6,
      construct.lab = c("Compassion", "Fairness", "Conformity"))
@@ -258,12 +258,12 @@ plot(mod, hide = TRUE, ind.scores = TRUE)
 
 # Plot respondents separated on gender
 # Start by assigning the gender variable to a data frame
-# In this example this is done by sub-setting the gender column
+# In this example, this is done by sub-setting the gender column
 x <- as.matrix(anes0809offwaves)
 
 # Call plot() and use the gender variable column in the levels argument
 # Respondent data on gender is in column two, x[, 2]
-# In the function call below both items and constructs are hidden
+# In the function call below, both items and constructs are hidden
 # Score levels: 1 = Blue ("male") and 2 = Red ("female")
 plot(mod, hide = TRUE, ind.scores = TRUE,
     levels = x[, 2],
@@ -299,14 +299,14 @@ plot(mod, hide = TRUE,
     view = c(15, 20, 0.6))
 }
 \dontrun{
-# Export an open RGL device to the console to be saved as html or image file
+# Export an open RGL device to the console to be saved as HTML or image file
 plot(mod, constructs = TRUE)
 s <- rgl::scene3d()
 rgl::rglwidget(s,
                width = 1040,
                height = 1040)
 
-# Export a snap shoot of an open RGL device directly to file
+# Export a snapshoot of an open RGL device directly to file
 plot(mod, constructs = TRUE)
 rgl::rgl.snapshot('RGLdevice.png',
                     fmt = 'png')

@@ -21,23 +21,23 @@ library(D3mirt)
 
 # `D3MIRT` Modeling
 
-The `D3mirt` analysis is based on descriptive multidimensional item response theory (DMIRT; Reckase, 2009, 1985; Reckase & McKinley, 1991) and can be used to analyze dichotomous and polytomous items (Muraki & Carlson, 1995) in a three-dimensional ability ($\theta$) space. The method is foremost visual and illustrates item characteristics with the help of vector geometry in which items are represented by vector arrows.
+The `D3mirt` analysis is based on descriptive multidimensional item response theory (DMIRT; Reckase, 2009, 1985; Reckase & McKinley, 1991) and can be used to analyze dichotomous and polytomous items to measure latent traits (denoted $\theta$) in a three-dimensional ability space. The method is foremost visual and illustrates item characteristics with the help of vector geometry.
 
-In DMIRT analysis, also called within multidimensional modeling, it is assumed that items in a multidimensional ability space can measure single or multiple latent traits (Reckase, 2009, 1985; Reckase & McKinley, 1991). The methodology is a type of data reduction technique based on the compensatory model (Reckase, 2009), i.e., a type of measurement model that uses linear combinations of $\theta$-values for ability assessment. The method seeks to maximize item discrimination and so is *descriptive* because the results describe the extent to which items in a test are unidimensional, i.e., that the items discriminate on one dimension only, or are within-multidimensional, i.e., that the items discriminate on more than one dimension.
+In DMIRT analysis, it is assumed that items in a multidimensional ability space can measure single or multiple latent traits (Reckase, 2009, 1985). This assumption is realized in the *compensatory model*, i.e., a type of measurement model that uses linear combinations of $\theta$-values for ability assessment (Reckase, 2009). DMIRT builds on the results from the former model and seeks to maximize item discrimination in the latent space by relaxing the assumption of unidimensionality. The method is *descriptive* because the results describe both the strength of discrimination of the items and the extent to which the items are unidimensional, i.e., that the items discriminate on one dimension only, or are within-multidimensional, i.e., that the maximum item discrimination is reached when the item measures more than one dimension.
 
-Regarding vector orientation, the angle of the vector arrows indicates what traits, located along the orthogonal axes in the model, an item can be said to describe (Reckase, 2009, 1985, Reckase & McKinley, 1991). For instance, in a two-dimensional space, an item is *unidimensional* if its item vector arrow is at $0°$ with respect to one of the axes in the model, and $90°$ with respect to the other. Such an item describes a singular trait only. In contrast, an item is *within-multidimensional* if its item vector arrow is oriented at $45°$ in relation to the axes in the model. Such an item describes both traits in the model equally well. The same criteria are extended to the three-dimensional case.
+Regarding vector orientation, the angle of the vector arrows indicates what traits, located along the axes in the model, an item measures (Reckase, 2009, 1985; Reckase & McKinley, 1991). For instance, in a two-dimensional space, an item is *unidimensional* if its item vector arrow is at $0°$ with respect to one of the axes in the model and $90°$ with respect to the other. Such an item describes a single trait only. In contrast, an item is perfectly *within-multidimensional* if its item vector arrow is oriented at $45°$ in relation to the axes in the model. Such an item describes both traits in the model equally well. The same criteria are extended to the $n$-dimensional case.
 
-The DMIRT approach uses two types of item models, dependent on item type. If dichotomous items are used, the analysis is based on the multidimensional two-parameter logistic model (M2PL). If polytomous items are used, the analysis is based on the multidimensional two-parameter graded response model (MGRM; Muraki & Carlson, 1995). The method is therefore limited to items that fit these item models.
+The DMIRT approach uses two types of item models depending on item type. If dichotomous items are used, the analysis is based on the multidimensional two-parameter logistic model (M2PL) (McKinley & Reckase, 1983; Reckase, 1985). If polytomous items are used, the analysis is extended to the multidimensional two-parameter graded response model (MGRM; Muraki & Carlson, 1995). The method is, therefore, limited to items that fit these item models.
 
-The estimation process begins by first fitting and extracting the discrimination $a$ and difficulty parameters $d$ from a compensatory model. Next, the DMIRT estimation uses the former to compute the multidimensional discrimination ($MDISC$) parameter and the multidimensional difficulty ($MDIFF$) parameter that is used to locate the items in a vector space.
+The estimation begins by first fitting and extracting the loadings $a$ and difficulty parameters $d$ from a compensatory model. Next, the DMIRT estimation takes the former estimates and computes the multidimensional discrimination ($MDISC$) parameter and the multidimensional difficulty ($MDIFF$) parameter used to locate the items in a multidimensional vector space.
 
-The $MDIFF$ is interpreted similarly as the difficulty parameter in the unidimensional model, i.e., it shows the level of ability that is required for a higher or correct response. Note, if polytomous items are used, such as Likert items, the items will be represented by multiple vector arrows (one for each response function). The $MDIFF$ will, in such a case, show the multidimensional range of difficulty for an item as located in a multidimensional latent trait space.
+The $MDIFF$ is interpreted similarly to the difficulty parameter in the unidimensional model. It shows the level of ability required for a higher or correct response, defined as the distance from the origin. Note that if polytomous items are used, such as Likert items, the items will be represented by multiple vector arrows, one for each response function. The $MDIFF$ will then show an item's multidimensional range of difficulty as located in the latent trait space.
 
-The $MDISC$ shows the highest level of discrimination an item can achieve in the multidimensional model. It is, therefore, a global item characteristic assuming a multidimensional latent space. In addition, the $MDISC$ score is visualized in the graphical output by scaling the length of the vector arrows representing the item response functions, such that longer arrows indicate higher discrimination (and vice versa).
+The $MDISC$ shows the highest level of discrimination an item can achieve in the multidimensional latent model. It is, therefore, a global item characteristic referring only to the discrimination achieved in the specific direction of the item in the latent space. The $MDISC$ score is visualized in the graphical output by scaling the length of the vector arrows (longer arrows indicate higher discrimination and vice versa), which in turn describe the domain of item response functions.
 
-A novel theoretical contribution to DMIRT is the use of constructs in the `D3mirt` functions. Constructs, in this context, refer to the assumption that a subset of items can measure a higher-order latent variable. In `D3mirt`, constructs are implemented as optional vectors whose orientation is calculated as the average direction, i.e., the average multidimensional discrimination of a subset of items (from one item to all items in the set) in the model. A construct vector will, therefore, point in the direction of the maximum slope of an imaginary item response function indicated by the items chosen by the user.
+In `D3mirt`it also possible to use constructs in the analysis. Constructs, in this context, refer to the assumption that a subset of items or a particular orientation in the model space can measure a higher-order latent variable. This is implemented in `D3mirt` as optional vectors whose orientation is either calculated as the average direction of a subset of items (from all items down to a single item) or indicated by spherical coordinates. A construct vector will, therefore, point in the direction of the maximum slope of what we might think of as an imaginary item response function indicated by the items or coordinates chosen by the user based on exploratory or theoretical reasons. 
 
-If constructs are used, the output will include reporting of the directional discrimination ($DDISC$) parameter that shows how well the items discriminate under the assumption that they measure one of the constructs used in the analysis. That is, while the $MDISC$ represents the maximum level of discrimination in the model, the $DDISC$ represents the local discrimination that makes it possible to compare item discrimination in a specific direction set by the constructs. The constructs are, therefore, like unidimensional models nested in the multidimensional latent space and are visually represented with construct vector arrows scaled to an arbitrary length.
+If constructs are used, the output will include reporting the directional discrimination ($DDISC$) parameter that shows how well the items discriminate, assuming that they measure one of the constructs used in the analysis. That is, while the $MDISC$ represents the maximum level of discrimination in the model, the $DDISC$ represents the local discrimination that makes it possible to compare item discrimination in a specific direction set by the constructs. The constructs are, therefore, like unidimensional models nested in the multidimensional latent space and are visually represented with construct vector arrows scaled to an arbitrary length.
 
 # Overview
 
@@ -55,13 +55,13 @@ You can install the `D3mirt` package from CRAN, or try the development version o
 # Install from CRAN depository
 install.packages('D3mirt')
 
-# Install development version from Github
+# Install the development version from GitHub
 # install.packages("devtools")
-# To include package vignette in the installation add: build_vignettes = TRUE
+# To include package vignette in the installation, add: build_vignettes = TRUE
 devtools::install_github("ForsbergPyschometrics/D3mirt")
 ```
 
-In what follows, the `D3mirt` procedure, including the main functions and some of the more essential arguments, will be described very briefly using the built-in data set "anes0809offwaves". The data set ($N = 1046, M_{age} = 51.33, SD = 14.56, 57\%$ Female) is a subset from the American National Election Survey (ANES) from the 2008-2009 Panel Study Off Wave Questionnaires, December 2009 (DeBell, et al, 2010; <https://electionstudies.org/data-center/2008-2009-panel-study/>). All items measure moral preferences and are positively scored of Likert type, ranging from 1 = *Strongly Disagree* to 6 = *Strongly Agree*. Demographic variables include age and gender (male/female).
+In what follows, the `D3mirt` procedure, including the main functions and some of the more essential arguments, will be briefly described using the built-in data set "anes0809offwaves". The data set ($N = 1046, M_{age} = 51.33, SD = 14.56, 57\%$ Female) is a subset from the American National Election Survey (ANES) from the 2008-2009 Panel Study Off Wave Questionnaires, December 2009 (DeBell, et al, 2010; <https://electionstudies.org/data-center/2008-2009-panel-study/>). All items measure moral preferences and are positively scored of Likert type, ranging from 1 = *Strongly Disagree* to 6 = *Strongly Agree*. Demographic variables include age and gender (male/female).
 
 The D3mirt approach largely consists of the following three steps:
 
@@ -69,17 +69,17 @@ The D3mirt approach largely consists of the following three steps:
 2.  D3mirt model estimation
 3.  Plotting
 
-For more details on the `D3mirt` package, including extended examples of analysis and functions, please see the vignette included in the package.
+Please see the vignette included in the package for more details on the `D3mirt` package, including extended examples of analysis and functions.
 
 # 1. Model Identification
 
-As a first step in the analysis, the three-dimensional compensatory model must be identified (Reckase, 2009). In the three-dimensional case, this implies locating the $x$ and $y$-axis by selecting two items from the item set. The first item should not load on the second and third axes ($y$ and $z$), while the second item should not load on the third axis ($z$). Consequently, if the model is not known beforehand it is necessary to explore the data with exploratory factor analysis (EFA), preferably with the help of the EFA methods suitable for DMIRT.
+As a first step in the analysis, the three-dimensional compensatory model must be identified (Reckase, 2009). In the three-dimensional case, this implies identifying the $x$ and $y$-axis in the DMIRT model by selecting two items from the item set. The first item should not load on the second and third axes ($y$ and $z$-axes), while the second item should not load on the third axis ($z$). Consequently, if the model is not known beforehand, it is necessary to explore the data with exploratory factor analysis (EFA), preferably with the help of the EFA methods suitable for DMIRT.
 
-The `modid()` function was designed to help with this step in the process. The function first performs an EFA using multidimensional item response theory and then select items so that the strongest loading item, from the strongest factor, always aligns perfectly with the x-axis, and the remaining items follow thereafter. This helps makes the result maximally interpretable while also avoiding imposing an unempirical structure on the data.
+The `modid()` function was designed to help with this step in the process. In brief, the function first performs an EFA based on multidimensional item response theory. It then selects items so that the strongest loading item, from the strongest factor, is always parallel with the x-axis, and the remaining items follow thereafter. This helps make the result maximally interpretable while also avoiding imposing an unempirical structure on the data.
 
-Note, the EFA is only used to find model identification items that meet the necessary DMIRT model specification requirements. The EFA model itself is discarded after this step in the procedure. This implies that the rotation method is less crucial and the user is encouraged to try different rotation methods and compare the results.
+Note that the EFA is only used to find model identification items that meet the necessary DMIRT model specification requirements. The EFA model itself is discarded after this step in the procedure. This implies that the rotation method is less crucial, and the user is encouraged to try different rotation methods and compare the results.
 
-Begin by loading the item data. Note, all outputs are available as ready-made package files that can be loaded directly into the R session.
+Begin by loading the item data. Note that all outputs are available as ready-made package files that can be loaded directly into the R session.
 
 ```{r, message = FALSE, results = 'hide', eval = FALSE}
 # Load data
@@ -88,90 +88,86 @@ x <- anes0809offwaves
 x <- x[,3:22] # Remove columns for age and gender
 ```
 
-The `modid()` can take in raw item data or a data frame with item factor loadings. In the default mode (`efa = TRUE`), using raw data, the function performs an EFA using the EFA option in the `mirt()` (Chalmers, 2012) function with three factors as default (`factors = 3`). The function then finishes with the model identification. If, however, item factor loadings are already available, the function can jump directly to the model identification by setting `efa = FALSE`.
+The `modid()` can take in raw item data or a data frame with item factor loadings. In the default mode (`efa = TRUE`), using raw data, the function performs an EFA using with the help of the `mirt()` function, from the `mirt` package (Chalmers, 2012), with three factors as the default (`factors = 3`). After sorting the results following the model identification procedure, the function finishes by presenting the model identification items. The function throws an error if no items can be located. Note that it is possible to use available factor loadings assigned to a data frame in the function call. This can be done by setting `efa ` to `FALSE`, which allows the function to skip the EFA and jump directly to the model identification procedure.
 
-The output consists of an $S3$ object of class `modid` containing data frames with model identification items, order of factor strength (based on sum of squares), and item factor loadings. The function has two arguments: the *lower* and *upper* bound. In brief, the lower bound increase the item pool used in the procedure while the upper bound acts as a filter that removes items that do not meet the necessary statistical requirements. This implies that the upper bound should not, in general, be manipulated.
+The output consists of an $S3$ object of class `modid` containing data frames with model identification items, order of factor strength (based on sum of squares), and item factor loadings. The function has two arguments: the *lower* and *upper* bound. In brief, the lower bound increases the item pool used in the procedure, while the upper bound acts as a filter that removes items that do not meet the necessary statistical requirements. This implies that the upper bound should not generally be manipulated.
 
 ```{r}
 # Optional: Load the EFA data for this example directly from the package file
 load(system.file("extdata/efa.Rdata", package = "D3mirt"))
-
+```
+```{r, eval = FALSE}
 # Call to modid() with x, containing factors scores from the EFA
 # Observe that the efa argument is set to false 
-a <- modid(x, efa = FALSE)
+a <- modid(x)
+```
+```{r}
 summary(a)
 ```
 
 The `summary()` function prints the number of items and the number of factors used in the analysis together with the suggested model identification items. As can be seen, the items suggested by `modid()` are the items "W7Q3" and "W7Q20". The output also includes data frames that hold all the model identification items (`Item.1...Item.n`) selected by `modid()` together with the items' absolute sum score (`ABS`), one frame for the sum of squares for factors sorted in descending order, and one frame for item factor loadings.
 
-The order of the factors follows the model identification items so that item 1 comes from the strongest factor (sorted highest up), item 2 from the second strongest (sorted second), and so on. The absolute sum scores indicate statistical fit to the structural assumptions of the DMIRT model and the items are, therefore, sorted with the lowest absolute sum score highest up. The top items are the items that best meet the necessary statistical requirements for the model identification. For a three-dimensional model this implies that the item highest up in the first data frame should be used to identify the $x$-axis, and the item highest up in the second data frame should be used to identify the $y$-axis, and so on. For more on the model identification procedure (e.g., trouble shooting, criteria, or limitations), see package vignette.
+The order of the factors follows the model identification items so that item 1 comes from the strongest factor (sorted highest up), item 2 from the second strongest (sorted second), and so on. The absolute sum scores indicate statistical fit to the structural assumptions of the DMIRT model, and the items are sorted with the lowest absolute sum score highest up. Thus, the top items are the items that best meet the necessary statistical requirements for the model identification. For a three-dimensional model, this implies that the item highest up in the first data frame should be used to identify the $x$-axis and the item highest up in the second data frame should be used to identify the $y$-axis, and so on. See the package vignette for more on the model identification procedure (e.g., troubleshooting, criteria, or limitations).
 
 # 2. D3mirt Model Estimation
 
-The `D3mirt()` function takes model parameters from a three-dimensional compensatory model (either in the form of a data frame or an S4 object of class 'SingleGroupClass' exported from the `mirt()` (Chalmers, 2012) function) and returns an $S3$ object of class `D3mirt` with lists of $a$ and $d$, $MDISC$, and $MDIFF$ parameters, direction cosines, and spherical coordinates. Regarding the latter, spherical coordinates are represented by $\theta$ and $\phi$. The $\theta$ coordinate is the positive or negative angle in degrees, starting from the $x$-axis, of the vector projections from the vector arrows in the $xz$-plane up to $\pm 180°$. Note, the $\theta$ angle is oriented following the positive pole of the $x$ and $z$ axis so that the angle increases clockwise in the graphical output. The $\phi$ coordinate is the positive angle in degrees from the $y$-axis and the vectors. Note, the $\rho$ coordinate from the spherical coordinate system is in DMIRT represented by the MDIFF, and so is reported separately.
+The `D3mirt()` function holds two built-in models. The first model is the default model, i.e., the three-dimensional compensatory model, and the latter is the *orthogonal model*, i.e., a restricted model in which the assumption of within-multidimensionality is removed. In this context, *orthogonal* refers to the strict perpendicular orientation of the items in the latent space. The choice of model depends on the vector used in the `modid` argument when calling `D3mirt()` (see examples below).
+
+Calling `D3mirt()` returns an $S3$ object of class `D3mirt` with lists containing $a$ and $d$ from the compensatory model, and the $MDISC$, and $MDIFF$ parameters, direction cosines, and spherical coordinates for the item vectors from the DMIRT model. Regarding the latter, spherical coordinates are represented by $\theta$ and $\phi$. The $\theta$ coordinate is the positive or negative angle in degrees, starting from the $x$-axis, of the vector projections from the vector arrows in the $xz$-plane up to $\pm 180°$. Note that the $\theta$ angle is oriented following the positive pole of the $x$ and $z$ axis so that the angle increases clockwise in the graphical output. The $\phi$ coordinate is the positive angle in degrees from the $y$-axis and the vectors. Note, the $\rho$ coordinate from the spherical coordinate system is in DMIRT represented by the $MDIFF$, and so is reported separately. 
+
+Constructs can be included in the analysis by creating one or more nested lists that indicate what items belong to what construct (see example below) and using it in the `con.items` argument. From this, the `D3mirt()` function finds the average direction of the subset of items contained in each nested list by adding and normalizing the direction cosines for the items and scaling the construct direction vector to an arbitrary length (the length can be adjusted by the user) so that the arrows can be seen when plotting. To use spherical coordinates, the user must create a nested list containing spherical coordinate pairs in the same format as the item indicators. For example: `con <- list(c(0, 45))`, and so on. The `con` vector, in the latter case, gives one construct vector located $45^{\circ}$ strictly above the $x$-axis in the latent space.
 
 If constructs are used, the function also returns construct direction cosines, spherical coordinates for the construct vector arrows, and $DDISC$ parameters (one index per construct).
 
-The three-dimensional compensatory model is specified so that all items load on all three factors in the model, and that the factors are constrained to be orthogonal (see below). The fitting of the model is preferably done with the `mirt()` (Chalmers, 2012) function. Please note very carefully regarding the model specification in the example below. However, because the fitting of the compensatory model in the `mirt()` function takes a long time, the item parameters for this example are contained in a data frame that is available in the package file "mod1.Rdata".
-
-```{r, message = FALSE, results = 'hide', eval = FALSE}
-# Load data
-data("anes0809offwaves")
-x <- anes0809offwaves
-x <- x[,3:22] # Remove columns for age and gender
-
-# Fit a three-dimensional graded response model with orthogonal factors
-# Example below uses Likert items from the built-in data set "anes0809offwaves"
-# Item W7Q3 and item W7Q20 was selected with modid()
-# The model specification set all items in the data set (1-20) 
-# to load on all three factors (F1-F3)
-# The START and FIXED commands are used on the two items to identify the DMIRT model
-spec <-  ' F1 = 1-20
-           F2 = 1-20
-           F3 = 1-20
-
-           START=(W7Q3,a2,0)
-           START=(W7Q3,a3,0)
-
-           START=(W7Q20,a3,0)
-
-           FIXED=(W7Q3,a2)
-           FIXED=(W7Q3,a3)
-
-           FIXED=(W7Q20,a3) '
-
-mod1 <- mirt::mirt(x, 
-                   spec, 
-                   itemtype = 'graded', 
-                   SE = TRUE, 
-                   method = 'QMCEM')
-```
-
-Constructs can be included in the analysis by creating one or more nested lists that indicate what items belong to what construct. Such a nested list can contain all items in the set down to a single item. From this, the `D3mirt()` function finds the average direction of the subset of items contained in each nested list by adding and normalizing the direction cosines for the items and scaling the construct direction vector to an arbitrary length (length can be adjusted by the user) so that the arrows can be seen when plotting.
-
-The construct vector arrows can contribute to the analysis by (a) visualizing the average direction for a subset set of items, and (b) showing how all items discriminate locally in the direction of the construct vector with the help of the $DDISC$ index.
-
-The `summary()` function is used to inspect the DMIRT estimates. The constructs included below were grouped based on exploratory reasons, i.e., because these items cluster in the model (observable in the graphical output below).
+The `summary()` function presents the DMIRT estimates. The constructs included below were grouped based on exploratory reasons, i.e., because these items cluster in the model (observable in the graphical output below).
 
 ```{r}
-# Optional: Load the mod1 data as data frame directly from the package file
-load(system.file("extdata/mod1.Rdata", package = "D3mirt"))
-
+# Optional: Load the mod3 data as a data frame directly from the package file
+load(system.file("extdata/mod3.Rdata", package = "D3mirt"))
+```
+```{r, message = FALSE, include = FALSE}
+g <- mod3
+```
+```{r, eval = FALSE}
 # Call to D3mirt(), including optional nested lists for three constructs
 # Item W7Q16 is not included in any construct because of model violations
 # The model violations for the item can be seen when plotting the model
-c <- list(list(1,2,3,4,5,6,7,8,9,10),
-          list(11,12,13,14),
-          list(15,17,18,19,20))
-g <- D3mirt(mod1, c)
+con <- list(c(1:10),
+            c(11:14),
+            c(15:20))
+g <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
+```
+```{r}
 summary(g)
 ```
 
-The `D3mirt()` function prints a short report containing the number of items used and the levels of difficulty of the items when the estimation is done. As can be seen, when construct vectors are used, the function also prints the number of construct vectors and the names of the items included in each construct. Next, the factor loadings and the difficulty parameters from the compensatory model are reported in data frames followed by all necessary DMIRT estimates.
+The `D3mirt()` function prints a short report containing the number of items used and the number of difficulty levels when the estimation is done. As can be seen, when construct vectors are used, the function also prints the number of construct vectors and the names of the items included in each construct. Next, the factor loadings and the difficulty parameters from the compensatory model are reported in data frames, followed by all necessary DMIRT estimates.
+
+Regarding the orthogonal model, the function call must include nested lists indicating which items should be constrained to either of the axes. Below is an example in which items $1$ to $10$ are constrained to the $x$-axes, items $15$ to $19$ to the $y$-axis, and items $11$ to $14$ to the $z$-axis. Note that fitting the orthogonal model often requires removing misfitting items. Otherwise, the orthogonal model most likely will amplify the misfit tendencies. In this case, item W7Q16 was removed before fitting the model.
+ 
+```{r}
+# Optional: Load the mod2 data as a data frame directly from the package file
+load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
+```
+```{r, message = FALSE, include = FALSE}
+h <- mod2
+```
+```{r, eval = FALSE}
+y <- data.frame(x[,-16])# Remove misfitting item W7Q16
+# Call D3mirt() and using the orthogonal model
+h <- D3mirt(y, modid = list(c(1:10),   # x-axis
+                             c(15:19),  # y-axis
+                             c(11:14))) # z-axis
+```
+```{r}
+summary(h)
+```
+
+In the output, the simple loading structure can be seen. Aldo note that $\theta$ reports `NaN` when both $\theta$ and $\phi$ is zero. This is because when converting to spherical coordinates, items oriented parallel to the $y$-axis will have $\cos (0)$ in the denominator of the $\arctan$ function, resulting in undefined values.
 
 # 3. Plotting
 
-The `plot()` method for objects of class `D3mirt` is built on the `rgl` package (Adler & Murdoch, 2023) for visualization with OpenGL. Graphing in default mode by calling `plot()` will return an RGL device that will appear in an external window as a three-dimensional interactive object, containing vector arrows with the latent dimensions running along the orthogonal axes, that can be rotated. In this illustration, however, all RGL devices are plotted inline as still shots displayed from two angles, $15^{\circ}$ (clockwise; default plot angle) and $90^{\circ}$. To change the plot output to $90^{\circ}$, use the `view` argument in the `plot()` function and change the first indicator from $15$ to $90$.
+The `plot()` method for objects of class `D3mirt` is built on the `rgl` package (Adler & Murdoch, 2023) for visualization with OpenGL. Graphing in default mode by calling `plot()` will return an RGL device appearing in an external window as a three-dimensional interactive object containing vector arrows with the latent dimensions running along the orthogonal axes that can be rotated. In this illustration, however, all RGL devices are plotted inline as still shots displayed from two angles, $15^{\circ}$ (clockwise; default plot angle) and $90^{\circ}$. To change the plot output to $90^{\circ}$, use the `view` argument in the `plot()` function and change the first indicator from $15$ to $90$.
 
 ```{r, eval = FALSE}
 # Plot RGL device with constructs visible and named
@@ -187,9 +183,19 @@ Figure 1: Three-dimensional vector plot for all items and the three constructs C
 
 Figure 2: Three-dimensional vector plot for all items and the three constructs Compassion, Fairness, and Conformity (solid black arrows) plotted with the model rotated $90^{\circ}$ clockwise.
 
-An example of how the output can be described could be as follows.
+An example of how the output can be described is as follows.
 
-> As can be seen in Figures 1 and 2, the pattern in the data indicates the presence of foremost two main nested latent constructs indicated by the items, one aligned with the $x$-axis and one approaching the $y$-axis. We might also suspect the presence of a third construct located close to the $xy$-plane, between the $x$ and $z$ axes. Studying the content of the items, the labels *Compassion*, *Fairness*, and *Conformity* were introduced. The angles of the constructs inform us that Compassion ($\theta = 2.092^{\circ}$, $\phi = 86.061^{\circ}$) and Conformity ($\theta = -2.514 ^{\circ}$, $\phi = 28.193^{\circ}$) have some within-multidimensional tendencies. However, they are both more or less orthogonal to the $z$-axis. Next, we find Fairness ($\theta = 49.101^{\circ}$, $\phi = 78.313^{\circ}$) with clear within-multidimensional tendencies with respect to the $x$-axis. Thus, the output indicates that Compassion and Conformity could be independent constructs but that Fairness seems not to be.
+> As can be seen in Figures 1 and 2, the pattern in the data indicates the presence of foremost two main nested latent constructs indicated by the items, one aligned with the $x$-axis and one approaching the $y$-axis. We might also suspect the presence of a third construct located close to the $xy$-plane, between the $x$ and $z$ axes. Studying the content of the items, the labels *Compassion*, *Fairness*, and *Conformity* were introduced. The angles of the constructs inform us that Compassion ($\theta = 2.092^{\circ}$, $\phi = 86.061^{\circ}$) and Conformity ($\theta = -2.514 ^{\circ}$, $\phi = 28.193^{\circ}$) have some within-multidimensional tendencies. However, they are both more or less orthogonal to the $z$-axis. Next, we find Fairness ($\theta = 49.101^{\circ}$, $\phi = 78.313^{\circ}$) with clear within-multidimensional tendencies with respect to the $x$-axis. Thus, the output indicates that Compassion and Conformity could be independent constructs but Fairness seems not to be.
+
+The orthogonal model is displayed below rotated rotated $15^{\circ}$ clockwise. In the graphical output the perpendicular orientation of the items forms a cross pattern in which each axis holds a unidimensional model indicated by the items parallel to it. The orthogonal model is foremost useful for studying the items under the assumption that the items are unidimensional and that the unidimensions are uncorrelated. Note that the orthogonal model will change the location of respondents in the latent space compared to the compensatory model. This can have an effect when studying profiles (see examples below), such that profile tendencies can emerge or disappear depending on the choice of model.
+
+```{r, eval = FALSE}
+# Plot the orthogonal model
+plot(h)
+```
+
+![](./images/o1.png)
+Figure 3: The orthogonal model plotted with the model rotated $15^{\circ}$ clockwise.
 
 ## 3.1. `items`
 
@@ -199,19 +205,18 @@ A subset of items can be plotted for a more thorough investigation using the `it
 # The Conformity items from the model plotted with construct vector arrows
 plot(g, constructs = TRUE, 
         items = c(15,17,18,19,20), 
-        construct.lab = c("Compassion", "Fairness", "Conformity"), 
-        view = c(15, 20, 0.6))
+        construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
 
 ![](./images/con1.png)
 
-Figure 7: The items from the Conformity construct plotted with the model rotated $15^{\circ}$ clockwise.
+Figure 4: The items from the Conformity construct plotted with the model rotated $15^{\circ}$ clockwise.
 
 ![](./images/con2.png)
 
-Figure 8: The items from the Conformity construct plotted the model rotated $90^{\circ}$ clockwise.
+Figure 5: The items from the Conformity construct plotted the model rotated $90^{\circ}$ clockwise.
 
-The `plot()` function also allows plotting a single item by entering a single number indicating what item that should be displayed. As was mentioned above, the W7Q16 was not included in any of the constructs because the item showed signs of measurement problems. For example, the short vector arrows indicate high amounts of model violations and the location of the item in the model also indicates that the item is within-multidimensional and that it does not seem to belong to any construct explicitly. Typing in $16$ in the `items` argument allows for a closer look.
+The `plot()` function also allows plotting a single item by entering a single number indicating what item that should be displayed. As was mentioned above, the W7Q16 was not included in any of the constructs because the item showed signs of measurement problems. For example, the short vector arrows indicate high amounts of model violations and the location of the item in the model also indicates that the item is within-multidimensional and does not seem to belong to any construct explicitly. Typing $16$ in the `items` argument allows for a closer look.
 
 ```{r, eval = FALSE}
 # Item W7Q16 has location 16 in the data set (gender and age excluded)
@@ -223,34 +228,33 @@ plot(g, constructs = TRUE,
 
 ![](./images/item1.png)
 
-Figure 3: The item W7Q16 plotted with the three constructs and with the model rotated $15^{\circ}$ clockwise.
+Figure 6: The item W7Q16 plotted with the three constructs and with the model rotated $15^{\circ}$ clockwise.
 
 ![](./images/item2.png)
 
-Figure 4: The item W7Q16 plotted with the three constructs and with the model rotated $90^{\circ}$ clockwise.
+Figure 7: The item W7Q16 plotted with the three constructs and with the model rotated $90^{\circ}$ clockwise.
 
-An example of how the output for analysis of the single item could be as follows.
+An example of how the output for analysis of the single item above is as follows.
 
-> The Figures 3 and 4 shows that item W7Q16 is located at $\theta = 16.085^{\circ}$, $\phi = 57.476^{\circ}$, indicating that the item is within-multidimensional with respect to the $x$ and $y$-axis; but much less so with respect to the $z$-axis. In addition, the directional discrimination further underscores that the item does not seem to measure any particular construct ($DDISC_1 = .657$, $DDISC_2 = .617$, $DDISC_3 = .656$). The global discrimination ($MDISC = .770$, $MDIFF_{range} = [-4.838, 2.349]$) is also the lowest of all discrimination scores in the model. This, combined, implies that the item in question does not seem to fit the three-dimensional DMIRT model used in this analysis and should therefore be removed or adapted. We can also note that item W7Q15, $MDISC = .923$, $MDIFF_{range} = [-4.680, 1.051]$) has the second lowest global discrimination score. Compared to W7Q16, however, item W7Q15 does seem to belong to the 
+> The Figures 3 and 4 shows that item W7Q16 is located at $\theta = 16.085^{\circ}$, $\phi = 57.476^{\circ}$, indicating that the item is within-multidimensional with respect to the $x$ and $y$-axis; but much less so with respect to the $z$-axis. In addition, the directional discrimination further underscores that the item does not seem to measure any particular construct ($DDISC_1 = .657$, $DDISC_2 = .617$, $DDISC_3 = .656$). The global discrimination ($MDISC = .770$, $MDIFF_{range} = [-4.838, 2.349]$) is also the lowest of all discrimination scores in the model. This, combined, implies that the item in question does not seem to fit the three-dimensional DMIRT model used in this analysis and should, therefore, be removed or adapted. We can also note that item W7Q15, $MDISC = .923$, $MDIFF_{range} = [-4.680, 1.051]$) has the second lowest global discrimination score. Compared to W7Q16, however, item W7Q15 does seem to belong to the 
 Conformity construct, observable when comparing angle orientation ($\theta = -19.432^{\circ}, \phi = 31.515^{\circ}$) and direction discrimination ($DDISC_1 = .502$, $DDISC_2 = .332$, $DDISC_3 = .912$). In other words, even if item W7Q15 shows signs of statistical violations in the model, the item still informs us of the content of the Conformity construct.
 
 ## 3.2. `diff.level`
 
-The user has the option of plotting on one level of difficulty at a time with the `diff.level` argument studying the entire scale, a subset of items, or on one item at a time. Note, *difficulty* refers to the number of item response functions in the items, i.e., the total number of response options minus one. In this case, $6$ response options were used which means that the model has $5$ levels of difficulty.
+The user has the option of plotting on one level of difficulty at a time with the `diff.level` argument studying the entire scale, a subset of items, or on one item at a time. Note that *difficulty* refers to the number of item response functions in the items, i.e., the total number of response options minus one. In this case, $6$ response options were used which means that the model has $5$ levels of difficulty.
 
 ```{r, eval = FALSE}
 # Plot RGL device on item difficulty level 5
-plot(g, diff.level = 5, 
-        view = c(15, 20, 0.6))
+plot(g, diff.level = 5)
 ```
 
 ![](./images/diff1.png)
 
-Figure 5: All items plotted on difficulty level 5 and with the model rotated $15^{\circ}$ clockwise.
+Figure 8: All items plotted on difficulty level 5 and with the model rotated $15^{\circ}$ clockwise.
 
 ![](./images/diff2.png)
 
-Figure 6: All items plotted on difficulty level 5 and with the model rotated $90^{\circ}$ clockwise.
+Figure 9: All items plotted on difficulty level 5 and with the model rotated $90^{\circ}$ clockwise.
 
 ## 3.3 `scale`
 
@@ -260,86 +264,74 @@ The `D3mirt()` function returns item vector coordinates estimated with and witho
 # Plot RGL device with items in uniform length and constructs visible and named
 plot(g, scale = TRUE, 
         constructs = TRUE, 
-        construct.lab = c("Compassion", "Fairness", "Conformity"), 
-        view = c(15, 20, 0.6))
+        construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
 
 ![](./images/scale1.png)
 
-Figure 9: All items scaled to uniform length and plotted with the model rotated $15^{\circ}$ clockwise.
+Figure 10: All items scaled to uniform length and plotted with the model rotated $15^{\circ}$ clockwise.
 
 ![](./images/scale2.png)
 
-Figure 10: All items scaled to uniform length and plotted with the model rotated $90^{\circ}$ clockwise.
+Figure 11: All items scaled to uniform length and plotted with the model rotated $90^{\circ}$ clockwise.
 
 ## 3.4. `D3mirt` Profile Analysis
 
-The `plot()` function can also display respondents in the three-dimensional model represented as spheres whose coordinates are derived from the respondent's factor scores. This allows for a profile analysis in which respondents can be separated, or subset, conditioned on single or multiple criteria and then plotted. The resulting output shows where the respondents are located in the model, and, accordingly, what model profile best describes them. Similarly, respondent categories can be simultaneously compared to see if a group-level effect can be visually observed.
+The `plot()` function can also display respondents in the three-dimensional model represented as spheres whose coordinates are derived from the respondent's trait scores. This allows for a profile analysis in which respondents can be separated and plotted as subsets conditioned on single or multiple criteria. The resulting output shows where the respondents are located in the model and, accordingly, what model profile best describes them. To do this, the user can either plot all respondents by setting `ind.scores`to `TRUE`, or plot a subsection of respondents by creating a separate data frame and use it in the `profiles` argument when calling `plot()`. 
 
-To do this, the user must first extract respondent factor scores with `fscores()` (Chalmers, 2012) and then separate or select a subset of respondent rows based on one or more criteria. The resulting data frame is imputed in the `profiles` argument. Generally, it can be useful to hide vector arrows with `hide = TRUE` when plotting respondent profiles to avoid visual cluttering. The example below separates respondents using the gender variable included in the built-in data set.
+In the example below, the first option is illustrated also using the `levels` argument. Regarding the latter, the `plot()` function uses `as.factor()` to count the number of factor levels in the data imputed in the `levels` argument. This information is then used to assign colors for the spheres representing respondents when plotting. This means that raw data can be used as is, but the number of colors in the color vectors argument (`sphere.col`) may need to be adapted. In the example below, the criteria variable for gender only hold two factor levels and, therefore, only two colors in the color vector are needed. By separating respondents using color coding, it is sometimes possible to display group-level effects.
+
+Generally, it can be helpful to hide vector arrows with `hide = TRUE` when plotting respondent profiles to avoid visual cluttering. The example below displays all respondents using the gender variable included in the built-in data set. The gender variable is also color-coded so that males are displayed as blue spheres and females as red spheres.
 
 ```{r, eval = FALSE}
-# Extract respondent factor scores from mod1 with fscores()
-f <- mirt::fscores(mod1, 
-                   method="EAP", 
-                   full.scores = TRUE, 
-                   full.scores.SE = FALSE, QMC = TRUE)
-```
-
-```{r}
-# Optional: Load the respondent factor scores for this example directly from the package file
-load(system.file("extdata/fscores.Rdata", package = "D3mirt"))
-
-# Attach f to the gender variable (column 2 from anes0809offwaves data set; "W3XGENDER")
-# Use cbind with fscores() output attached first
+# Load the data set to be used in levels
+# Use as.matrix to remove any attributes
 data("anes0809offwaves")
-x <- anes0809offwaves
-z <- data.frame(cbind(f, x[,2]))
+x <- as.matrix(anes0809offwaves)
 ```
 
-The `plot()` function uses `as.factor()` to count the number of factor levels in the data imputed in the `levels` argument. This means that raw data can be used as is but the number of colors in the color vectors argument (`sphere.col`) may need to be adapted. In the example below, the criteria variable for gender only hold two factor levels and therefore only two colors in the color vector are needed.
-
-Call `plot()` with the respondent data frame $z$ in the `profiles` argument and the `levels` argument with the levels column subset from $z$. In the function call below, the axes in the model are named using the `x.lab`, `y.lab`, and `z.lab` arguments following the direction of the constructs. Note, the model axes represent unidimensional singular structures, or traits, in this case borrowing the names of the constructs.
+Call `plot()` and use the gender data, contained in column two in data frame $x$, in the `levels` argument. In the function call below, the axes in the model are named using the `x.lab`, `y.lab`, and `z.lab` arguments following the direction of the constructs. Note that the model axes represent unidimensional singular structures or traits.
 
 ```{r, eval = FALSE}
 # Plot profiles with item vector arrows hidden with hide = TRUE
 # Score levels: 1 = Blue ("male") and 2 = Red ("female")
-plot(g, hide = TRUE, 
-     profiles = z, 
-     levels = z[,4], 
+# Plot profiles with item vector arrows hidden
+# Score levels: 1 = Blue ("male") and 2 = Red ("female")
+plot(mod3, hide = TRUE, ind.scores = TRUE, 
+     levels = x[, 2],
      sphere.col = c("blue", "red"), 
-     x.lab = "Compassion", 
-     y.lab="Conformity", 
-     z.lab="Fairness")
+           x.lab = "Compassion", 
+           y.lab="Conformity", 
+           z.lab="Fairness")
 ```
 
 ![](./images/p1.png)
 
-Figure 11: Gender profile for the `anes0809offwaves` data set plotted with the model rotated $15^{\circ}$ clockwise.
+Figure 12: Gender profile for the `anes0809offwaves` data set plotted with the model rotated $15^{\circ}$ clockwise.
 
 ![](./images/p2.png)
 
-Figure 12: Gender profile for the `anes0809offwaves` data set plotted with the model rotated $90^{\circ}$ clockwise.
+Figure 13: Gender profile for the `anes0809offwaves` data set plotted with the model rotated $90^{\circ}$ clockwise.
 
-An example of how the output can be described could be as follows.
+An example of how the output can be described is as follows.
 
-> In Figures 5 and 6, it can be observed a simple profile on gender in which more women tend to have higher levels of Compassion. When rotating the model $90^{\circ}$ clockwise, there seems not to be any easily observable gender difference related to Conformity or Fairness.
+> In the figure, a simple gender profile can be observed, showing that more women tend to have higher levels of compassion. When rotating the model $90^{\circ}$ clockwise, there seems to be no obvious gender difference related to Conformity or Fairness.
 
 ## 3.5. Plotting Confidence Intervals
 
-It is also possible to plot a confidence interval in the shape of an ellipse surrounding the spheres. In the example below, the younger individuals ($\leq30$) are selected and plotted together with a $95\%$ *CI*.
+It is also possible to plot a confidence interval in the shape of an ellipse surrounding the spheres in the latent space. In the example below, the younger individuals ($\leq30$) are selected and plotted with a $95\%$ *CI*. To subset respondents, create a new data frame by combining respondents' factor scores from `mod3$fscores` with age data from column one in data frame $x$. Then assign respondent data conditioned on age to a new data frame using the `subset()` function.
 
-```{r}
-# Column bind fscores() with age variable ("W3Xage") from column 1
-y <- data.frame(cbind(f, x[,1]))
+```{r, eval = FALSE}
+# Column bind trait scores in mod3 with the age variable W3Xage from data frame x
+z <- data.frame(cbind(mod3$fscores, x[, 1]))
 
-# Subset data frame y conditioned on age <= 30
-z1 <- subset(y, y[,4] <= 30)
+# Subset data frame z conditioned on age <= 30
+z1 <- subset(z, z[, 4] <= 30)
 ```
 
-When a criterion variable has a wide data range, such as an age variable, `rep()` can be used to set the appropriate size of the color vector for `sphere.col` by repeating color names with `rep()`. When plotting, the `plot()` function will pick colors from the `sphere.col` argument following the factor order in the levels argument. To do this, the first step is to count the number of factors in the criterion variable. This can be done with `nlevels()`, as can be seen below.
+When a criterion variable has a wide data range, such as an age variable, `rep()` can be used to set the appropriate size of the color vector for `sphere.col` by repeating color names with `rep()`. When plotting, the `plot()` function will pick colors from the `sphere.col` argument following the factor order in the levels argument. To do this, the first step is to count the number of factors in the criterion variable. This can be done with `nlevels()`, as illustrated below.
 
-```{r}
+```{r, eval = FALSE}
 # Check number of factor levels with nlevels() and as.factor()
 nlevels(as.factor(z1[,4]))
 
@@ -348,13 +340,13 @@ nlevels(as.factor(z1[,4]))
 colvec <- c(rep("red", 14))
 ```
 
-To plot the *CI*, the `ci` argument is set to `TRUE`. The color of the sphere was also changed from default `grey80` to `orange` in the example below. Note, the *CI* limit can be adjusted with the `ci.level` argument.
+To plot the *CI*, the `ci` argument is set to `TRUE`. The color of the sphere was also changed from default `grey80` to `orange` in the example below. Note that the *CI* limit can be adjusted with the `ci.level` argument.
 
 ```{r, , eval = FALSE}
 # Call plot() with profile data on age with item vector arrows hidden
-plot(g, hide = TRUE, 
+plot(mod3, hide = TRUE, 
      profiles = z1, 
-     levels = z1[,4], 
+     levels = z1[, 4], 
      sphere.col = colvec, 
      x.lab = "Compassion", 
      y.lab="Conformity", 
@@ -366,19 +358,19 @@ plot(g, hide = TRUE,
 
 ![](./images/ci1.png)
 
-Figure 13: Adults less than or equal to age 30 from the `anes0809offwaves` data set plotted surrounded by a $95\%\,CI$ and with the model rotated $15^{\circ}$ clockwise.
+Figure 14: Adults less than or equal to age 30 from the `anes0809offwaves` data set plotted surrounded by a $95\%\,CI$ and with the model rotated $15^{\circ}$ clockwise.
 
 ![](./images/ci2.png)
 
-Figure 14: Adults less than or equal to age 30 from the `anes0809offwaves` data set plotted surrounded by a $95\%\,CI$ and with the model rotated $90^{\circ}$ clockwise.
+Figure 15: Adults less than or equal to age 30 from the `anes0809offwaves` data set plotted surrounded by a $95\%\,CI$ and with the model rotated $90^{\circ}$ clockwise.
 
-An example of how the output can be described could be as follows.
+An example of how the output can be described is as follows.
 
-> In Figures 7 and 8 we can see a tendency for a profile on age in which younger individuals could be described as less oriented towards Conformity. We can also observe a tendency for what could be an interaction effect in which higher levels of Conformity seem to be associated with lower levels of Fairness.
+> In Figures 7 and 8 we can see a tendency for an age profile in which younger individuals could be described as less oriented towards Conformity. We can also observe a tendency for what could be an interaction effect in which higher levels of Conformity seem to be associated with lower levels of Fairness.
 
 # 4. Exporting The RGL Device
 
-Some options for exporting the RGL device are shown below. Over and above these, it is also possible to export graphical devices in R Markdown documents with `rgl::hook_webgl()` together with graphical options for knitr, as was done when creating the package vignette.
+Some options for exporting the RGL device are shown below. In addition, it is also possible to export graphical devices in R Markdown documents with `rgl::hook_webgl()` together with graphical options for knitr, as was done when creating the package vignette.
 
 ```{r, eval = FALSE}
 # Export an open RGL device to the console that can be saved as an html or image file
@@ -394,9 +386,9 @@ rgl::rgl.snapshot('RGLdevice.png',
                     fmt = 'png')
 ```
 
-# Getting Help and Reporting Bugs
+# Getting Help and Providing Feedback
 
-If you encounter a bug, please file an issue with a minimal reproducible example on GitHub (<https://github.com/ForsbergPyschometrics/D3mirt>). For questions please contact me on Github or via email ([forsbergpsychometrics\@gmail.com](mailto:forsbergpsychometrics@gmail.com){.email}).
+If you encounter a bug, please file an issue with a minimal reproducible example on GitHub (<https://github.com/ForsbergPyschometrics/D3mirt>). For questions and suggestions on how to improve the code, please contact me on GitHub or via email ([forsbergpsychometrics\@gmail.com](mailto:forsbergpsychometrics@gmail.com){.email}).
 
 # References
 
@@ -405,6 +397,8 @@ Adler, D., & Murdoch, D. (2023). *Rgl: 3d Visualization Using OpenGL* [Computer 
 Chalmers, R., P. (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. *Journal of Statistical Software, 48*(6), 1-29. <https://doi.org/10.18637/jss.v048.i06>
 
 DeBell, M., Krosnick, J. A., & Lupia, A.(2010). *Methodology Report and User's Guide for the 2008-2009 ANES Panel Study*. Palo Alto, CA, and Ann Arbor, MI: Stanford University and the University of Michigan.
+
+McKinley, R. L., & Reckase, M. D. (1983). *An Extension of the Two-parameter Logistic Model to the multidimensional latent space*, Report ONR83-2. Iowa City, IA, American College Testing Program.
 
 Muraki, E., & Carlson, J. E. (1995). Full-Information Factor Analysis for Polytomous Item Responses. *Applied Psychological Measurement, 19*(1), 73-90. <https://doi.org/10.1177/014662169501900109>
 

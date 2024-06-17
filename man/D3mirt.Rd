@@ -20,10 +20,10 @@ D3mirt(
 \item{x}{A data frame with rows for items and columns for model parameters or an S4 object of class 'SingleGroupClass' exported from \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
 Regarding the data frame, the number of columns must be more than or equal to 4, i.e., three columns with (\emph{a}) parameters and at least one column for difficulty (\emph{d}) parameters.}
 
-\item{modid}{Argument that either takes in the two model identification items as a combined vector. The user can also use nested list consisting of item indicators to fit an orthogonal model.
+\item{modid}{Argument that either takes in the two model identification items as a combined vector. The user can also use nested list of item indicators to fit an orthogonal model.
 The default is \code{modid = NULL}.}
 
-\item{model}{The user has the option of imputing a model specification schema that is used in the call to \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
+\item{model}{The user has the option of imputing a model specification schema used in the call to \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
 The default is \code{model = NULL}.}
 
 \item{con.items}{Optional. Nested lists with integer values as item indicators to identify constructs. The default is \code{con.items = NULL}.}
@@ -32,7 +32,7 @@ The default is \code{model = NULL}.}
 
 \item{itemtype}{What item type to use in the function call. Available options are \code{"2PL"} and \code{"graded"}. The default is \code{itemtype = "graded"}.}
 
-\item{method.mirt}{Estimation algorithm for \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012) for fitting the model. The default is \code{method.mirt = "QMCEM"}.}
+\item{method.mirt}{Estimation algorithm for \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012) to fit the model. The default is \code{method.mirt = "QMCEM"}.}
 
 \item{method.fscores}{Factor estimation algorithm for \link[mirt:fscores]{mirt::fscores} (Chalmers, 2012) for extracting respondent trait scores. The default is \code{method.fscores = "EAP"}.}
 
@@ -52,22 +52,22 @@ Regarding the former, this includes visualization of the single multidimensional
 The function also returns respondent trait scores that can be plotted with \link{plot} as spheres located in the three-dimensional latent space.
 In turn, this allows for studying respondent profiles using the plot function (for more on profiles, see function documentation on \link{plot}).
 
-There are two types of models available for D3mirt analysis. The default model is the basic DMIRT model (Reckase, 2009, 1985, Reckase & McKinley, 1991) that relax the assumption of unidimensionality in the items while restrict the latent space to be orthogonal.
+There are two types of models available for D3mirt analysis. The default model is the basic DMIRT model (Reckase, 2009, 1985, Reckase & McKinley, 1991) that relaxes the assumption of unidimensionality in the items while restricting the latent space to be orthogonal.
 To use the default option requires first selecting two items to identify the model. This can be done manually with the \code{modid} argument in the function call to \code{D3mirt}.
-However, it is advisable to use the dedicated function \link{modid} included in the package for this purpose (for more on model identification see functiopn documentation for \link{modid}).
-In contrast, the optional orthogonal model constrain the items to be strictly parallel with the axes (see example section below).
+However, it is advisable to use the dedicated function \link{modid} included in the package for this purpose (for more on model identification see function documentation for \link{modid}).
+In contrast, the optional orthogonal model constrains the items to be strictly parallel with the axes (see example section below).
 Consequently, this option allows the user to investigate the model under the assumption that the items are strictly unidimensional and orthogonally oriented.
-Thus, the term "orthogonal" refers to the perpendicular orientation of the items that the model specification creates.
-Note that using the optional model will also effect respondent locations in the latent space accordingly.
+Thus, "orthogonal" refers to the perpendicular orientation of the items the model specification creates.
+Note that using the optional model will also affect respondent locations in the latent space accordingly.
 It is also possible to specify a unique model with the help of the \code{model} parameter in the function call to \code{D3mirt} if written in mirt (Chalmers, 2012) syntax (see examples in package vignette regarding how to write model specifications.)
 
 The user also has the option of including constructs in the estimation.
 Constructs, in this context, refer to the assumption that a subset of items or a particular angle in the latent space holds some higher-order latent variable of interest.
 Constructs are visualized when plotting as solid black arrows running across the model space.
-In addition, if constructs are used the output will also contain the directional discrimination (DDISC) parameters for all items assessed in the direction indicated by the construct vectors.
-This makes it possible to compare item discrimination under the assumption that the items are unidimensional measuring the same latent variable indicated by the angle of the construct vector.
+In addition, if constructs are used, the output will also contain the directional discrimination (DDISC) parameters for all items assessed in the direction indicated by the construct vectors.
+This makes it possible to compare item discrimination under the assumption that the items are unidimensional, measuring the same latent variable indicated by the angle of the construct vector.
 
-To include constructs, the user can create one or more nested lists that indicate what items belong to what construct (from one item up to all items in the set; see the examples section below).
+To include constructs, the user can create one or more nested lists that indicate what items belong to what construct (from one item to all items in the set; see the examples section below).
 From this, the \code{D3mirt()} function calculates the average direction by adding and normalizing the direction cosines using the items in the nested lists.
 Constructs can also be indicated using spherical coordinates stored in nested lists.
 This allows the user to freely add any number of constructs at any angle in the latent space to study the item discrimination.
@@ -96,11 +96,11 @@ summary(mod)
 # Call to D3mirt(), including optional constructs with the help of spherical coordinates
 # Spherical coordinates are indicated using nested list structures with angles
 # First angle indicates the rotation in the xz-plane
-# The second angle the angle away from the y-axis.
-# The specification below indicate three constructs located at an 45 degree angle
+# The second angle is the angle away from the y-axis.
+# The specification below indicates three constructs located at a 45-degree angle
 # between the three axes in the positive orientation.
 # To skip fitting the compensatory model with each function call to D3mirt,
-# it is possible to assign factor loadings and difficulty paramters from mod to a new data frame
+# it is possible to assign factor loadings and difficulty parameters from mod to a new data frame
 y <- cbind(mod$loadings, mod$diff)
 con <- list(c(0, 45),
             c(45, 90),

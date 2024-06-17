@@ -13,7 +13,7 @@ angles
 \description{
 A test unit data frame consisting of 42 rows and 6 columns with standard angles in Cartesian coordinates as item loadings (columns denoted \code{a1}, \code{a2}, and \code{a3}) oriented in both positive and negative directions in a three-dimensional space.
 The distance from the origin is set by \verb{d = 0,5} (4th column) on all rows, which refers to the parameter related to difficulty in the compensatory model.
-The last two columns contains the angles converted to spherical coordinates with \code{Theta} representing the polar angle and \code{Phi} representing the azimuthal angle.
+The last two columns contain the angles converted to spherical coordinates with \code{Theta} representing the polar angle and \code{Phi} representing the azimuthal angle.
 Running the data frame in \code{D3mirt()} converts the angles into spherical coordinates and can be used to check functionality in the package.
 Note, \code{Nan}, i.e., "not-a-number", appears in the \code{D3mirt()} output because the \eqn{\arctan} function (used when changing to spherical coordinates) is not defined when cosine equals zero.
 }

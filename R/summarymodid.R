@@ -5,7 +5,7 @@
 #' @param ... Additional arguments.
 #' @param digits The number of digits shown per estimate. The default is `digits = 4`.
 #'
-#' @return Model identification items (one less than the number of factors), factor loadings and absolute sum score for model identification items, squared factor loadings and factor loadings for all items.
+#' @return Model identification items (one less than the number of factors), factor loadings and absolute sum score for model identification items, squared factor loadings, and factor loadings for all items.
 #' @author Erik Forsberg
 #' @examples
 #' \dontrun{

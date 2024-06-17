@@ -12,7 +12,7 @@
 \item{...}{Additional arguments.}
 }
 \value{
-A printed message reporting the number of items, levels of difficulty, the number of construct vectors and the row names of the respective items contained in each construct.
+A printed message reporting the number of items, levels of difficulty, the number of construct vectors, and the row names of the respective items contained in each construct.
 }
 \description{
 The print method for the \code{\link[=D3mirt]{D3mirt()}} function.
@@ -20,7 +20,7 @@ The print method for the \code{\link[=D3mirt]{D3mirt()}} function.
 \examples{
 \dontrun{
 # Call D3mirt()
-# The first argument can be data frame with model parameters
+# The first argument can be a data frame with model parameters
 # or an S4 object of class 'SingleGroupClass' exported from mirt::mirt
 g <- D3mirt(mod1)
 

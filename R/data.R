@@ -2,7 +2,7 @@
 #'
 #' A subset of data (\emph{N} = 1046, \emph{Mean age} = 51.33, \emph{SD} = 14.56, 57% Female) from the ANES 2008-2009 Panel Study Off Wave Questionnaires, December 2009 (DeBell et al., 2010),
 #' with complete responses on a pilot version of the Judgment subscale from what became the Moral Foundations Questionnaire (Graham et al., 2011).
-#' Demographic variables include age and gender (two levels) and Likert-items positively scored on a scale from 1 = \emph{Strongly Disagree} to 6 = \emph{Strongly Agree}.
+#' Demographic variables include age and gender (two levels), and Likert-items positively scored on a scale from 1 = \emph{Strongly Disagree} to 6 = \emph{Strongly Agree}.
 #'
 #'
 #' @format ## `anes0809offwaves`

@@ -6,13 +6,13 @@
 #' @param digits The number of digits shown per estimate. The default is `digits = 4`.
 #'
 #' @return Tables containing \emph{a} and \emph{d} parameters, multidimensional discrimination (MDISC), multidimensional item difficulty (MDIFF), direction cosines, and degrees for vector angles for items.
-#' If constructs were used in the estimation process, the summary function will also show tables for direction cosines, and degrees for construct vectors as well as directional discrimination (DDISC) parameters.
+#' If constructs were used in the estimation process, the summary function will also show tables for direction cosines, degrees for construct vectors, and directional discrimination (DDISC) parameters.
 #'
 #' @author Erik Forsberg
 #' @examples
 #' \dontrun{
 #' # Call D3mirt() and create list of constructs
-#' # The first argument can be data frame with model parameters
+#' # The first argument can be a data frame with model parameters
 #' # or an S4 object of class 'SingleGroupClass' exported from mirt::mirt
 #' c <- list(list(1,2,3,4,5,6,7,8,9,10),
 #'           list(11,12,13,14),
