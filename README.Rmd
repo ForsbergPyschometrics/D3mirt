@@ -195,6 +195,7 @@ plot(h)
 ```
 
 ![](./images/o1.png)
+
 Figure 3: The orthogonal model plotted with the model rotated $15^{\circ}$ clockwise.
 
 ## 3.1. `items`
