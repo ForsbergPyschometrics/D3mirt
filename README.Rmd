@@ -82,6 +82,8 @@ Note that the EFA is only used to find model identification items that meet the 
 Begin by loading the item data. Note that all outputs are available as ready-made package files that can be loaded directly into the R session.
 
 ```{r, message = FALSE, results = 'hide', eval = FALSE}
+# Load Package
+library(D3mirt)
 # Load data
 data("anes0809offwaves")
 x <- anes0809offwaves

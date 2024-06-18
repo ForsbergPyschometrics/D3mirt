@@ -144,6 +144,8 @@ Note that the EFA is only used to find model identification items that meet the 
 To start, load the data set from the ANES 2008-2009 Panel Study and remove columns for age and gender.
 
 ```{r, message = FALSE, results = 'hide', eval = FALSE}
+# Load Package
+library(D3mirt)
 # Load data
 data("anes0809offwaves")
 x <- anes0809offwaves
