@@ -41,7 +41,7 @@ In DMIRT, it is assumed that axes $l$ are orthogonal. This introduces the constr
 The $MDISC$ for item $i$ represents the highest level of discrimination the item $i$ can achieve located in a multidimensional latent trait space, with $m$ number of dimensions and $a_{ik}$ item slope parameters (Reckase, 2009, Reckase & McKinley, 1991).
 
 ::: {align="center"}
-$A_i := \sqrt {\sum_{k = 1}^{m} a^{2}_{ik} }$
+$MDISC := \sqrt {\sum_{k = 1}^{m} a^{2}_{ik} }$
 :::
 
 Similarly to unidimensional discrimination, the $MDISC$ parameter, also denoted as $A_i$, indicates the steepness of the slope of the item response function at the point of inflection. The slope is, similarly to the unidimensional case, calculated multiplied with the constant $\frac{1}{4}$, which is omitted in the equation above.
@@ -57,7 +57,7 @@ The resulting angle $\omega_{il}$ is an item characteristic that describes an it
 The multidimensional version of the difficulty parameter, denoted $B_i$, is the DMIRT counterpart to the $b$-parameter in the unidimensional models. The $MDIFF$ is defined as the negative intercept $d_i$ over the $MDISC$ (Reckase, 2009, 1985).
 
 $$
-B_i :=\frac{-d_i}{\sqrt{\sum_{k=1}^m a^2_{ik}}}
+MDIFF :=\frac{-d_i}{\sqrt{\sum_{k=1}^m a^2_{ik}}}
 $$
 
 The $MDIFF$ is interpreted similarly as the difficulty parameter in the unidimensional model. That is, higher values indicate that higher levels of ability for a probability of a correct response of more than $0.5$ are necessary. Moreover, the $MDIFF$, just as in the unidimensional model, also indicates the distance from the origin of the model to the point of inflection. However, in DMIRT analysis, the $MDIFF$ becomes a multidimensional location parameter that shows the distance following the item's specific angle orientation.
