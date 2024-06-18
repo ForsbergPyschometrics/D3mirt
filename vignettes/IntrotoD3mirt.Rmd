@@ -154,7 +154,7 @@ x <- x[, 3:22] # Remove columns for age and gender
 
 If the default mode `efa = TRUE` is not changed, the function performs an EFA with three factors as the default before performing the model identification. If factor loadings are already available, it is possible to assign them to a data frame and use them in the call to `modid()` by setting `efa` to `FALSE`. This allows `modid()` to skip the efa and the model identification will be instant.
 
-```{r, include = FALSE}
+```{r, include = FALSE, eval = FALSE}
 load("efa.Rdata")
 x <- a$loadings
 a <- modid(x, efa = FALSE)
