@@ -1,5 +1,5 @@
-── R CMD check results D3mirt 1.3.0 ────
-Duration: 56m 39s
+── R CMD check results D3mirt 2.0.0 ────
+Duration: 52m 6.8s
 
 ❯ checking installed package size ... NOTE
     installed size is  7.8Mb
@@ -8,13 +8,13 @@ Duration: 56m 39s
 
 ❯ checking top-level files ... NOTE
   Non-standard files/directories found at top level:
-    ‘anes1.png’ ‘paper.Rmd’ ‘paper.html’ ‘paper.md’ ‘paper.pdf’
+    ‘anes1.png’ ‘p1.png’ ‘paper.Rmd’ ‘paper.html’ ‘paper.md’ ‘paper.pdf’
     ‘refs.bib’
 
 ## Comments to CRAN
 
 Notes:
-- doc size is large because the package contains many examples and the output is highly grachical
+- doc size is large because the package contains many examples and the output is highly graphical
 - A multitude of examples are necessary because the method is fairly unknown to the community
 - Non-standard files are files connected to an article submitted to Journal of Open Source software and they are not included when building the R-package
 
