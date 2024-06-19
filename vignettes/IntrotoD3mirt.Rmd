@@ -156,10 +156,8 @@ If the default mode `efa = TRUE` is not changed, the function performs an EFA wi
 
 ```{r, include = FALSE, eval = FALSE}
 load("id.Rdata")
-x <- a$loadings
-a <- modid(x, efa = FALSE)
 ```
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Optional: Load the modid data for this example directly from the package file
 load(system.file("extdata/id.Rdata", package = "D3mirt"))
 ```
@@ -196,7 +194,7 @@ Sometimes, however, the model is hard to identify. If this happens, try the foll
 
 The latter (point 4) should, however, only be used as a last resort. This is because the upper bound sets the upper limit for item inclusion. Adjusting this limit too high compromises the necessary statistical requirements. The lower limit (point 2), however, only increases the size of the item pool used for the item selection. It is, therefore, recommended to adjust the lower limit up and down to see if the output differs, and from that make the final decision.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Assigns loadings from a to data frame x
 x <- id$loadings
 ```
@@ -213,7 +211,7 @@ Another option (point 3) is to override the factor order with the `fac.order` ar
 
 Since the squared factor loadings for factors 2 and 3 in this example are somewhat similar, it could be useful to compare the final results after manually overriding the factor order. The latter is, however, outside of the scope of this vignette.
 
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Override factor order by reversing columns in the original data frame
 b <- modid(x, efa = FALSE, fac.order = c(3, 2, 1))
 summary(b)
@@ -247,10 +245,10 @@ To use the compensatory model, the user only needs to specify the model identifi
 
 Note that because fitting the compensatory model in the `mirt()` function takes a long time, the item parameters for this example are contained in a data frame available in the package file "mod1.Rdata". To save time studying these examples, the package file can be loaded and used in the function call. 
 
-```{r, include = FALSE}
+```{r, include = FALSE, eval = FALSE}
 load("mod1.Rdata")
 ```
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Optional: Load mod1 directly from the package file
 load(system.file("extdata/mod1.Rdata", package = "D3mirt"))
 ```
@@ -276,10 +274,10 @@ To tell `D3mirt` to use the orthogonal model, create a nested list of items spec
 
 On a side note, using an orthogonal model in `D3mirt` often requires removing poorly fitting items. This is because constraining items already struggling to fit the model will most likely increase the misfit. This will most likely lead to a very large $MDIFF$ range, distorting the graphical output. In the example below, item W7Q16 was removed before fitting the model.
 
-```{r, include = FALSE}
+```{r, include = FALSE, eval = FALSE}
 load("mod2.Rdata")
 ```
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Optional: Load mod2 directly from the package file
 load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
 ```
@@ -306,10 +304,10 @@ This type of construct can contribute to the analysis by visualizing the average
 
 The constructs included below were grouped based on exploratory reasons, i.e., because these items cluster in the model (observable in the graphical output). To call `D3mirt` with constructs calculated as the average direction of a subset of items, use the `con.items` argument and create nested lists, as the example below illustrates. Note that if a `D3mirt` object already exists, it is possible to extract factor loadings and the difficulty parameters from the compensatory model from the `D3mirt` object and assign them to a new data frame. This new data frame can then be used to refit the object for the purpose of adding constructs, for instance. Following this procedure, the call to `D3mirt` will skip fitting the compensatory model, and the calculation of parameters will be instant.
 
-```{r, include = FALSE}
+```{r, include = FALSE, eval = FALSE}
 load("mod3.Rdata")
 ```
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Optional: Load mod3 directly from the package file
 load(system.file("extdata/mod3.Rdata", package = "D3mirt"))
 ```
@@ -333,10 +331,10 @@ In contrast to the previous example, the printed message now includes the constr
 Regarding the second option, adding a construct arbitrarily in the model is also possible using spherical angles. In this case, the user follows the same convention presented above, i.e., $\theta$ to indicate the angle in the $xz$-plane and $\phi$ to indicate the angle away from the $y$-axis. The resulting vector will then be oriented in the direction of the spherical coordinates and report the $DDISC$ for all items in the set constrained to this orientation.
 
 In the example below, the constructs are oriented $45^{\circ}$ between each axes in the positive direction. More specifically, this implies that the first construct is oriented $45^{\circ}$ between the $x$ and $y$-axes, the second construct $45^{\circ}$ between the $x$ and $z$-axes and the third construct $45^{\circ}$ between the $y$ and $z$-axes.
-```{r, include = FALSE}
+```{r, include = FALSE, eval = FALSE}
 load("mod4.Rdata")
 ```
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 # Optional: Load mod3 directly from the package file
 load(system.file("extdata/mod4.Rdata", package = "D3mirt"))
 ```
