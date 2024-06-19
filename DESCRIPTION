@@ -17,7 +17,7 @@ Suggests:
     knitr,
     rmarkdown,
     stats,
-    testthat.
+    testthat,
     R.rsp
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
