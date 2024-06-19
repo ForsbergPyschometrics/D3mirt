@@ -573,7 +573,7 @@ function and change the first indicator from $15$ to $90$.
 
 ``` r
 # Plot RGL device with constructs visible and named
-plot(g, constructs = TRUE, 
+plot(mod3, constructs = TRUE, 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
 
@@ -620,7 +620,7 @@ tendencies can emerge or disappear depending on the choice of model.
 
 ``` r
 # Plot the orthogonal model
-plot(h)
+plot(mod2)
 ```
 
 ![](./images/o1.png)
@@ -638,7 +638,7 @@ the item order in the original data frame (see `?anes0809offwaves`).
 
 ``` r
 # The Conformity items from the model plotted with construct vector arrows
-plot(g, constructs = TRUE, 
+plot(mod3, constructs = TRUE, 
         items = c(15,17,18,19,20), 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
@@ -666,7 +666,7 @@ look.
 ``` r
 # Item W7Q16 has location 16 in the data set (gender and age excluded)
 # The item is plotted together with construct to aid the visual interpretation
-plot(g, constructs = TRUE, 
+plot(mod3, constructs = TRUE, 
         items = 16, 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
@@ -716,7 +716,7 @@ used which means that the model has $5$ levels of difficulty.
 
 ``` r
 # Plot RGL device on item difficulty level 5
-plot(g, diff.level = 5)
+plot(mod3, diff.level = 5)
 ```
 
 ![](./images/diff1.png)
@@ -741,7 +741,7 @@ without the $MDISC$, set `scale = TRUE`.
 
 ``` r
 # Plot RGL device with items in uniform length and constructs visible and named
-plot(g, scale = TRUE, 
+plot(mod3, scale = TRUE, 
         constructs = TRUE, 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
@@ -905,7 +905,7 @@ An example of how the output can be described is as follows.
 > interaction effect in which higher levels of Conformity seem to be
 > associated with lower levels of Fairness.
 
-# 4. Exporting The RGL Device
+# 4. Exporting the RGL Device
 
 Some options for exporting the RGL device are shown below. In addition,
 it is also possible to export graphical devices in R Markdown documents
@@ -914,14 +914,14 @@ was done when creating the package vignette.
 
 ``` r
 # Export an open RGL device to the console that can be saved as an html or image file
-plot(g, constructs = TRUE)
+plot(mod3, constructs = TRUE)
 s <- rgl::scene3d()
 rgl::rglwidget(s, 
                width = 1040, 
                height = 1040)
 
 # Export a snap shoot of an open RGL device directly to file
-plot(g, constructs = TRUE)
+plot(mod3, constructs = TRUE)
 rgl::rgl.snapshot('RGLdevice.png', 
                     fmt = 'png')
 ```

@@ -167,7 +167,7 @@ The `plot()` method for objects of class `D3mirt` is built on the `rgl` package 
 
 ```{r, eval = FALSE}
 # Plot RGL device with constructs visible and named
-plot(g, constructs = TRUE, 
+plot(mod3, constructs = TRUE, 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
 
@@ -187,7 +187,7 @@ The orthogonal model is displayed below rotated rotated $15^{\circ}$ clockwise. 
 
 ```{r, eval = FALSE}
 # Plot the orthogonal model
-plot(h)
+plot(mod2)
 ```
 
 ![](./images/o1.png)
@@ -200,7 +200,7 @@ A subset of items can be plotted for a more thorough investigation using the `it
 
 ```{r, eval = FALSE}
 # The Conformity items from the model plotted with construct vector arrows
-plot(g, constructs = TRUE, 
+plot(mod3, constructs = TRUE, 
         items = c(15,17,18,19,20), 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
@@ -218,7 +218,7 @@ The `plot()` function also allows plotting a single item by entering a single nu
 ```{r, eval = FALSE}
 # Item W7Q16 has location 16 in the data set (gender and age excluded)
 # The item is plotted together with construct to aid the visual interpretation
-plot(g, constructs = TRUE, 
+plot(mod3, constructs = TRUE, 
         items = 16, 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
@@ -242,7 +242,7 @@ The user has the option of plotting on one level of difficulty at a time with th
 
 ```{r, eval = FALSE}
 # Plot RGL device on item difficulty level 5
-plot(g, diff.level = 5)
+plot(mod3, diff.level = 5)
 ```
 
 ![](./images/diff1.png)
@@ -259,7 +259,7 @@ The `D3mirt()` function returns item vector coordinates estimated with and witho
 
 ```{r, eval = FALSE}
 # Plot RGL device with items in uniform length and constructs visible and named
-plot(g, scale = TRUE, 
+plot(mod3, scale = TRUE, 
         constructs = TRUE, 
         construct.lab = c("Compassion", "Fairness", "Conformity"))
 ```
@@ -365,20 +365,20 @@ An example of how the output can be described is as follows.
 
 > In Figures 7 and 8 we can see a tendency for an age profile in which younger individuals could be described as less oriented towards Conformity. We can also observe a tendency for what could be an interaction effect in which higher levels of Conformity seem to be associated with lower levels of Fairness.
 
-# 4. Exporting The RGL Device
+# 4. Exporting the RGL Device
 
 Some options for exporting the RGL device are shown below. In addition, it is also possible to export graphical devices in R Markdown documents with `rgl::hook_webgl()` together with graphical options for knitr, as was done when creating the package vignette.
 
 ```{r, eval = FALSE}
 # Export an open RGL device to the console that can be saved as an html or image file
-plot(g, constructs = TRUE)
+plot(mod3, constructs = TRUE)
 s <- rgl::scene3d()
 rgl::rglwidget(s, 
                width = 1040, 
                height = 1040)
 
 # Export a snap shoot of an open RGL device directly to file
-plot(g, constructs = TRUE)
+plot(mod3, constructs = TRUE)
 rgl::rgl.snapshot('RGLdevice.png', 
                     fmt = 'png')
 ```
