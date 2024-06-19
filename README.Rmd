@@ -96,15 +96,15 @@ The output consists of an $S3$ object of class `modid` containing data frames wi
 
 ```{r}
 # Optional: Load the EFA data for this example directly from the package file
-load(system.file("extdata/efa.Rdata", package = "D3mirt"))
+load(system.file("extdata/id.Rdata", package = "D3mirt"))
 ```
 ```{r, eval = FALSE}
 # Call to modid() with x, containing factors scores from the EFA
 # Observe that the efa argument is set to false 
-a <- modid(x)
+id <- modid(x)
 ```
 ```{r}
-summary(a)
+summary(id)
 ```
 
 The `summary()` function prints the number of items and the number of factors used in the analysis together with the suggested model identification items. As can be seen, the items suggested by `modid()` are the items "W7Q3" and "W7Q20". The output also includes data frames that hold all the model identification items (`Item.1...Item.n`) selected by `modid()` together with the items' absolute sum score (`ABS`), one frame for the sum of squares for factors sorted in descending order, and one frame for item factor loadings.
