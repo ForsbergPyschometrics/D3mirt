@@ -155,20 +155,20 @@ x <- x[, 3:22] # Remove columns for age and gender
 If the default mode `efa = TRUE` is not changed, the function performs an EFA with three factors as the default before performing the model identification. If factor loadings are already available, it is possible to assign them to a data frame and use them in the call to `modid()` by setting `efa` to `FALSE`. This allows `modid()` to skip the efa and the model identification will be instant.
 
 ```{r, include = FALSE, eval = FALSE}
-load("efa.Rdata")
+load("id.Rdata")
 x <- a$loadings
 a <- modid(x, efa = FALSE)
 ```
 ```{r, eval = FALSE}
-# Optional: Load the EFA data for this example directly from the package file
-load(system.file("extdata/efa.Rdata", package = "D3mirt"))
+# Optional: Load the modid data for this example directly from the package file
+load(system.file("extdata/id.Rdata", package = "D3mirt"))
 ```
 ```{r, eval = FALSE}
 # Call to modid()
-a <- modid(x)
+id <- modid(x)
 ```
 ```{r}
-summary(a)
+summary(id)
 ```
 
 The output consists of an $S3$ object of class `modid` containing data frames with model identification items, order of factor strength (based on sum of squares), and item factor loadings. Using the `summary()` function, we first get a printed message telling us the number of items and the number of factors used in the analysis together with the suggested model identification items. The items that are suggested by `modid()` to identify the model in this example are the items W7Q3, for the $x$-axis, and W7Q20, for the $y$-axis. Next, we find data frames that hold all the model identification items (`Item.1...Item.n`) selected by `modid()` together with the items' absolute sum score (`ABS`), one frame for the sum of squares for factors sorted in descending order, and one frame for item factor loadings.
@@ -198,13 +198,13 @@ The latter (point 4) should, however, only be used as a last resort. This is bec
 
 ```{r, eval = FALSE}
 # Assigns loadings from a to data frame x
-x <- a$loadings
+x <- id$loadings
 ```
 ```{r}
 # Call to modid with increased lower and higher bound
 # Set efa to false when using factor loadings as data frame
-b <- modid(x, efa = FALSE, lower = 1, upper = 1)
-summary(b)
+a <- modid(x, efa = FALSE, lower = 1, upper = 1)
+summary(a)
 ```
 
 In this case, we find that the second item "W7Q17" is new. Observing the statistical estimates, we can also see that this outcome is related to the increased `lower` bound, allowing weaker loading items to be included in the selection process. Both the previous item ("W7Q20") and the new item ("W7Q17") have an acceptable absolute sum score, however. We can also note that the increased `upper` bound allows more items to be included in the selection process. This is most notable in the first data frame for `Item.1`. In this case, however, this had no effect on the final selection.
@@ -215,8 +215,8 @@ Since the squared factor loadings for factors 2 and 3 in this example are somewh
 
 ```{r, eval = FALSE}
 # Override factor order by reversing columns in the original data frame
-c <- modid(x, efa = FALSE, fac.order = c(3, 2, 1))
-summary(c)
+b <- modid(x, efa = FALSE, fac.order = c(3, 2, 1))
+summary(b)
 ```
 
 In this case, we find that item W7Q3, which was previously suggested for the $x$-axis, is now suggested for the $y$-axis. For the $x$-axis, we find a new item, W7Q13.
