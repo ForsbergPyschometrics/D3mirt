@@ -942,7 +942,7 @@ Chalmers, R., P. (2012). mirt: A Multidimensional Item Response Theory
 Package for the R Environment. *Journal of Statistical Software, 48*(6),
 1-29. <https://doi.org/10.18637/jss.v048.i06>
 
-DeBell, M., Krosnick, J. A., & Lupia, A.(2010). *Methodology Report and
+DeBell, M., Krosnick, J. A., & Lupia, A. (2010). *Methodology Report and
 User’s Guide for the 2008-2009 ANES Panel Study*. Palo Alto, CA, and Ann
 Arbor, MI: Stanford University and the University of Michigan.
 
@@ -954,10 +954,10 @@ Muraki, E., & Carlson, J. E. (1995). Full-Information Factor Analysis
 for Polytomous Item Responses. *Applied Psychological Measurement,
 19*(1), 73-90. <https://doi.org/10.1177/014662169501900109>
 
-Reckase, M. D.(2009). *Multidimensional Item Response Theory*. Springer.
-<https://doi.org/10.1007/978-0-387-89976-3>
+Reckase, M. D. (2009). *Multidimensional Item Response Theory*.
+Springer. <https://doi.org/10.1007/978-0-387-89976-3>
 
-Reckase, M. D.(1985). The Difficulty of Test Items That Measure More
+Reckase, M. D. (1985). The Difficulty of Test Items That Measure More
 Than One Ability. *Applied Psychological Measurement, 9*(4),401-412.
 <https://doi.org/10.1177/014662168500900409>
 
