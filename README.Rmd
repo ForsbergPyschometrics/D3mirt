@@ -127,9 +127,6 @@ The `summary()` function presents the DMIRT estimates. The constructs included b
 # Optional: Load the mod3 data as a data frame directly from the package file
 load(system.file("extdata/mod3.Rdata", package = "D3mirt"))
 ```
-```{r, message = FALSE, include = FALSE}
-g <- mod3
-```
 ```{r, eval = FALSE}
 # Call to D3mirt(), including optional nested lists for three constructs
 # Item W7Q16 is not included in any construct because of model violations
@@ -137,10 +134,10 @@ g <- mod3
 con <- list(c(1:10),
             c(11:14),
             c(15:20))
-g <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
+mod3 <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
 ```
 ```{r}
-summary(g)
+summary(mod3)
 ```
 
 The `D3mirt()` function prints a short report containing the number of items used and the number of difficulty levels when the estimation is done. As can be seen, when construct vectors are used, the function also prints the number of construct vectors and the names of the items included in each construct. Next, the factor loadings and the difficulty parameters from the compensatory model are reported in data frames, followed by all necessary DMIRT estimates.
@@ -151,18 +148,15 @@ Regarding the orthogonal model, the function call must include nested lists indi
 # Optional: Load the mod2 data as a data frame directly from the package file
 load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
 ```
-```{r, message = FALSE, include = FALSE}
-h <- mod2
-```
 ```{r, eval = FALSE}
 y <- data.frame(x[, -16])# Remove misfitting item W7Q16
 # Call D3mirt() and using the orthogonal model
-h <- D3mirt(y, modid = list(c(1:10),   # x-axis
+mod2 <- D3mirt(y, modid = list(c(1:10),   # x-axis
                             c(15:19),  # y-axis
                             c(11:14))) # z-axis
 ```
 ```{r}
-summary(h)
+summary(mod2)
 ```
 
 In the output, the simple loading structure can be seen. Aldo note that $\theta$ reports `NaN` when both $\theta$ and $\phi$ is zero. This is because when converting to spherical coordinates, items oriented parallel to the $y$-axis will have $\cos (0)$ in the denominator of the $\arctan$ function, resulting in undefined values.
