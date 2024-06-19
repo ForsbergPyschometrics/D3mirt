@@ -1,7 +1,7 @@
 ---
 title: "Introduction to D3mirt Analysis"
 package: D3mirt
-output: rmarkdown::pdf_document
+output: rmarkdown::html_document
 vignette: >
   %\VignetteIndexEntry{Introduction to D3mirt Analysis}
   %\VignetteEncoding{UTF-8}
@@ -363,7 +363,7 @@ When plotting the `D3mirt` model with `plot()`, it is possible to visually obser
 
 Graphing in default mode by calling `plot()` will return an RGL device that will appear in an external window as a three-dimensional interactive object that can be rotated manually by the user. In this illustration, however, all RGL devices are plotted as inline interactive objects with the help of R markdown. Note that the `view` argument is used in all function calls to `plot()` below. This was only done to optimize the size of the RGL device (the default is `view = c(15, 20, 7)`) when creating this R Markdown vignette.
 
-```{r, testg1, webgl = TRUE, fig.width = 7, fig.height = 7}
+```{r, testg1, webgl = TRUE, fig.width = 7, fig.height = 7, dev="png"}
 # Plot RGL device
 plot(mod1, scale = TRUE, view = c(15, 20, 0.6))
 ```
