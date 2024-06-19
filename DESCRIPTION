@@ -17,11 +17,10 @@ Suggests:
     knitr,
     rmarkdown,
     stats,
-    testthat,
-    R.rsp
+    testthat
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 LazyData: true
-VignetteBuilder: R.rsp
+VignetteBuilder: knitr
 Config/testthat/edition: 3
