@@ -74,7 +74,7 @@ modid <- function(x, efa = TRUE, factors = 3, lower = 0.5, upper = .10, fac.orde
   if (efa == TRUE){
   if (!(itemtype %in% c("graded", "2PL"))) stop ("The item model must be of type GRM or 2PL")
   x <- as.matrix(x)
-  if(any(!x == round(x))) stop("Set efa to FALSE if the data frame contains factor loadings")
+  if(any(!x == round(x))) warning("Set efa to FALSE if the data frame contains factor loadings")
   e <- mirt::mirt(x, model = factors, itemtype = itemtype, method = method, ...)
   f <- mirt::summary(e, rotate = rotate, verbose = FALSE)
   x <- data.frame(f$rotF)

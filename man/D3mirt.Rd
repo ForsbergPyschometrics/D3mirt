@@ -17,7 +17,8 @@ D3mirt(
 )
 }
 \arguments{
-\item{x}{A data frame with rows for items and columns for model parameters or an S4 object of class 'SingleGroupClass' exported from \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
+\item{x}{A data frame with items in rows and model parameters in columns containing raw response data as integer values or factor loadings.
+Input can also be an S4 object of class 'SingleGroupClass' exported from \link[mirt:mirt]{mirt::mirt} (Chalmers, 2012).
 Regarding the data frame, the number of columns must be more than or equal to 4, i.e., three columns with (\emph{a}) parameters and at least one column for difficulty (\emph{d}) parameters.}
 
 \item{modid}{Use either the two model identification items from \link{modid} as a combined vector or use nested list of item indicators to fit an orthogonal model (see examples below).
@@ -56,10 +57,10 @@ There are two types of models available for D3mirt analysis. The default model i
 To use the default option requires first selecting two items to identify the model. This can be done manually with the \code{modid} argument in the function call to \code{D3mirt}.
 However, it is advisable to use the dedicated function \link{modid} included in the package for this purpose (for more on model identification see function documentation for \link{modid}).
 In contrast, the optional orthogonal model constrains the items to be strictly parallel with the axes (see example section below).
-Consequently, this option allows the user to investigate the model under the assumption that the items are strictly unidimensional and orthogonally oriented.
-Thus, "orthogonal" refers to the perpendicular orientation of the items the model specification creates.
+Consequently, this option allows the user to investigate the model under the assumption that the items are strictly unidimensional and orthogonally oriented in the latent space.
+In this context "orthogonal" refers to the perpendicular orientation of the item vectors the model specification creates.
 Note that using the optional model will also affect respondent locations in the latent space accordingly.
-It is also possible to specify a unique model with the help of the \code{model} parameter in the function call to \code{D3mirt} if written in mirt (Chalmers, 2012) syntax (see examples in package vignette regarding how to write model specifications.)
+It is also possible to specify a unique model with the help of the \code{model} argument in the function call to \code{D3mirt} if written in mirt (Chalmers, 2012) syntax (for an example, see the appendix in the package vignette).
 
 The user also has the option of including constructs in the estimation.
 Constructs, in this context, refer to the assumption that a subset of items or a particular angle in the latent space holds some higher-order latent variable of interest.
