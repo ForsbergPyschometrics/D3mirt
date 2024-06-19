@@ -44,7 +44,7 @@ If dichotomous items are used, the analysis is based on the
 multidimensional two-parameter logistic model (M2PL) (McKinley &
 Reckase, 1983; Reckase, 1985). If polytomous items are used, the
 analysis is extended to the multidimensional two-parameter graded
-response model (MGRM; Muraki & Carlson, 1995). The method is therefore
+response model (MGRM; Muraki & Carlson, 1995). The method is, therefore,
 limited to items that fit these item models.
 
 The estimation begins by first fitting and extracting the loadings $a$
@@ -166,10 +166,12 @@ Begin by loading the item data. Note that all outputs are available as
 ready-made package files that can be loaded directly into the R session.
 
 ``` r
+# Load Package
+library(D3mirt)
 # Load data
 data("anes0809offwaves")
 x <- anes0809offwaves
-x <- x[,3:22] # Remove columns for age and gender
+x <- x[, 3:22] # Remove columns for age and gender
 ```
 
 The `modid()` can take in raw item data or a data frame with item factor
@@ -177,7 +179,7 @@ loadings. In the default mode (`efa = TRUE`), using raw data, the
 function performs an EFA using with the help of the `mirt()` function,
 from the `mirt` package (Chalmers, 2012), with three factors as the
 default (`factors = 3`). After sorting the results following the model
-identification procedure the function finishes by presenting the model
+identification procedure, the function finishes by presenting the model
 identification items. The function throws an error if no items can be
 located. Note that it is possible to use available factor loadings
 assigned to a data frame in the function call. This can be done by
@@ -195,17 +197,17 @@ generally be manipulated.
 
 ``` r
 # Optional: Load the EFA data for this example directly from the package file
-load(system.file("extdata/efa.Rdata", package = "D3mirt"))
+load(system.file("extdata/id.Rdata", package = "D3mirt"))
 ```
 
 ``` r
 # Call to modid() with x, containing factors scores from the EFA
 # Observe that the efa argument is set to false 
-a <- modid(x)
+id <- modid(x)
 ```
 
 ``` r
-summary(a)
+summary(id)
 #> 
 #> modid: 20 items and 3 factors
 #> 
@@ -335,11 +337,11 @@ load(system.file("extdata/mod3.Rdata", package = "D3mirt"))
 con <- list(c(1:10),
             c(11:14),
             c(15:20))
-g <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
+mod3 <- D3mirt(x, modid = c("W7Q3", "W7Q20"), con.items = con)
 ```
 
 ``` r
-summary(g)
+summary(mod3)
 #> 
 #> D3mirt: 20 items and 5 levels of difficulty
 #> 
@@ -469,15 +471,15 @@ load(system.file("extdata/mod2.Rdata", package = "D3mirt"))
 ```
 
 ``` r
-y <- data.frame(x[,-16])# Remove misfitting item W7Q16
+y <- data.frame(x[, -16])# Remove misfitting item W7Q16
 # Call D3mirt() and using the orthogonal model
-h <- D3mirt(y, modid = list(c(1:10),   # x-axis
-                             c(15:19),  # y-axis
-                             c(11:14))) # z-axis
+mod2 <- D3mirt(y, modid = list(c(1:10),   # x-axis
+                            c(15:19),  # y-axis
+                            c(11:14))) # z-axis
 ```
 
 ``` r
-summary(h)
+summary(mod2)
 #> 
 #> D3mirt: 19 items and 5 levels of difficulty
 #> 
@@ -603,26 +605,28 @@ An example of how the output can be described is as follows.
 > we find Fairness ($\theta = 49.101^{\circ}$, $\phi = 78.313^{\circ}$)
 > with clear within-multidimensional tendencies with respect to the
 > $x$-axis. Thus, the output indicates that Compassion and Conformity
-> could be independent constructs but that Fairness seems not to be.
+> could be independent constructs but Fairness seems not to be.
 
 The orthogonal model is displayed below rotated rotated $15^{\circ}$
 clockwise. In the graphical output the perpendicular orientation of the
 items forms a cross pattern in which each axis holds a unidimensional
 model indicated by the items parallel to it. The orthogonal model is
-foremost useful to study the items under the assumption that the items
-are unidimensional and that he unidimensions are uncorrelated. Note that
-the orthogonal model will change the location of respondents in the
-latent space compared to the compensatory model. This can have an effect
-when studying profiles (see examples below), such that profile
-tendencies can emerge or dissappear dependent on the choice of model.
+foremost useful for studying the items under the assumption that the
+items are unidimensional and that the unidimensions are uncorrelated.
+Note that the orthogonal model will change the location of respondents
+in the latent space compared to the compensatory model. This can have an
+effect when studying profiles (see examples below), such that profile
+tendencies can emerge or disappear depending on the choice of model.
 
 ``` r
 # Plot the orthogonal model
 plot(h)
 ```
 
-![](./images/o1.png) Figure 3: The orthogonal model plotted with the
-model rotated $15^{\circ}$ clockwise.
+![](./images/o1.png)
+
+Figure 3: The orthogonal model plotted with the model rotated
+$15^{\circ}$ clockwise.
 
 ## 3.1. `items`
 
@@ -655,9 +659,9 @@ mentioned above, the W7Q16 was not included in any of the constructs
 because the item showed signs of measurement problems. For example, the
 short vector arrows indicate high amounts of model violations and the
 location of the item in the model also indicates that the item is
-within-multidimensional and that it does not seem to belong to any
-construct explicitly. Typing in $16$ in the `items` argument allows for
-a closer look.
+within-multidimensional and does not seem to belong to any construct
+explicitly. Typing $16$ in the `items` argument allows for a closer
+look.
 
 ``` r
 # Item W7Q16 has location 16 in the data set (gender and age excluded)
@@ -677,7 +681,7 @@ model rotated $15^{\circ}$ clockwise.
 Figure 7: The item W7Q16 plotted with the three constructs and with the
 model rotated $90^{\circ}$ clockwise.
 
-An example of how the output for analysis of the single item is as
+An example of how the output for analysis of the single item above is as
 follows.
 
 > The Figures 3 and 4 shows that item W7Q16 is located at
@@ -690,7 +694,7 @@ follows.
 > ($MDISC = .770$, $MDIFF_{range} = [-4.838, 2.349]$) is also the lowest
 > of all discrimination scores in the model. This, combined, implies
 > that the item in question does not seem to fit the three-dimensional
-> DMIRT model used in this analysis and should therefore be removed or
+> DMIRT model used in this analysis and should, therefore, be removed or
 > adapted. We can also note that item W7Q15, $MDISC = .923$,
 > $MDIFF_{range} = [-4.680, 1.051]$) has the second lowest global
 > discrimination score. Compared to W7Q16, however, item W7Q15 does seem
@@ -705,10 +709,10 @@ follows.
 
 The user has the option of plotting on one level of difficulty at a time
 with the `diff.level` argument studying the entire scale, a subset of
-items, or on one item at a time. Note, *difficulty* refers to the number
-of item response functions in the items, i.e., the total number of
-response options minus one. In this case, $6$ response options were used
-which means that the model has $5$ levels of difficulty.
+items, or on one item at a time. Note that *difficulty* refers to the
+number of item response functions in the items, i.e., the total number
+of response options minus one. In this case, $6$ response options were
+used which means that the model has $5$ levels of difficulty.
 
 ``` r
 # Plot RGL device on item difficulty level 5
@@ -759,28 +763,30 @@ three-dimensional model represented as spheres whose coordinates are
 derived from the respondent’s trait scores. This allows for a profile
 analysis in which respondents can be separated and plotted as subsets
 conditioned on single or multiple criteria. The resulting output shows
-where the respondents are located in the model, and, accordingly, what
+where the respondents are located in the model and, accordingly, what
 model profile best describes them. To do this, the user can either plot
 all respondents by setting `ind.scores`to `TRUE`, or plot a subsection
 of respondents by creating a separate data frame and use it in the
-`profiles` argument when calling `plot()`. In the example below, the
-first option is illustrated also using the `levels` argument. Regarding
-the latter, the `plot()` function uses `as.factor()` to count the number
-of factor levels in the data imputed in the `levels` argument. This
-information is then used to assign colors for the spheres representing
-respondents when plotting. This means that raw data can be used as is
-but the number of colors in the color vectors argument (`sphere.col`)
-may need to be adapted. In the example below, the criteria variable for
-gender only hold two factor levels and therefore only two colors in the
-color vector are needed. By separating respondents using color coding it
-is sometimes possible to display group-level effects.
+`profiles` argument when calling `plot()`.
 
-Generally, it can be useful to hide vector arrows with `hide = TRUE`
+In the example below, the first option is illustrated also using the
+`levels` argument. Regarding the latter, the `plot()` function uses
+`as.factor()` to count the number of factor levels in the data imputed
+in the `levels` argument. This information is then used to assign colors
+for the spheres representing respondents when plotting. This means that
+raw data can be used as is, but the number of colors in the color
+vectors argument (`sphere.col`) may need to be adapted. In the example
+below, the criteria variable for gender only hold two factor levels and,
+therefore, only two colors in the color vector are needed. By separating
+respondents using color coding, it is sometimes possible to display
+group-level effects.
+
+Generally, it can be helpful to hide vector arrows with `hide = TRUE`
 when plotting respondent profiles to avoid visual cluttering. The
 example below displays all respondents using the gender variable
-included in the built-in data set. The gender variable is also color
-coded so that males are displayed as blue spheres and females as red
-spheres.
+included in the built-in data set. The gender variable is also
+color-coded so that males are displayed as blue spheres and females as
+red spheres.
 
 ``` r
 # Load the data set to be used in levels
@@ -792,7 +798,7 @@ x <- as.matrix(anes0809offwaves)
 Call `plot()` and use the gender data, contained in column two in data
 frame $x$, in the `levels` argument. In the function call below, the
 axes in the model are named using the `x.lab`, `y.lab`, and `z.lab`
-arguments following the direction of the constructs. Note, the model
+arguments following the direction of the constructs. Note that the model
 axes represent unidimensional singular structures or traits.
 
 ``` r
@@ -820,19 +826,19 @@ with the model rotated $90^{\circ}$ clockwise.
 
 An example of how the output can be described is as follows.
 
-> In Figures 5 and 6, it can be observed a simple profile on gender in
-> which more women tend to have higher levels of Compassion. When
-> rotating the model $90^{\circ}$ clockwise, there seems not to be any
-> easily observable gender difference related to Conformity or Fairness.
+> In the figure, a simple gender profile can be observed, showing that
+> more women tend to have higher levels of compassion. When rotating the
+> model $90^{\circ}$ clockwise, there seems to be no obvious gender
+> difference related to Conformity or Fairness.
 
 ## 3.5. Plotting Confidence Intervals
 
 It is also possible to plot a confidence interval in the shape of an
 ellipse surrounding the spheres in the latent space. In the example
-below, the younger individuals ($\leq30$) are selected and plotted
-together with a $95\%$ *CI*. To subset respondents create a new data
-frame by combining respondents factor scores from `mod3$fscores` with
-age data from column one in data frame $x$. Then assign respondent data
+below, the younger individuals ($\leq30$) are selected and plotted with
+a $95\%$ *CI*. To subset respondents, create a new data frame by
+combining respondents’ factor scores from `mod3$fscores` with age data
+from column one in data frame $x$. Then assign respondent data
 conditioned on age to a new data frame using the `subset()` function.
 
 ``` r
@@ -849,11 +855,11 @@ vector for `sphere.col` by repeating color names with `rep()`. When
 plotting, the `plot()` function will pick colors from the `sphere.col`
 argument following the factor order in the levels argument. To do this,
 the first step is to count the number of factors in the criterion
-variable. This can be done with `nlevels()`, as is illustrated below.
+variable. This can be done with `nlevels()`, as illustrated below.
 
 ``` r
 # Check number of factor levels with nlevels() and as.factor()
-nlevels(as.factor(z1[,4]))
+nlevels(as.factor(z1[, 4]))
 
 # Use rep() to create a color vector to color groups based on the nlevels() output
 # z1 has 14 factor levels
@@ -862,7 +868,7 @@ colvec <- c(rep("red", 14))
 
 To plot the *CI*, the `ci` argument is set to `TRUE`. The color of the
 sphere was also changed from default `grey80` to `orange` in the example
-below. Note, the *CI* limit can be adjusted with the `ci.level`
+below. Note that the *CI* limit can be adjusted with the `ci.level`
 argument.
 
 ``` r
@@ -893,7 +899,7 @@ the model rotated $90^{\circ}$ clockwise.
 
 An example of how the output can be described is as follows.
 
-> In Figures 7 and 8 we can see a tendency for a profile on age in which
+> In Figures 7 and 8 we can see a tendency for an age profile in which
 > younger individuals could be described as less oriented towards
 > Conformity. We can also observe a tendency for what could be an
 > interaction effect in which higher levels of Conformity seem to be
@@ -901,10 +907,10 @@ An example of how the output can be described is as follows.
 
 # 4. Exporting The RGL Device
 
-Some options for exporting the RGL device are shown below. Over and
-above these, it is also possible to export graphical devices in R
-Markdown documents with `rgl::hook_webgl()` together with graphical
-options for knitr, as was done when creating the package vignette.
+Some options for exporting the RGL device are shown below. In addition,
+it is also possible to export graphical devices in R Markdown documents
+with `rgl::hook_webgl()` together with graphical options for knitr, as
+was done when creating the package vignette.
 
 ``` r
 # Export an open RGL device to the console that can be saved as an html or image file
@@ -920,12 +926,12 @@ rgl::rgl.snapshot('RGLdevice.png',
                     fmt = 'png')
 ```
 
-# Getting Help and Reporting Bugs
+# Getting Help, Feedback, and Questions
 
 If you encounter a bug, please file an issue with a minimal reproducible
 example on GitHub (<https://github.com/ForsbergPyschometrics/D3mirt>).
-For questions please contact me on Github or via email
-(<forsbergpsychometrics@gmail.com>).
+For questions and suggestions on how to improve the code, please contact
+me on GitHub or via email (<forsbergpsychometrics@gmail.com>).
 
 # References
 
@@ -942,13 +948,13 @@ Arbor, MI: Stanford University and the University of Michigan.
 
 McKinley, R. L., & Reckase, M. D. (1983). *An Extension of the
 Two-parameter Logistic Model to the multidimensional latent space*,
-number: ONR83-2. Iowa City, IA, American College Testing Program.
+Report ONR83-2. Iowa City, IA, American College Testing Program.
 
 Muraki, E., & Carlson, J. E. (1995). Full-Information Factor Analysis
 for Polytomous Item Responses. *Applied Psychological Measurement,
 19*(1), 73-90. <https://doi.org/10.1177/014662169501900109>
 
-Reckase, M. D.(2009).*Multidimensional Item Response Theory*. Springer.
+Reckase, M. D.(2009). *Multidimensional Item Response Theory*. Springer.
 <https://doi.org/10.1007/978-0-387-89976-3>
 
 Reckase, M. D.(1985). The Difficulty of Test Items That Measure More
