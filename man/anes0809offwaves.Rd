@@ -52,6 +52,7 @@ data(anes0809offwaves)
 \references{
 DeBell, M., Krosnick, J. A., & Lupia, A. (2010). \emph{Methodology Report and User’s Guide for the 2008–2009 ANES Panel Study}. Palo Alto, CA, and Ann Arbor, MI: Stanford University and the University of Michigan.
 
-Graham, J., Nosek, B. A., Haidt, J., Iyer, R., Koleva, S., & Ditto, P. H. (2011). Mapping the moral domain. \emph{Journal of Personality and Social Psychology, 101}(2), 366–385. https://doi.org/10.1037/a0021847
+Graham, J., Nosek, B. A., Haidt, J., Iyer, R., Koleva, S., & Ditto, P. H. (2011). Mapping the moral domain. \emph{Journal of Personality and Social Psychology, 101}(2), 366–385.
+https://doi.org/10.1037/a0021847
 }
 \keyword{datasets}

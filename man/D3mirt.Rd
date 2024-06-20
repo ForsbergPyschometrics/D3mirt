@@ -129,12 +129,15 @@ summary(mod)
 }
 \references{
 Chalmers, R., P. (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. \emph{Journal of Statistical Software, 48}(6), 1-29.
+https://doi.org/10.18637/jss.v048.i06
 
 Reckase, M. D. (2009). \emph{Multidimensional Item Response Theory}. Springer.
 
-Reckase, M. D. (1985). The Difficulty of Test Items That Measure More Than One Ability. \emph{Applied Psychological Measurement, 9}(4), 401-412. https://doi-org.ezp.sub.su.se/10.1177/014662168500900409
+Reckase, M. D. (1985). The Difficulty of Test Items That Measure More Than One Ability. \emph{Applied Psychological Measurement, 9}(4), 401-412.
+https://doi.org/10.1177/014662168500900409
 
-Reckase, M. D., & McKinley, R. L. (1991). The Discriminating Power of Items That Measure More Than One Dimension. \emph{Applied Psychological Measurement, 15}(4), 361-373. https://doi-org.ezp.sub.su.se/10.1177/014662169101500407
+Reckase, M. D., & McKinley, R. L. (1991). The Discriminating Power of Items That Measure More Than One Dimension. \emph{Applied Psychological Measurement, 15}(4), 361-373.
+https://doi.org/10.1177/014662169101500407
 }
 \author{
 Erik Forsberg
