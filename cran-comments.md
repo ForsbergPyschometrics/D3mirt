@@ -1,15 +1,9 @@
-── R CMD check results D3mirt 2.0.0 ────
-Duration: 56m 21.8s
+── R CMD check results D3mirt 2.0.2 ────
+Duration: 55m 53.8s
 
-❯ checking top-level files ... NOTE
-  Non-standard files/directories found at top level:
-    ‘anes1.png’ ‘p1.png’ ‘paper.Rmd’ ‘paper.html’ ‘paper.md’ ‘paper.pdf’
-    ‘refs.bib’
+0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 
 ## Comments to CRAN
-
-Notes:
-- Non-standard files are files refer to an article submitted to Journal of Open Source Software and they are not included when building the R-package.
 
 Package Revisions:
 - New workflow integration which only requires the user to state what model identification items should be used by D3mirt() (no external model syntax required).
