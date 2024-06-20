@@ -1,10 +1,5 @@
 ── R CMD check results D3mirt 2.0.0 ────
-Duration: 52m 6.8s
-
-❯ checking installed package size ... NOTE
-    installed size is  7.8Mb
-    sub-directories of 1Mb or more:
-      doc   7.4Mb
+Duration: 56m 21.8s
 
 ❯ checking top-level files ... NOTE
   Non-standard files/directories found at top level:
@@ -14,18 +9,17 @@ Duration: 52m 6.8s
 ## Comments to CRAN
 
 Notes:
-- doc size is large because the package contains many examples and the output is highly graphical
-- A multitude of examples are necessary because the method is fairly unknown to the community
-- Non-standard files are files connected to an article submitted to Journal of Open Source software and they are not included when building the R-package
+- Non-standard files are files refer to an article submitted to Journal of Open Source Software and they are not included when building the R-package.
 
 Package Revisions:
-- New workflow integration which only requires the user to state what model identification items should be used by D3mirt()
-- New option model, referred to as the orthogonal model, which allows investigating a three-dimensional scale under the assumption that no within-multidimensionality exists
-- Respondent trait scores are included in the exported object from D3mirt(), which allows for easy plotting of respondents using plot()
-- Constructs can be created using spherical coordinates, which allows for adding constructs anywhere in the latent space
-- Test unit included in the package, including a data frame containing multiple standard angles that are used for checking the numerical and graphical results
-- Contact information regarding questions, code contribution, and reporting bugs included in the package vignette
-- Minor revisions of documentation, code, and description
+- New workflow integration which only requires the user to state what model identification items should be used by D3mirt() (no external model syntax required).
+- A new optional model, referred to as the orthogonal model, is included in D3mirt() which allows investigating a three-dimensional scale under the assumption that no within-multidimensionality exists.
+- Respondent trait scores are included in the exported S3 object from D3mirt(), which allows for easy plotting of respondents using plot().
+- Constructs can be created using subsets of items or spherical coordinates, which allows for adding constructs anywhere in the latent space.
+- Test units have been developed for all functions in the package
+- Vignette is now a static PDF file to save space and installation time. The previous interactive HTML document was error prone and slow to load because of its large size. 
+- Contact information regarding questions, code contribution, and reporting bugs has been included in the package vignette
+- Minor revisions of documentation, code, and description file
     
     
 ## Previos updates and revisions
