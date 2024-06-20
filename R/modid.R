@@ -48,6 +48,7 @@
 #' @return A S3 object of class `modid` with lists of items and absolute sum scores, sorted by the latter, and sum of squared factor loadings and frame with raw factor loadings with columns ordered on explained variance (high to low) or according to user settings.
 #' @author Erik Forsberg
 #' @references Chalmers, R., P. (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. \emph{Journal of Statistical Software, 48}(6), 1-29.
+#' https://doi.org/10.18637/jss.v048.i06
 #' @references Reckase, M. D. (2009). \emph{Multidimensional Item Response Theory}. Springer.
 #'
 #' @examples
