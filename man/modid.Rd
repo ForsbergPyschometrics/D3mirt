@@ -96,7 +96,7 @@ id <- modid(x, fac.order = c(3,2,1))
 }
 }
 \references{
-Chalmers, R., P. (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. \emph{Journal of Statistical Software, 48}(6), 1-29.
+Chalmers, R., P. (2012). mirt: A Multidimensional Item Response Theory Package for the R Environment. \emph{Journal of Statistical Software, 48}(6), 1-29.\cr
 https://doi.org/10.18637/jss.v048.i06
 
 Reckase, M. D. (2009). \emph{Multidimensional Item Response Theory}. Springer.
