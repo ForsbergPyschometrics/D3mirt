@@ -10,3 +10,10 @@
 ^Meta$
 ^images$
 ^\.github$
+^\.anes1.png$
+^\.p1.png$
+^\.paper.Rmd$
+^\.paper.html$
+^\.paper.md$
+^\.paper.pdf$
+^\.refs.bib$
