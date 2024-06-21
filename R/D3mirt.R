@@ -66,7 +66,7 @@
 #' # Load data
 #' data("anes0809offwaves")
 #' x <- anes0809offwaves
-#' x <- x[, 3:22] # Remove columns for age and gender
+#' x <- as.matrix(x[, 3:22]) # Remove columns for age and gender
 #'
 #' # Call to D3mirt(), including optional nested lists for three constructs
 #' # Item W7Q16 is not included in any construct because of model violations
@@ -88,6 +88,7 @@
 #' # between the three axes in the positive orientation.
 #' # It is possible to assign factor loadings and difficulty parameters from mod to a new data frame
 #' # This skips fitting the compensatory model and makes fitting the model with D3mirt() instant
+#' # Note that trait scores will not be included in the exported S3 object when using this option
 #' y <- cbind(mod$loadings, mod$diff)
 #' con <- list(c(0, 45),
 #'             c(45, 90),
