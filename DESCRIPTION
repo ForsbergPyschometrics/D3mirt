@@ -1,6 +1,6 @@
 Package: D3mirt
 Title: Descriptive 3D Multidimensional Item Response Theory Modelling
-Version: 2.0.2
+Version: 2.0.3
 Authors@R: 
     person("Erik", "Forsberg", email= "forsbergpsychometrics@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0002-5228-9729"))
