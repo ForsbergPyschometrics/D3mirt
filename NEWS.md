@@ -1,12 +1,12 @@
-# D3mirt 2.0.2
+# D3mirt 2.0.3
 - New workflow integration which only requires the user to state what model identification items should be used by D3mirt() (no external model syntax required).
 - A new optional model, referred to as the orthogonal model, is included in D3mirt() which allows investigating a three-dimensional scale under the assumption that no within-multidimensionality exists.
 - Respondent trait scores are included in the exported S3 object from D3mirt(), which allows for easy plotting of respondents using plot().
 - Constructs can be created using subsets of items or spherical coordinates, which allows for adding constructs anywhere in the latent space.
-- Test units have been developed for all functions in the package
+- Test units have been developed to cover all functions in the package.
 - Vignette is now a static PDF file to save space and installation time. The previous interactive HTML document was error prone and slow to load because of its large size. 
-- Contact information regarding questions, code contribution, and reporting bugs has been included in the package vignette
-- Minor revisions of documentation, code, and description file
+- Contact information regarding questions, code contribution, and reporting bugs has been included in the package vignette.
+- Minor revisions of documentation, code, and description file.
 
 # D3mirt 1.1.0
 - Examples in README extended
