@@ -118,7 +118,7 @@
 #' # Load data
 #' data("anes0809offwaves")
 #' x <- anes0809offwaves
-#' x <- x[, 3:22] # Remove columns for age and gender
+#' x <- as.matrix(x[, 3:22]) # Remove columns for age and gender
 #'
 #' # Call D3mirt() with constructs assigned to con
 #' con <- list(c(1,2,3,4,5,6,7,8,9,10),
