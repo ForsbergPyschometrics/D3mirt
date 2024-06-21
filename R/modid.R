@@ -56,7 +56,7 @@
 #' # Load data
 #' data("anes0809offwaves")
 #' x <- anes0809offwaves
-#' x <- x[,3:22] # Remove columns for age and gender
+#' x <- as.matrix(x[,3:22]) # Remove columns for age and gender
 #'
 #' # Identify the DMIRT model using a three-factor EFA
 #' id <- modid(x)
@@ -65,10 +65,14 @@
 #' summary(id)
 #'
 #' # Call to modid with increased lower and upper bound
-#' id <- modid(x, lower = 1, upper = 1 )
+#' # Assign loadings to a data frame and set efa to false
+#' x <- id$loadings
+#' id <- modid(x, efa = FALSE, lower = 1, upper = 1 )
+#' summary(id)
 #'
 #' # Override factor order by reversing columns in the original data frame
-#' id <- modid(x, fac.order = c(3,2,1))
+#' id <- modid(x, efa = FALSE, fac.order = c(3,2,1))
+#' summary(id)
 #' }
 #' @export
 modid <- function(x, efa = TRUE, factors = 3, lower = 0.5, upper = .10, fac.order = NULL, itemtype = "graded", method = "EM", rotate = "oblimin", ...){
