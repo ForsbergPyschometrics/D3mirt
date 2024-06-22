@@ -6,7 +6,6 @@ Duration: 24m 36.3s
 ## Comments to CRAN
 
 Package Revisions and comments:
-# D3mirt 2.0.4
 - New workflow integration which only requires the user to state what model identification items should be used by D3mirt() (no external model syntax required).
 - A new optional model, referred to as the orthogonal model, is included in D3mirt() which allows investigating a three-dimensional scale under the assumption that no within-multidimensionality exists.
 - Respondent trait scores are included in the exported S3 object from D3mirt(), which allows for easy plotting of respondents using plot().
