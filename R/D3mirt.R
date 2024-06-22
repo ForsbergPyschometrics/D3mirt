@@ -66,7 +66,7 @@
 #' # Load data
 #' data("anes0809offwaves")
 #' x <- anes0809offwaves
-#' x <- as.matrix(x[, 3:22]) # Remove columns for age and gender
+#' x <- x[, 3:22] # Remove columns for age and gender
 #'
 #' # Call to D3mirt(), including optional nested lists for three constructs
 #' # Item W7Q16 is not included in any construct because of model violations

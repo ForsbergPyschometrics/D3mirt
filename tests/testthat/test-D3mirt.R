@@ -1,6 +1,6 @@
 test_that("Test unit D3mirt and plot", {
-  load(system.file("extdata/mod1.Rdata", package = "D3mirt"))
-  anes1 <- cbind(mod1$loadings, mod1$diff)
+  data(anes0809offwaves)
+  anes1 <- as.matrix(anes0809offwaves[,3:22])
   x <- D3mirt(anes1, modid= c("W7Q3", "W7Q20"), con.items = list(c(1:10), (11:15), c(16:20)))
   expect_s3_class(x, "D3mirt")
   expect_snapshot(x)
@@ -12,8 +12,7 @@ test_that("Test unit D3mirt and plot", {
   for (i in seq_along(row)){
     expect_equal(row[i,1], 1)
   }
-  load(system.file("extdata/modbi.Rdata", package = "D3mirt"))
-  anes2 <- cbind(modbi$loadings, modbi$diff)
+  anes2 <- data.frame(ifelse(anes1 > 4 ,1 , 0))
   y <- D3mirt(anes2, modid= c("W7Q3", "W7Q20"), itemtype = "2PL")
   row <- as.matrix(y$dir.cos)
   row <- rowSums(row^2)
@@ -134,9 +133,8 @@ test_that("Test unit D3mirt and plot", {
        axis.scalar = 2.1, show.plane = FALSE, type = "extrusion", arrow.width = 0.8, n = 22, theta = 0.3, barblen = 0.03)
   p <- rgl::scene3d()
   testthat::expect_snapshot(p)
-  data("anes0809offwaves")
   anes3 <- anes0809offwaves
-  z <- data.frame(cbind(mod1$fscores, anes3[, 1]))
+  z <- data.frame(cbind(x$fscores, anes3[, 1]))
   z1 <- subset(z, z[, 4] <= 30)
   plot(x, hide = TRUE, constructs = TRUE, scale = TRUE, construct.lab = c("Con 1", "Con 2", "Con 3"), adjust.lab = c(0.6, -0.9), font = 2, item.lab = c(1:20),
        cex = 2, axis.length = 4, x.lab = "A", y.lab="B", z.lab="C", title = "Plot Test 15", font.col = "pink", axis.points = "green",
@@ -146,6 +144,20 @@ test_that("Test unit D3mirt and plot", {
        c.col = "cyan", c.arrow.width = 0.8, c.n = 21, c.theta = 0.3, c.barblen = 0.04,
        profiles = z1, levels = z1[, 4], spheres.r = 0.08, sphere.col = c(rep("red", 14)),
        ci = TRUE, ci.level = 0.90, ellipse.col = "grey99", ellipse.alpha = 0.40)
+  p <- rgl::scene3d()
+  testthat::expect_snapshot(p)
+  anes1 <- data.frame(anes1[,-16])
+  x <- D3mirt(anes1, modid = list(c(1:10), c(15:19), c(11:14)))
+  testthat::expect_snapshot(x)
+  testthat::expect_snapshot(print(x))
+  testthat::expect_snapshot(summary(x))
+  row <- as.matrix(x$dir.cos)
+  row <- rowSums(row^2)
+  row <- matrix(row)
+  for (i in seq_along(row)){
+    testthat::expect_equal(row[i,1], 1)
+  }
+  plot(x, title = "Plot Test 16")
   p <- rgl::scene3d()
   testthat::expect_snapshot(p)
   data("angles")

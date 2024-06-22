@@ -80,7 +80,7 @@ For more details on the model identification process and troubleshooting, please
 # Load data
 data("anes0809offwaves")
 x <- anes0809offwaves
-x <- as.matrix(x[,3:22]) # Remove columns for age and gender
+x <- x[,3:22] # Remove columns for age and gender
 
 # Identify the DMIRT model using a three-factor EFA
 id <- modid(x)

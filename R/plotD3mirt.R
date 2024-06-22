@@ -118,7 +118,7 @@
 #' # Load data
 #' data("anes0809offwaves")
 #' x <- anes0809offwaves
-#' x <- as.matrix(x[, 3:22]) # Remove columns for age and gender
+#' x <- x[, 3:22] # Remove columns for age and gender
 #'
 #' # Call D3mirt() with constructs assigned to con
 #' con <- list(c(1,2,3,4,5,6,7,8,9,10),
@@ -159,7 +159,7 @@
 #' # Plot respondents separated on gender
 #' # Start by assigning the gender variable to a data frame
 #' # In this example, this is done by sub-setting the gender column
-#' x <- as.matrix(anes0809offwaves)
+#' x <- anes0809offwaves
 #'
 #' # Call plot() and use the gender variable column in the levels argument
 #' # Respondent data on gender is in column two, x[, 2]
@@ -170,8 +170,7 @@
 #'     sphere.col = c("blue", "red"),
 #'     x.lab = "Compassion",
 #'     y.lab="Conformity",
-#'     z.lab="Fairness",
-#'     view = c(16, 20, 0.6))
+#'     z.lab="Fairness"))
 #'
 #' # Add a 95% CI to respondent factor scores on <= 30 y.o.
 #' # Column bind trait scores with the age variable "W3Xage"
@@ -195,8 +194,7 @@
 #'     z.lab="Fairness",
 #'     ci = TRUE,
 #'     ci.level = 0.95,
-#'     ellipse.col = "orange",
-#'     view = c(15, 20, 0.6))
+#'     ellipse.col = "orange"))
 #'}
 #' \dontrun{
 #' # Export an open RGL device to the console to be saved as HTML or image file
@@ -474,12 +472,14 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
       y <- profiles[,2]
       z <- profiles[,3]
     } else {
+      profiles <- as.matrix(profiles)
       x <- profiles[,1]
       y <- profiles[,2]
       z <- profiles[,3]
     }
     if (!is.null(levels)){
       grad <- function (levels, sphere.col){
+        levels <- as.matrix(levels)
         levels <- as.factor(levels)
         if (nlevels(levels) > length(sphere.col)) stop ("The number of factor levels are higher than the number of available sphere colors")
         color <- sphere.col[as.numeric(levels)]
