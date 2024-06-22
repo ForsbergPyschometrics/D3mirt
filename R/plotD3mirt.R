@@ -170,7 +170,7 @@
 #'     sphere.col = c("blue", "red"),
 #'     x.lab = "Compassion",
 #'     y.lab="Conformity",
-#'     z.lab="Fairness"))
+#'     z.lab="Fairness")
 #'
 #' # Add a 95% CI to respondent factor scores on <= 30 y.o.
 #' # Column bind trait scores with the age variable "W3Xage"
@@ -194,7 +194,7 @@
 #'     z.lab="Fairness",
 #'     ci = TRUE,
 #'     ci.level = 0.95,
-#'     ellipse.col = "orange"))
+#'     ellipse.col = "orange")
 #'}
 #' \dontrun{
 #' # Export an open RGL device to the console to be saved as HTML or image file
