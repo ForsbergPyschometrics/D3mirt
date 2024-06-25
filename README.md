@@ -910,18 +910,23 @@ An example of how the output can be described is as follows.
 Some options for exporting the RGL device are shown below. In addition,
 it is also possible to export graphical devices in R Markdown documents
 with `rgl::hook_webgl()` together with graphical options for knitr, as
-was done when creating the package vignette.
+was done when creating the package vignette. When exporting images, it
+is good to use the `view` argument when calling `plot()` to adjust the
+angle of the device captured in the image file. In the function calls
+below, the angle of the device is set to $45^{\circ}$ rotation in the
+plane, $20^{\circ}$ tilt away from the $y$-axis, and a zoom factor of
+$0.6$ (the default is `c(15, 20, 0.6)`).
 
 ``` r
 # Export an open RGL device to the console that can be saved as an html or image file
-plot(mod3, constructs = TRUE)
+plot(mod3, constructs = TRUE, view = c(45, 20, 0.6)))
 s <- rgl::scene3d()
 rgl::rglwidget(s, 
                width = 1040, 
                height = 1040)
 
 # Export a snap shoot of an open RGL device directly to file
-plot(mod3, constructs = TRUE)
+plot(mod3, constructs = TRUE, view = c(45, 20, 0.6))
 rgl::rgl.snapshot('RGLdevice.png', 
                     fmt = 'png')
 ```
