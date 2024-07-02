@@ -54,7 +54,7 @@ Compared to other software, `D3mirt` is unique in implementing DMIRT methodology
 
 The `D3mirt` package was designed to counter many of the just mentioned shortages by implementing specialized functions for identifying the DMIRT model, calculation of the necessary DMIRT estimates, and plotting the results in an interactive three-dimensional latent environment (see \autoref{fig:anes}). An example of the utility of using the package in an empirical context for item and scale analysis has been presented in @Forsberg:2024.
 
-![**Figure 1**. A still shot of the graphical output from `D3mirt`. The Figure illustrates a three-dimensional vector plot for items in the `anes0809offwaves` data set included in the package. The output also shows three construct vector arrows: Compassion, Fairness, and Conformity (solid black arrows).\label{fig:anes}](anes1.png){ width=100% }
+![**Figure 1**. A still shot of the graphical output from `D3mirt`. The figure illustrates a three-dimensional vector plot for items in the `anes0809offwaves` data set included in the package. The output also shows three construct vector arrows: Compassion, Fairness, and Conformity (solid black arrows).\label{fig:anes}](anes1.png){ width=100% }
 
 ![**Figure 2**. A still shot of the graphical output from `D3mirt` illustrating respondent scores in the latent space separated on sex (male in blue and female in red) from the `anes0809offwaves` data set included in the package.\label{fig:p1}](p1.png){ width=100% }
 
