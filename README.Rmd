@@ -19,6 +19,8 @@ library(D3mirt)
 <img src="man/figures/logo.png" align="center" height="300"/>
 :::
 
+[![](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml)\
+
 # `D3MIRT` Modeling
 
 The `D3mirt` analysis is based on descriptive multidimensional item response theory (DMIRT; Reckase, 2009, 1985; Reckase & McKinley, 1991) and can be used to analyze dichotomous and polytomous items to measure latent traits (denoted $\theta$) in a three-dimensional ability space. The method is foremost visual and illustrates item characteristics with the help of vector geometry.
@@ -409,5 +411,3 @@ Reckase, M. D. (2009). *Multidimensional Item Response Theory*. Springer. <https
 Reckase, M. D. (1985). The Difficulty of Test Items That Measure More Than One Ability. *Applied Psychological Measurement, 9*(4),401-412. <https://doi.org/10.1177/014662168500900409>
 
 Reckase, M. D., & McKinley, R. L. (1991). The Discriminating Power of Items That Measure More Than One Dimension. *Applied Psychological Measurement, 15*(4), 361-373. <https://doi.org/10.1177/014662169101500407>
-
-[![](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml)
