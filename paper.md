@@ -25,9 +25,6 @@ affiliations:
     Sweden
   index: 1
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Summary
 The `D3mirt` package for `R` [@R] offers functions for analyzing questionnaire items used in psychological research in a three-dimensional latent space. The application is based on descriptive multidimensional item response theory (DMIRT) [@Reckase:2009; @Reckase:1985; @Reckase+McKinley:1991], a statistical framework incorporating vector geometry to describe item characteristics. The method is foremost visual, and the latent model can be plotted as an interactive graphical device with the help of a dedicated plot function based on the `RGL` 3D visualization device system for `R` [@Adler+Murdoch:2023]. Alongside the plot function, the package also includes a model identification function that helps the user identify the DMIRT model and a model estimation function for extracting the necessary vector estimates. New additions to the DMIRT framework introduced in the `D3mirt` package include studying constructs (explained below) and individual scores plotted in the three-dimensional latent model.
