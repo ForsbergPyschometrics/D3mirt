@@ -50,7 +50,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-          build_args: 'c("--no-manual", "--no-build-vignettes", "--as-cran")'
+          build_args: 'c("--no-manual", "--no-build-vignettes")'
           error-on: '"error"'
           check-dir: '"check"'
 
