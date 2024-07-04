@@ -5,6 +5,9 @@
 
 </div>
 
+[![](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml)
+[![status](https://joss.theoj.org/papers/abc1dfe0f4805bdc11f1e01b0937957b/status.svg)](https://joss.theoj.org/papers/abc1dfe0f4805bdc11f1e01b0937957b)
+
 # `D3MIRT` Modeling
 
 The `D3mirt` analysis is based on descriptive multidimensional item
@@ -970,5 +973,3 @@ Reckase, M. D., & McKinley, R. L. (1991). The Discriminating Power of
 Items That Measure More Than One Dimension. *Applied Psychological
 Measurement, 15*(4), 361-373.
 <https://doi.org/10.1177/014662169101500407>
-
-[![](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml)
