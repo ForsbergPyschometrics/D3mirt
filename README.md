@@ -5,8 +5,12 @@
 
 </div>
 
+<div align="left">
+
 [![](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ForsbergPyschometrics/D3mirt/actions/workflows/R-CMD-check.yaml)
 [![status](https://joss.theoj.org/papers/abc1dfe0f4805bdc11f1e01b0937957b/status.svg)](https://joss.theoj.org/papers/abc1dfe0f4805bdc11f1e01b0937957b)
+
+</div>
 
 # `D3MIRT` Modeling
 
