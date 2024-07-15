@@ -56,7 +56,7 @@ The `D3mirt` package was designed to counter many of the just mentioned shortage
 
 # Multidimensional item parameters
 
-The theoretical framework for DMIRT rests foremost on three assumptions [@Reckase:1985]. Firstly, ability maps the probability monotonically, such that a higher level of ability implies a higher probability of answering an item correctly. Second, we wish to locate an item at a singular point at which it is possible to derive item characteristics for the multidimensional case. Thirdly, an item's maximum level of discrimination, i.e., its highest possible sensitivity score for measuring ability, is the best option for the singular point estimation. The most important parameter equations capturing the assumptions mentioned regarding DMIRT will be presented below.
+The theoretical framework for DMIRT rests foremost on three assumptions [@Reckase:1985]. Firstly, ability maps the probability monotonically, such that a higher level of ability implies a higher probability of answering an item correctly. Second, we wish to locate an item at a singular point at which it is possible to derive item characteristics for the multidimensional case conceptually similar to the unidimensional case. Thirdly, an item's maximum level of discrimination, i.e., its highest possible capacity to separate respondents on level of ability, is the best option for the singular point estimation. The most important parameter equations regarding the assumptions just mentioned will be briefly presented below.
 
 Firstly, by using the discrimination score $a_i$ on item $i$ from the compensatory model, we can define the multidimensional discrimination index (MDISC) as follows. 
 
@@ -80,7 +80,7 @@ MDIFF :=\frac{-d_i}{\sqrt{\sum_{k=1}^m a^2_{ik}}},
 
 in which $d_i$ is the $d_i$-parameter from the compensatory model. The MDIFF is, therefore, a difficulty characteristic of item $i$, such that higher MDIFF values indicate that higher levels of ability are necessary for a correct response [@Reckase:2009;  @Reckase+McKinley:1991]. Observe that the denominator in \autoref{eq:MDIFF} is the same expression as \autoref{eq:MDISC}. 
 
-Importantly, in DMIRT analysis, the MDISC and MDIFF only apply in the direction set by $\omega_{il}$ and  \autoref{eq:dcos} [@Reckase:2009; @Reckase+McKinley:1991]. Thus, we cannot compare these estimates directly across items, as would be the case in the unidimensional model. This is because DMIRT seeks to maximize item discrimination as a global characteristic in a multidimensional environment. To estimate item discrimination as a local characteristic in the multidimensional space, it is, however, possible to select a common direction for the items and then recalculate the discrimination, i.e., to estimate the directional discrimination (DDISC), as follows.
+Importantly, in DMIRT analysis, the MDISC and MDIFF only apply in the direction set by $\omega_{il}$ and \autoref{eq:dcos} [@Reckase:2009; @Reckase+McKinley:1991]. Thus, we cannot compare these estimates directly across items, as would be the case in the unidimensional model. This is because DMIRT seeks to maximize item discrimination as a global characteristic in a multidimensional environment. To estimate item discrimination as a local characteristic in the multidimensional space, it is, however, possible to select a common direction for the items and then recalculate the discrimination, i.e., to estimate the directional discrimination (DDISC), as follows.
 
 \begin{equation} \label{eq:DDISC}
 DDISC :=\sum_{k=1}^{m}a_{ik}cos\,\omega_{ik}.
