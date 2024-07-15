@@ -53,9 +53,7 @@ Compared to other software, `D3mirt` is unique in implementing DMIRT methodology
 
 The `D3mirt` package was designed to counter many of the just mentioned shortages by implementing specialized functions for identifying the DMIRT model, calculation of the necessary DMIRT estimates, and plotting the results in an interactive three-dimensional latent environment (see \autoref{fig:anes}). An example of the utility of using the package in an empirical context for item and scale analysis has been presented in @Forsberg:2024.
 
-![A still shot of the graphical output from `D3mirt`. The Figure illustrates a three-dimensional vector plot for items in the `anes0809offwaves` data set included in the package. The output also shows three construct vector arrows: Compassion, Fairness, and Conformity (solid black arrows).\label{fig:anes}](anes1.png){ width=100% }
-
-![A still shot of the graphical output from `D3mirt` illustrating respondent scores in the latent space separated on sex (male in blue and female in red) from the `anes0809offwaves` data set included in the package.\label{fig:p1}](p1.png){ width=100% }
+![A still shot of the graphical output from `D3mirt`. The Figure illustrates a three-dimensional vector plot for items in the `anes0809offwaves` data set included in the package. The output also shows three construct vector arrows: Compassion, Fairness, and Conformity (solid black arrows).\label{fig:anes}](anes1.png){ width=80% }
 
 # Multidimensional item parameters
 
@@ -92,6 +90,8 @@ DDISC :=\sum_{k=1}^{m}a_{ik}cos\,\omega_{ik}.
 Since the DDISC is a local characteristic in the model, it is always the case that $DDISC\,\leq\,MDISC$. In `D3mirt`, the DDISC is optional and implemented in `D3mirt` as optional *construct vectors* indicated by a subset of items or using spherical coordinates. 
 
 The results include tables for the MDISC and MDIFF estimates as well as spherical coordinates describing the location of the vector arrows. If construct vectors are used, the output also includes DDISC scores for all items showing the constrained discrimination. It is also possible to plot individual scores (i.e., *profile analysis*) in the three-dimensional latent space (see \autoref{fig:p1}). This can be useful for studying respondents' location conditioned on some external variable, e.g., sex, age, political preference, and so on. Instructions on the method, such as model identification, model estimation, plotting, and profile analysis, are given in the package vignette. 
+
+![A still shot of the graphical output from `D3mirt` illustrating respondent scores in the latent space separated on sex (male in blue and female in red) from the `anes0809offwaves` data set included in the package.\label{fig:p1}](p1.png){width=80%}
 
 To report issues, seek support, or for developers wishing to contribute to the software, contact the author via the dedicated GitHub page (<https://github.com/ForsbergPyschometrics/D3mirt>) or email ([forsbergpsychometrics\@gmail.com](mailto:forsbergpsychometrics@gmail.com){.email}). 
 
