@@ -313,8 +313,8 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           } else {
             if(ncol(vec) == 1) stop("The data only has one level of difficulty")
             m <- items*2-1
-            vapply(m, function(x){
-              rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(1))
+            sapply(m, function(x){
+              rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
           }
         } else {
           if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
@@ -322,9 +322,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
           if(diff.level > ncol(x$mdiff)) stop("The argument for difficulty level is too high")
           v <- vec[[diff.level]]
           m <- items*2-1
-          vapply(m, function(i){
+          sapply(m, function(i){
             rgl::arrow3d(v[i,], v[i+1,], type = type, col = col[diff.level], width = arrow.width, n = n, theta = theta, barblen = barblen)
-          }, integer(2))
+          })
         }
       }
       else if (!is.null(diff.level)) {
