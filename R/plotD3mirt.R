@@ -314,7 +314,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
             if(ncol(vec) == 1) stop("The data only has one level of difficulty")
             m <- items*2-1
             vapply(m, function(x){
-              rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(2))
+              rgl::arrow3d(vec[x,], vec[x+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer(1))
           }
         } else {
           if(!diff.level== round(diff.level)) stop("Difficulty level must be indicated with integer values")
@@ -349,8 +349,8 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
             }
           }
         } else {
-          sapply(seq(from = 1, to = nrow(vec), by=2), function(i){
-            rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
+          vapply(seq(from = 1, to = nrow(vec), by=2), function(i){
+            rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer (1))
         }
       }
       if (item.names == TRUE && is.null(items)){
@@ -452,9 +452,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
   if (constructs == TRUE){
     if (is.null(x$c.vec)) stop("The D3mirt object does not contain any constructs")
     cvec <- x$c.vec
-    sapply(seq(from = 1, to = nrow(cvec), by=2), function(x){
+    vapply(seq(from = 1, to = nrow(cvec), by=2), function(x){
       rgl::arrow3d(cvec[x,]*c.scalars[2], cvec[x+1,]*c.scalars[1], type = c.type, col = c.col, width = c.arrow.width, n = c.n, theta = c.theta, barblen = c.barblen)
-    })
+    }, integer(2))
     if (!is.null(construct.lab) && constructs == TRUE){
       if(!length(construct.lab) <= nrow(x$c.vec)) warning("There are more construct labels than constructs")
       clab <-  x$c.vec*c.scalars[1]
