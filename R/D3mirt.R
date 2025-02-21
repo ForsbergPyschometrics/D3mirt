@@ -115,7 +115,7 @@
 #' }
 #' @export
 D3mirt <- function(x, modid = NULL, model = NULL, con.items = NULL, con.sphe = NULL, itemtype = "graded", method.mirt = "QMCEM", method.fscores = "EAP", QMC = TRUE){
-  if (!(itemtype == "graded" || itemtype == "2PL")) stop("The item model must be the GRM or the 2PL")
+  if (!(itemtype == "graded" || itemtype == "2PL")) stop("The item model must be GRM or 2PL")
   if (!is.null(con.items) && !is.null(con.sphe)) stop("Use either items or spherical coordinates for constructs, not both")
   if (isS4(x)){
     trait <- mirt::fscores(x, method = method.fscores, full.scores = TRUE, full.scores.SE = FALSE, QMC = TRUE)
