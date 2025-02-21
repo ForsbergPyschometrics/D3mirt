@@ -399,7 +399,7 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
         }
       }
       if (item.names == TRUE && !is.null(items)){
-        if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators that are higher than the total number of items")
+        if(any(!items <= nrow(x$loadings))) stop("The items list contains one or more item indicators higher than the total number of items")
         if (is.null(diff.level)){
           if (is.null(item.lab)){
             inames <- rownames(x$loadings)
