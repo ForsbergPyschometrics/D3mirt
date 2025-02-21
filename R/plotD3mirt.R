@@ -349,8 +349,8 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
             }
           }
         } else {
-          vapply(seq(from = 1, to = nrow(vec), by=2), function(i){
-            rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)}, integer (1))
+          sapply(seq(from = 1, to = nrow(vec), by=2), function(i){
+            rgl::arrow3d(vec[i,], vec[i+1,], type = type, col = col[1], width = arrow.width, n = n, theta = theta, barblen = barblen)})
         }
       }
       if (item.names == TRUE && is.null(items)){
