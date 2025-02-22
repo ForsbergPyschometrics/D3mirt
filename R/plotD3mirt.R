@@ -452,9 +452,9 @@ plot.D3mirt <- function (x, scale = FALSE, hide = FALSE, ind.scores = FALSE, dif
   if (constructs == TRUE){
     if (is.null(x$c.vec)) stop("The D3mirt object does not contain any constructs")
     cvec <- x$c.vec
-    vapply(seq(from = 1, to = nrow(cvec), by=2), function(x){
+    sapply(seq(from = 1, to = nrow(cvec), by=2), function(x){
       rgl::arrow3d(cvec[x,]*c.scalars[2], cvec[x+1,]*c.scalars[1], type = c.type, col = c.col, width = c.arrow.width, n = c.n, theta = c.theta, barblen = c.barblen)
-    }, integer(2))
+    })
     if (!is.null(construct.lab) && constructs == TRUE){
       if(!length(construct.lab) <= nrow(x$c.vec)) warning("There are more construct labels than constructs")
       clab <-  x$c.vec*c.scalars[1]
